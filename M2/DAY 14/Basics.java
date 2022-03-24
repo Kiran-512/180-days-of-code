@@ -107,6 +107,7 @@ in above range power of 2 is bits for the particular data type:
 negative no representation in binary / complemenatry of each bit 
 e.g.-10
 | o | 0 | 0 | 0 | 1 | 0 | 1 | 0 |
+
 | 1 | 1 | 1 | 1 | o | 1 | 0 | 1 |   // this is second stage to find complementary of bit representation of 10
                               1     // this is third stage is to add 1
 ----------------------------------- 
