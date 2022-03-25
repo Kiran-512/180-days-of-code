@@ -10,26 +10,62 @@ class StatInst {
   static int b = 10;
   int c = 20;
 
-  void m2() {
-    System.out.println(a);
-    System.out.println(b);
-    System.out.println(c); // can access static variable without class name
-
-    m1(); // can access static method without class name
-  }
-
   static void m1() {
     StatInst b1 = new StatInst();
+    //Static method can directly access static var and static method of the same class
     System.out.println(a);
     System.out.println(b);
-    //  System.out.println(c); can not acces instacen variable without object
-    //m2(); can not acces instance method without abject
+
+    m6();
+
+    //Static method can not access instance var AND Instance method of the same class direclty, obj is needed
+    //System.out.println(c); CE :
+    System.out.println(b1.c);
+    //m2(); CE: can not acces instance method without abject
     b1.m2();
 
+    //Static method can not access instance var AND Instance method of another class direclty, obj is needed
     StatInstDemo s2 = new StatInstDemo();
+    System.out.println(s2.e);
     s2.m3();
 
+    //Static method can directly access static var and static methds of another class with the class name
+    StatInstDemo.d = 100;
     StatInstDemo.m4();
+
+    System.out.println(StatInstDemo.d);
+    //  System.out.println(StatInstDemo.e); CE:
+    System.out.println(s2.e);
+  }
+
+  void m2() {
+    //Instance method can access static variable without class name
+    System.out.println(a);
+    System.out.println(b);
+
+    //Instance Method can access instance var and methods of same class
+    System.out.println(c);
+    m5();
+
+    //Instance Method can access static method without class name as m1 belongs to the same class
+    m1();
+
+    //Instance Method can access static var and methods of demo class
+    StatInstDemo.m4();
+    StatInstDemo.d = 100;
+
+    //Instance Method can access instance var and methods of demo class
+    StatInstDemo s3 = new StatInstDemo();
+    s3.e = 100;
+    s3.m3();
+  }
+
+  void m5() {
+    System.out.println("Instance Method 5");
+  }
+
+  static void m6() {
+    System.out.println("Static Method 6");
   }
 }
 
@@ -63,6 +99,16 @@ class StatInstDemo {
     m4();
   }
 }
+
 /*
 We can call static variables and methods inside the instance method but reverse is not true
+
+V IMP ::: Static var and methods are the part of the class so we can use them anywhere in the particular class wihtout class_name
+In case we are using it in another class then we can use it with class_name.stat_var, class_name.stat_method and they are the part of the class,
+becasue its already present in the memory! 
+
+But for instance var and method we need object compulsorily to call them anywhere in the program
+
+Hence we can use static var and methods in instance method too but vice a versa is not true!
+
 */
