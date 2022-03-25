@@ -8,7 +8,7 @@ public static void main(String[] args) {
     int d = 40;
     long e = 50l;
 	long $e = 9223372036854775807l;
-    float f = 60.789f;
+    float f = 60f;
     double g = 70;
     char h = 100;
 
@@ -17,9 +17,6 @@ public static void main(String[] args) {
 
     float $a = e;
     System.out.println($a);
-	
-	long $f = f;
-	System.out.println($f);
 	
 	float $d = $e;
     System.out.println($d);
