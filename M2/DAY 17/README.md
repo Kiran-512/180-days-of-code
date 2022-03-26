@@ -11,4 +11,5 @@ ref variable gets memory in the stack and the object get memory in the heap and 
 variables will get memory in the objects and they will be initialised with the default values 
 if not assigned any value.
 
+In case of instance block and constructor, first init block will be called and then constructor.
 

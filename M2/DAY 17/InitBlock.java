@@ -1,5 +1,4 @@
 class InitBlock {
-
     int x =10;
     static{
 
@@ -8,7 +7,6 @@ class InitBlock {
     {
         x=20;
         System.out.println("Init block");
-
     }
 }
 
@@ -20,6 +18,9 @@ class InitBlockDemo {
         InitBlock i2 = new InitBlock();
         InitBlock i3 = new InitBlock();
 
+        System.out.println(i);
+        System.out.println(i2);
+        System.out.println(i3);
 
     }
 }
@@ -33,6 +34,7 @@ Init block
 20
 Init block
 Init block
-
+InitBlock@36baf30c
+InitBlock@7a81197d
+InitBlock@5ca881b5
 */
-/*even if we use like this op will be same as init block will get executed first and then it will go in the main thread*/
