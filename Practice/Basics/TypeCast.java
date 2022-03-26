@@ -18,8 +18,8 @@ public static void main(String[] args) {
     float $a = e;
     System.out.println($a);
 	
-	long $f = f;
-	System.out.println($f);
+//	long $f = f;
+//	System.out.println($f);
 	
 	float $d = $e;
     System.out.println($d);

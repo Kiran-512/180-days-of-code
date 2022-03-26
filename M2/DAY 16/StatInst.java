@@ -58,6 +58,8 @@ class StatInst {
     StatInstDemo s3 = new StatInstDemo();
     s3.e = 100;
     s3.m3();
+
+    //System.out.println(StatInstDemo.e);// can not make static ref to the non static-var
   }
 
   void m5() {
