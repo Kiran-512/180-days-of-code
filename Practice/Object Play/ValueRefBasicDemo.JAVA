@@ -1,0 +1,92 @@
+class A{
+	
+    int x;
+    int y;
+    static int z;
+    {
+        x=10;
+        y=10;
+    }
+    A(int p, int q){
+        this.x=p;
+        this.y=q;
+    }
+     void m1(int a, int b){
+      this.x = a;  
+      this.y = a;  
+    }
+	
+    void m2(A ovar){
+        ovar.x=500;
+        ovar.y=500;
+		this.x=1000;
+		this.y=1000;
+    }
+	
+    static void m3(int a, int b){
+/* in this block we can not change the values of x and y, thats where the we pass the binary representation of how to reach object 
+	OR ELSE
+		We can use the concept of static referenece variable
+ */
+    }
+	    static void m4(A ob){
+        ob.x=100;
+        ob.y=100;
+		
+    }
+}
+
+class ValueRefBasicDemo{
+    public static void main(String[] args) {
+        A a1 = new A(5,5);
+		A a2 = new A(50,50);
+		
+        System.out.println("The values of X is " + a1.x);//5
+        System.out.println("The values of Y is " + a1.y);//5
+		
+		System.out.println("The values of X is " + a2.x);//50
+        System.out.println("The values of Y is " + a2.y);//50
+
+
+        a1.m1(20,20);
+		System.out.println("The values of a1.X after m1 is " + a1.x);//20
+        System.out.println("The values of a1.Y after m1 is " + a1.y);//20
+		
+		a1.m2(a2);
+		System.out.println("The values of a1.X after m2 is " + a1.x);//1000
+        System.out.println("The values of a1.Y after m2 is " + a1.y);//1000
+		
+		System.out.println("The values of a2.X after m2 is " + a2.x);//500
+        System.out.println("The values of a2.Y after m2 is " + a2.y);//500
+		
+		A.m4(a1);
+		System.out.println("The values of a1.X after m4 is " + a1.x);//100
+        System.out.println("The values of a1.Y after m4 is " + a1.y);//100		
+
+    }
+
+
+}
+/*
+
+C:\CDAC\Github\180-days-of-code\Practice\Object Play>javac ValueRefBasicDemo.java
+
+C:\CDAC\Github\180-days-of-code\Practice\Object Play>java ValueRefBasicDemo
+The values of X is 5
+The values of Y is 5
+The values of X is 50
+The values of Y is 50
+The values of a1.X after m1 is 20
+The values of a1.Y after m1 is 20
+The values of a1.X after m2 is 1000
+The values of a1.Y after m2 is 1000
+The values of a2.X after m2 is 500
+The values of a2.Y after m2 is 500
+The values of a1.X after m4 is 100
+The values of a1.Y after m4 is 100
+
+C:\CDAC\Github\180-days-of-code\Practice\Object Play>
+
+
+
+*/
