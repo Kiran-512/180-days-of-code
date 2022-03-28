@@ -41,6 +41,7 @@ here className is the class in which static ref variable A is present:
 
 ===============================================================================================================
 
+Default value of all reference variable is null
 
 
 

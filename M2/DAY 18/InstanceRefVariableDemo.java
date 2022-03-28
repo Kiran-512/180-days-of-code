@@ -9,11 +9,8 @@ class InstanceRefVariable{
 	int i;
 	int j;
 	A a;
-	
 
 }
-
-
 class InstanceRefVariableDemo{
 	public static void main(String... args){
 		InstanceRefVariable irv = new InstanceRefVariable();
@@ -23,7 +20,6 @@ class InstanceRefVariableDemo{
 		
 		irv.a.x = 300;
 		irv.a.y = 400;
-		
 		
 		System.out.println(irv.i); //100
 		System.out.println(irv.j); //200

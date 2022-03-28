@@ -45,6 +45,8 @@ class StaticRefVariableDemo{
 		System.out.println(A.b.p);
 		System.out.println(A.b.q);
 		
+
+		/*Below we can use to access instance var from class B*/
 		//StaticRefVariable.avar.b.p = 300;
 		//StaticRefVariable.avar.b.q = 400;
 		
