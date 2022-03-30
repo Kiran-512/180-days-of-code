@@ -1,8 +1,6 @@
 class FinalVar{
     int p;
     int q;
-
-
 }
 class FinalVarDemo{
 
@@ -28,7 +26,7 @@ class FinalVarDemo{
          FinalVar fv2 = new FinalVar();
          FinalVar fv3 = new FinalVar();
 
-//       fv1=fv2; //Not allowed
+//       fv1=fv2; //Not allowed as fv 1 is declared as final
          fv2 = fv1;
          fv2 =fv3;
 
@@ -44,9 +42,9 @@ class FinalVarDemo{
 Local variables are not initialised with the default value, but when we define the local var and if we do not use them we wont get any error
 but we we use them after defining and not assiging any value it will give the error. 
 
-In short local variables msut be initialised BEFORE USE.
+In short local variables must be initialised BEFORE USE.
 
-In above e.g. for a there wont be any error if we do not give any value to key so it will give the error.
+In above e.g. for a there wont be any error but if we do not give any value to key so it will give the error.
 
 
 */

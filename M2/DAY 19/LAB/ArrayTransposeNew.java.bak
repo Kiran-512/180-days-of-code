@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+class ArrayTransposeNew{
+
+	public static void main(String[] args){
+	
+		int[][] first = new int[3][3];
+		int[][] transpose = new int[3][3];
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter array elements");
+		for(int i =0;i<first.length;i++){
+			for(int j=0;j<first[i].length;j++){
+				first[i][j] = sc.nextInt();
+			}
+		}
+		
+		System.out.println("Entered matrix elements are");
+		for(int[] dim:first){
+			for(int value:dim){
+			System.out.print(value+" ");
+			}
+			System.out.println(" ");
+		}
+		
+		System.out.println("Transpose iof the matrix is ");
+		for(int i=0;i<first.length;i++){
+			for(int j=0;j<first[i].length;j++){
+				transpose[i][j] = first[i][j];
+			}
+		}
+		
+		for(int i=0;i<first.length;i++){
+			for(j=0;j<first[i].length;j++){
+				System.out.println(transpose[i][j]+" ");
+			}
+				System.out.println();
+		}
+		
+		
+		
+		
+		
+		
+	}
+
+}
+
+/*
+
+*/
