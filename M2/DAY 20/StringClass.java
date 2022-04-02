@@ -50,7 +50,15 @@ class StringClass {
         String sbhw = hw.substring(0,6);
         System.out.println(sbhw);//Hello
 
-        System.out.println(hw.substring(6));// this will print all the string ahead from 7th index here it world
+        System.out.println(hw.substring(6));// this will print all the string ahead from 6th index here it world
+
+        StringClass sc = new StringClass();
+        StringClass sc1 = new StringClass();
+
+        String Sg = "Kiran";
+        String ns = "Kiran";
+        System.out.println(Sg.equals(ns));
+        System.out.println(equals(sc,sc1));
 
     }
     

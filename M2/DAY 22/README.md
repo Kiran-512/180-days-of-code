@@ -6,6 +6,21 @@ Notes for the day:
 ============================================================================
 Heirachial inheritence:
 
+When we write 
+class B extends A{}
+
+ln this case alass A will load first in the memory as B is dependent on A;
+so with this, 
+static var of class A will load
+static var of B
+init of A
+Constructor A
+init of B
+Constructor B
+
+Upcasting is nothing but the 
+
+
 ============================================================================
 Polymorphisom:
 
@@ -21,7 +36,7 @@ Rules:
 - Method name must be same
 - Method arguments and its type must be same
 - return type must be the same//
-- access modifiers can be same or less retrictive in a seq private/default/protected/public
+- access modifiers(AM) can be same or less retrictive in a seq private/default/protected/public
 - AM can not be private
 
 ============================================================================

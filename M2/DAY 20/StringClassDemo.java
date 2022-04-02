@@ -7,11 +7,11 @@ class StringClassDemo{
   System.out.println(s);
    s= s.toUpperCase();
    System.out.println(s);
-   int index = s.indexOf("B") //2
+   int index = s.indexOf("B"); //2
    System.out.println(index);
    
-   int index = s.LastIndexOf("B") //10
-   System.out.println(index);
+   int ind = s.LastIndexOf("B"); //10
+   System.out.println(ind);
    
    String s2 = "   ABCD   ";
    s2 = s2.trim(); //ABCD
@@ -30,16 +30,16 @@ class StringClassDemo{
      System.out.println(val);
    }
    
-   s = s.replace("A","XXXX") // will replace A with XXXX
+   s = s.replace("A","XXXX"); // will replace A with XXXX
     System.out.println(s);
   
    //substring
    String hw = "Hello World";
               //012345678910
   String sHw = hw.substring(0);
-  String sHw = hw.substring(0,5) ; // for 0 to 4
-  String sHw = hw.substring(6);
-  String sHw = hw.substring(6,11);
+  // String sHw = hw.substring(0,5) ; // for 0 to 4
+  // String sHw = hw.substring(6);
+  // String sHw = hw.substring(6,11);
   }
 
 }
