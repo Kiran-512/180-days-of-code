@@ -70,7 +70,7 @@ B b = (C)a;
 C C = (C)a;
 
 
-classcasteexception:
+classCasteException:
 When we ry to assign the object of parent class to the ref var of child class with the downcasting compiler wont throw error but at run time it will throw classCasteException as we can assign only THREE values to the ref variables
 1.null
 2.object of the same class

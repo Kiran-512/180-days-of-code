@@ -9,13 +9,13 @@ an abstratc class and implement the same method in next child class
 
 Concrete class : class which is not abstract
 
-Concere class must provide the implementation of the abstract method of parent class, or lese that program wont be compiled.
+Concere class must provide the implementation of the abstract method of parent class, or else that program wont be compiled.
 
 if class is abstract thgen it is not mandatory to have at least one abstract method, 
 but if any method is abstract then that class containing abstract method must be abstract!
 
 
-We can not create the object of the abstract class but we can createthe reference variable to create the object of child class if it is concrete class !!!
+We can not create the object of the abstract class but we can create the reference variable to create the object of child class if it is concrete class !!!
 
 can we create the constructor of the abstract class? 
 YES, becasue we can use it with the constructor chaining for initialising values!
