@@ -7,6 +7,6 @@ public class TryFinally {
     } finally {
       System.out.println("Release the resources");
     }
-    // System.out.println("After");//This code is unreachable
+    // System.out.println("After");//This code is unreachable as thown exception is not catched and code is ended abruptly
   }
 }

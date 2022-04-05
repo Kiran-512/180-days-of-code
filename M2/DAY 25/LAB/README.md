@@ -13,11 +13,12 @@ method can be final which cant be override
 local var can be final : we can not change it later on
 instance variable can be final : we can not change it later on and must be initialised on the same line or in init block
 static var can be final : we can not change it later and must be initialised on the same line or in static block
-final abstract can not be declared together
+final abstract can not be declared together AS BOTH HAVE opposite meaning
+abstract must override and final can not be chnaged later on
 
 =========================================
-As static methods are the part of the class hence we canot override thestatic metod and its called as Method hiding
-
+Method hiding:
+As static methods are the part of the class hence we canot override the static metod and its called as Method hiding
 
 =========================================
 IQ: 
@@ -42,7 +43,7 @@ When heap reached 80% then 100% GC will work
 
 2.No threads then JVM will call GC 
 
-3.As a good programmer make the objects which are used and have no more work left, eligible  to JVM for GC
+3.As a good programmer make the objects which are used and have no more work left, eligible to JVM for GC
 i>nulling a reference
 A a = new A();
 A a1 = new A();
@@ -67,7 +68,7 @@ Requesting JVM to run GC threat: using :
 System.gc();
 In System class there satic method gc which will when a coder req JVM that time it might run gc as not gauranteed that it will run.
 
-This si deprecated method:
+This is deprecated method:
 
 2.
 Run time class:
@@ -100,7 +101,7 @@ javap java.lang.Object
 String class:
 
 - String literals are immutable 
-- String literals are saved in String pull
+- String literals are saved in String pull for particular range
 
 =========================================
 Wrapper Classes:
@@ -108,10 +109,6 @@ Number is the parent class of wraper classes and as Wrapper classes are final so
 
 Object=>Number=>Wrapper=>Integer,Short,Byte,Long,Float,Double
 
-
 =========================================
-
-
-
 Assignment:
 WAP to create a single ton class:
