@@ -1,17 +1,16 @@
 /*
-As this is the checked exceptiuon so even if file is there or not there irrespective of this thing compiler will stop to do something about the possibly coming exception of filenotfoundexception and do something about ti in advance
-
+As this is the checked exceptiuon so even if file is there or not there irrespective of this thing compiler will stop to do something about the possibly coming exception of filenotfoundexception and do something about it in advance
 */
 
-import java.io.*;
+import java.io.*; 
 
 public class CheckedExceptionDemo1 {
 
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void main(String[] args) throws FileNotFoundException{
     System.out.println("Main start");
     // to get teh file
     File f = new File("abcd.txt");// abc.txt is present here 
-    //to read the file
+    //force to read the file f
     FileReader fr = new FileReader(f); //thow new FileNotFoundException();
     /* here CE with checked exception=> Error : CheckedExceptionDemo1.java:8: error: unreported exception FileNotFoundException; must be caught or declared to be thrown
         Here. Comp is telling that there might be error at runtime so it is forcing coder to write handler or do somehting about future happening exception
@@ -60,7 +59,7 @@ main ends
 C:\CDAC\Github\180-days-of-code\M2\DAY 27>
 
 */
-// If abcd.txt is not present inside this directory and exception is not handled
+// If abcd.txt is not present inside this directory and exception is not handled and next code wont get executed
 
 /*
 C:\CDAC\Github\180-days-of-code\M2\DAY 27>javac CheckedExceptionDemo1.java

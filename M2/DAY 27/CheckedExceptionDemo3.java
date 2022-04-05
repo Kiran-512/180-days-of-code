@@ -7,10 +7,10 @@ import java.io.*;
 public class CheckedExceptionDemo3 {
 
   static void m() throws FileNotFoundException {
-    System.out.println("code before error prone code in method");
+    System.out.println("code before :  error prone code in method");
     File f = new File("abc.txt");
     FileReader fr = new FileReader(f);
-    System.out.println("mehtod ends code after error prone code");
+    System.out.println("mehtod ends : code after error prone code");
   }
 
   static void m1() {

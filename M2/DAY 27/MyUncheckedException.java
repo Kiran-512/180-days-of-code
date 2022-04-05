@@ -43,3 +43,13 @@ class MyUncheckedException {
     }
   }
 }
+/*
+C:\CDAC\Github\180-days-of-code\M2\DAY 27>javac MyUncheckedException.java
+
+C:\CDAC\Github\180-days-of-code\M2\DAY 27>java MyUncheckedException
+This is unchecked user defined exception
+Bhai ye checked exception hai defined by user
+finally
+
+C:\CDAC\Github\180-days-of-code\M2\DAY 27>
+*/
