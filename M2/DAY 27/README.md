@@ -18,7 +18,7 @@ throws:
 - throws basically helps to propogate the checked exception in the method where error code prone is used OR by which method current method is called
 - throws just propagates the checked exception in the next block and will not handle the exception so code below error prone code wont get executed 
 - Once the Exception is handle with the try catch then no need to use throws again as exception wont propogate ahead in the flow of program excution
-==================================
+=================================
 Types of checked Exceptions:
 ClassNotFoundException:
 IO Exception:
@@ -26,8 +26,11 @@ FileNotFounException:
 ==================================
 
 => USER DEFINED Exceptions:
-1. USER DEFINED Unchecked Exceptions:
-- Every checked Exception is subclass of RuntimeException
+- USER DEFINED Unchecked Exceptions:
+ extends Runtime Exception {}
+- Not every Unchecked Exception is subclass of RuntimeException, but every child class of RuntimeException is Unchecked Exception
+- USER DEFINED checked Exception:
+ extends Exception{}
 ==================================
 
 Assignment:
