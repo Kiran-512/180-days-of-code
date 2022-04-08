@@ -13,16 +13,18 @@ class FinalDemo {}
 class C {
 
   final void m1() {}
+
+  void m1(int a) {}
 }
 
 class D extends C {
 
-  final void m1() {}
+  final void m1(int a) {} // child class method can be final
+
+  void m1() {} // since parent method is final we can not override
 }
 
 class FinalDemo {}
-
-
 /*
 
 class C {
@@ -38,7 +40,6 @@ class D extends C {
 class FinalDemo {}
 
 */
-
 //Below is valid
 /*
 class C {
@@ -54,7 +55,6 @@ class D extends C {
 class FinalDemo {}
 
 */
-
 //We can not use final and abstratct together as final wont allow for override and abstratc forces for override
 /*
 

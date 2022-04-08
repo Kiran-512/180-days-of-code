@@ -18,8 +18,11 @@ Mostly this concept is used in case of methods having arguments as an ref variab
 NOTE: Basically we can not access the methods of child class which is not there in the parent class in case of upcasting 
 i.e. Parent p = new Child();
 if m1(); is there in the child but not in the parent so we can not access with p.m1();
+We must defined in parent class to override the method m1(); in child class OR we downcast the upcated ref var
+
 So here we downcast the ref var (which is upcasted), as
 Child C = (Child)p;     
+
 and then we can access C.m1(); with this;
 ========================================================
 
@@ -70,10 +73,10 @@ class DownCastingDemo {
   }
 
   static void callMethod3(Object o) {
-    //         o.m3();
-    //Here we can directly call m3() as it is not there in the Object class but its there in the child of Object class
+    // o.m3(); // CE : M3 must be defined for the Object Type
+    //Here we can not directly call m3() as it is not there in the Object class but its there in the child of Object class
 
-    //Here we downcasted and the we called m3 which is in the YD class
+    //Here we downcasted and then we called m3 which is in the YD class
     YD y = (YD) o;
     y.m3();
   }
@@ -117,7 +120,6 @@ class DownCastingDemo {
 
     //classCasteException because every ref has ONLY THREE values and here its not there in that list of three
     XD xx = new XD();
-    YD yy = (YD)xx;
-
+    YD yy = (YD) xx;
   }
 }

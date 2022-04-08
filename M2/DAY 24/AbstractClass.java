@@ -111,6 +111,5 @@ class AbstractDemo {
 
     fv.noOfWheels();
     fv.engineCpacity();
-
   }
 }

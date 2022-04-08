@@ -1,9 +1,7 @@
 public class AkhriDemo {
 
-
     static void m1(Integer i){System.out.println("1");}
     static void m1(Object o){System.out.println("2");}
-
 
     public static void main(String[] args) {
         Object o =new Integer(10);
