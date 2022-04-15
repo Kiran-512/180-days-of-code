@@ -57,6 +57,36 @@ TreeMap :
 
 
 ============================================
+HashMap :
+default size is 16 i.e. 2^4
+load factor is .75 => it decide when the size will grow
+
+to identify the bucket : 
+bucket index = hashcode(key)&(size-1)
+above formula used to get the index in which object will go
+
+When 75% objects filled then the size will get double and the objects which are arranged will reaarranged as per the bucket index formula.
+
+Bucket Theory:
+In order to maintain uniqueness in set and map we override the hashcode and equals methods and at the time of object insersion in the collection first hashcode gets invoked and then object will reach out to the particular bucket and then  it will check if any other object exist there,
+If yes then it will invoke the equlas method
+If no then object will be stored in that bucket
+
+
+============================================
+=> Backed collections:
+- used wioth the only TreeSet and TreeMap
+- headMap(a); // here new backed collection wil be created which is less than a excluding a
+- tailMap(a)// here new backed collection wil be created which is greater than a including a
+- subMap(a,b)// here new backed collection wil be created whichincluded the objected which are greater than a, including a and smaller than b
+
+in TreeSet it will be sorted based on the object type
+in TreeMap it will be sorted based on the Key Type
+
+SortedSet<Integer, Employee> set1 = map.headSet(2);
+SortedMap<Integer, Employee> map1 = map.headMap(2);
+
+============================================
 
 What is an Iterator ? What differences exist between Iterator and ListIterator ?
 - An Iterator is one of the Java cursors. 

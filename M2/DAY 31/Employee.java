@@ -3,7 +3,12 @@
 We have to sort the objects of employee class so we have to implements the comparable interfaces 
 which is functional interface and based on the variables used inside the comparable interface compraeTo method, we will sort the data
 
+
+If we do not implem,ent comprable or comparator then we can not use treeset treemap or we cna not sort any collection for user defined class
+for String adn wrapper classes these things already implemented hence it directly osrt based on the ascending order's
+
 */
+
 public class Employee implements Comparable<Employee>{//if <Type> is not mentioned here then we have to make changes in method argument below as public int compareTo(Object o){ //here will have to downcast it first to employee type}
 
   private Integer EmployeeID;
