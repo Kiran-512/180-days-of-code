@@ -1,0 +1,99 @@
+Q.1=> Difference between linear and non linear data structure?
+=> Linear Data Structure
+- elements are arranged sequentially or linearly where each and every element is attached to its previous and next adjacent
+- In linear data structure, single level is involved.
+- Its implementation is easy in comparison to non-linear data structure.
+- In linear data structure, data elements can be traversed in a single run only.
+- In a linear data structure, memory is not utilized in an efficient way.
+- Its examples are: array, stack, queue, linked list, etc.
+- Applications of linear data structures are mainly in application software development.
+
+=> Non-linear Data Structure
+- In a non-linear data structure, data elements are attached in hierarchically manner.
+- Whereas in non-linear data structure, multiple levels are involved.
+- While its implementation is complex in comparison to linear data structure.
+- While in non-linear data structure, data elements can’t be traversed in a single run only.
+- While in a non-linear data structure, memory is utilized in an efficient way.
+- While its examples are: trees and graphs.
+- Applications of non-linear data structures are in Artificial Intelligence and image processing. 
+
+=> ADT 
+- The process of providing only the essentials and hiding the details is known as abstraction.
+- The definition of ADT only mentions what operations are to be performed but not how these operations will be implemented.
+- Think of ADT as a black box which hides the inner structure and design of the data type.
+
+
+->Queue ADT :
+A Queue contains elements of the same type arranged in sequential order. Operations take place at both ends, insertion is done at the end and deletion is done at the front. Following operations can be performed:
+enqueue() – Insert an element at the end of the queue.
+dequeue() – Remove and return the first element of the queue, if the queue is not empty.
+peek() – Return the element of the queue without removing it, if the queue is not empty.
+size() – Return the number of elements in the queue.
+isEmpty() – Return true if the queue is empty, otherwise return false.
+isFull() – Return true if the queue is full, otherwise return false.
+
+->Stack ADT
+In Stack ADT Implementation instead of data being stored in each node, the pointer to data is stored.
+The program allocates memory for the data and address is passed to the stack ADT.
+A Stack contains elements of the same type arranged in sequential order. All operations take place at a single end that is top of the stack and following operations can be performed:
+push() – Insert an element at one end of the stack called top.
+pop() – Remove and return the element at the top of the stack, if it is not empty.
+peek() – Return the element at the top of the stack without removing it, if the stack is not empty.
+size() – Return the number of elements in the stack.
+isEmpty() – Return true if the stack is empty, otherwise return false.
+isFull() – Return true if the stack is full, otherwise return false.
+
+
+===================================
+Arrays:
+- Collection of Ordered and homogeneous elements which is fixed in size and allocated contiguous memory locations. 
+
+Types of indexing in an array: 
+
+0 (zero-based indexing): The first element of the array is indexed by a subscript of 0.
+1 (one-based indexing): The first element of the array is indexed by the subscript of 1.
+n (n-based indexing): The base index of an array can be freely chosen. Usually, programming 
+languages allowing n-based indexing also allow negative index values, and other scalar data 
+types like enumerations, or characters may be used as an array index.
+
+
+=>Advantages of using arrays: 
+- allow random access to elements, makes accessing elements by position faster..
+- Arrays have better cache locality that makes a pretty big difference in performance.
+- Arrays represent multiple data items of the same type using a single name.
+
+=>Disadvantages of using arrays:
+- fixed in size
+- Insertion(s) and deletion(s) are difficult as the elements are stored in consecutive memory locations and the shifting operation is costly too.
+
+=>Applications on Array
+- Array stores data elements of the same data type.
+- Used in solving matrices problem
+- Applied as lookup table in computer.
+- Databases record are also implemented by array.
+- Helps in implementing sorting algorithm.
+- Different variable of same type can be saved under one name.
+- Arrays can be used for CPU scheduling.
+- Used to Implement other data structures like Stacks, Queues, Heaps, Hash tables, etc
+
+=>Arrays in java:
+An array in Java is a group of like-typed variables referred to by a common name. Arrays in Java work differently than they do in C/C++. Following are some important points about Java arrays. 
+
+In Java, all arrays are dynamically allocated. (discussed below)
+Since arrays are objects in Java, we can find their length using the object property length. This is different from C/C++, where we find length using sizeof.
+A Java array variable can also be declared like other variables with [] after the data type.
+The variables in the array are ordered, and each has an index beginning from 0.
+Java array can be also be used as a static field, a local variable, or a method parameter.
+The size of an array must be specified by int or short value and not long.
+The direct superclass of an array type is Object.
+Every array type implements the interfaces Cloneable and java.io.Serializable.
+
+
+
+
+
+
+
+
+
+
