@@ -1,0 +1,31 @@
+Notes for the day!
+========================
+=> How to defined the function:
+1.Name the function
+2.set the arguments
+3.set the correct return type
+4.write the logic
+========================
+=> Best Case (Omega) | Worst Case (BigO) | Average case (Theta)
+
+Worst case algo is the algo where we are interested as 
+========================
+=> Linear Search:
+- for Linear search we cn work with the sorted or unsorted array:
+
+=> Binary Search:
+- For binary search we need sorted array compulsarily:
+- Works on devide and conquer rule
+- devide array into two parts with low(start index), high(index index) and mid((low+high)/2)
+- 
+========================
+1.Create an aray and display it for n numbers n is no of elements in array
+
+2.Crerate an array of characters and convert it into String
+
+3.Creat and arrat and search a key value accepted from user
+
+4.Implement the binary and linear search alog for array
+
+5.
+========================
