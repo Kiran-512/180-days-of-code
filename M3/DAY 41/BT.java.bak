@@ -28,6 +28,7 @@ void printInorder(Node n)//Lc,Root, RC
 	printInorder(n.left);
 	System.out.println(n.data);
 	printInorder(n.right);	
+	
 
 }
 
