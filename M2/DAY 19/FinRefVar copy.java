@@ -4,16 +4,16 @@ final static int a; // will not get the default value so we assign value for fin
 
 final static boolean b;
 
-final int c;
-final int d;
+final int c; //  initialised in init block
+final int d; //  initialised in constructor with the zero parameter
 
  static {
      a=10;
      b = true;
  }
+ 
 {
     c=10;
-
  }
  FinRefVar(){
      d=100;

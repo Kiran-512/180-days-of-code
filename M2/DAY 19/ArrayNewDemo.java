@@ -98,3 +98,26 @@ class ArrayDemo{
 		
 	}
 }
+
+
+
+
+// Initailly we created array with the base size of 3 and 2 later we created array[0] of size 5 and the array oif size 2 became eligible for garbage collection
+ 
+class ArrayVariable{
+
+	public static void main(String... args){
+
+		int[][] array = new int[3][2];
+		array[0] = new int[5];
+		array[0][1] = 4;
+		array[0][2] = 4;
+		array[0][3] = 4;	
+		array[0][4] = 4;
+		array[0][0] = 4;
+
+		for(int x : array[0]){
+			System.out.println(x);
+		}
+	}
+}
