@@ -29,6 +29,8 @@ class StaticRefVariableDemo{
 		StaticRefVariable.avar = new A();
 		A.b = new B();
 		
+		//StaticRefVariable.avar.b = new B();
+		
 		StaticRefVariable.svar.a = 10;
 		StaticRefVariable.svar.b = 10;
 		
@@ -37,6 +39,12 @@ class StaticRefVariableDemo{
 		
 		A.b.p = 100;
 		A.b.q = 200;
+		
+		/*
+		Above can be written as below :
+		StaticRefVariable.avar.b.p =100;
+		StaticRefVariable.avar.b.p =200;
+		*/
 		
 		System.out.println(StaticRefVariable.svar.a);
 		System.out.println(StaticRefVariable.svar.b);

@@ -43,6 +43,12 @@ class StaticRefVariable {
         a =500;
         b =500;
     }
+	static void m(){
+				System.out.println("Static m called");
+				svar.a=1000000;
+				svar.b=2000000;
+		}	
+	
     void m1(){
         svar.a=500;
         svar.b=500;
@@ -74,7 +80,8 @@ class StaticRefVariableDemo {
 
         StaticRefVariable.i=100;
 
-        StaticRefVariable.svar=new StaticRefVariable();
+        StaticRefVariable.svar = new StaticRefVariable();
+	
         StaticRefVariable.svar.a = 1000;
         StaticRefVariable.svar.b = 1000;
 
@@ -89,7 +96,57 @@ class StaticRefVariableDemo {
         The main advantage is to access the x and y in  the static method directly with the static ref variable without passing object 
         as an arguments see method m2 where in we have directly used static ref var and in m3 we have passed the ref var as an arguments 
         */
-
+		
+		StaticRefVariable s1 = new StaticRefVariable();
+		
+		System.out.println("The value of a thru s1 is " +s1.a);
+		System.out.println("The value of b thru s1 is " + s1.b);
+		
+		
+		//Upto here we can not access a and b of s1 in static method 'm' but when we assign s1 to svar then we can acess a and b of s1 in 'm' static method 
+		
+		//Assigned the binary path of s1 to svar
+		StaticRefVariable.svar = s1;
+		
+		StaticRefVariable.m();	
+		
+		System.out.println("The value of a thru s1 is after changing thru svar in m static method" +s1.a);
+		System.out.println("The value of b thru s1 is after changing thru svar in m static method" + s1.b);
+		
+		// Or else we can change and access the values direclty aslso with savar here
+		StaticRefVariable.svar.a=10;
+		StaticRefVariable.svar.b=10;
+		
+		System.out.println(StaticRefVariable.svar.a);
+		System.out.println(StaticRefVariable.svar.b);		
+		
+		System.out.println("The value of a thru s1 is after changing thru svar" +s1.a);
+		System.out.println("The value of b thru s1 is after changing thru svar" + s1.b);
 
     }
 }
+/*
+C:\CDAC\Github\180-days-of-code\M2\DAY 18>java StaticRefVariableDemo
+The value of a thru s1 is 500
+The value of b thru s1 is 500
+Static m called
+The value of a thru s1 is after changing thru svar in m static method 1000000
+The value of b thru s1 is after changing thru svar in m static method 2000000
+10
+10
+The value of a thru s1 is after changing thru svar10
+The value of b thru s1 is after changing thru svar10
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+

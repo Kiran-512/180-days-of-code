@@ -14,13 +14,12 @@ class ConstructBas{
     double d;
 
     ConstructBas(double c, double d){
-        this(50,50);
+        this(50.0d,50.0d); // CE: ConstructBas.java:16: error: recursive constructor invocation ConstructBas(double c, double d) -> 
         System.out.println("Double construct called");
         this.c = c;
         this.d = d;    
     }
     void m1(){
-
         result1 = this.a + this.b;
         result2 = this.c + this.d;
         System.out.println(result1);
@@ -41,6 +40,4 @@ class ConstructBasDemo{
             ob2.m1();
             ob2.m2();
         }
-
-
 }
