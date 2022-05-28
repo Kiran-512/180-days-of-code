@@ -1,5 +1,5 @@
 //Bean class
-// PoJo class
+//PoJo class
 //Model class
 class Employee{
 
@@ -16,7 +16,7 @@ class Employee{
 		this.gender = gender;
 	}
 	
-	// read -> get with return type
+	//read -> get with return type
 	//write -> set
 	
 	public String getName(){
