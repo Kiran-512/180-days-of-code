@@ -3,7 +3,7 @@ Multiple inheritence IN java
 Using class NO
 using interfaces YES
 
-In case of same method in both the parent interaface of any class it would create the ambigutiy
+In case of same method with different return type in both the parent interaface of any class it would create the ambigutiy
 */
 
 interface I4{
@@ -35,16 +35,18 @@ class Demo{
 
     CC1 cc = new CC1(); 
 
-    //in below eg compiler will get confuse which method to be called from parent interafces
+    //Below will get executed without any ERROR and botht he time m4 of concrent class will get excuted
     I4 cc1 = new CC1(); 
     cc1.m4();
 
     I5 cc2 = new CC1(); 
     cc2.m4();
 
+	//Ambiguity is below if any of the interface method has same method signature with diff return type
+	
     //
     /*
-    CC1 cc = new CC1(); 
+
     I4 cc1 = new CC1(); 
 
     cc1.m4();

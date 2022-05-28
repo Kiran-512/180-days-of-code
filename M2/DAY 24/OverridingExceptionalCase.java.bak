@@ -1,5 +1,5 @@
 /*
-In overriding if parent method is private then there will be CE : Parents method is not visible
+In overriding if parent method is private then there will be CE: Parents method is not visible
 */
 
 class Parent {

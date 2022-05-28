@@ -1,9 +1,9 @@
 /*
-Only upcasted REF VAR can be downcasted WHICH WERE Upcasted
+Only upcasted REF VAR can be downcasted!
 
 Here type of object will remain the same and type of ref var ONLY will change.
 
-Here, B extends A and C extends B
+Here,C extends B and B extends A 
 A
 B
 C
@@ -13,20 +13,18 @@ B b = (C)a;
 C C = (C)a;
 =======================================================
 
-Mostly this concept is used in case of methods having arguments as an ref variables
+Mostly this concept is used in case of methods having arguments as an ref variables, and paramter as Object class ref variable so first it downcasted and then used
 
 NOTE: Basically we can not access the methods of child class which is not there in the parent class in case of upcasting 
 i.e. Parent p = new Child();
 if m1(); is there in the child but not in the parent so we can not access with p.m1();
-We must defined in parent class to override the method m1(); in child class OR we downcast the upcated ref var
+We must define in parent class to override the method m1(); in child class OR we downcast the upcated ref var
 
 So here we downcast the ref var (which is upcasted), as
 Child C = (Child)p;     
 
 and then we can access C.m1(); with this;
 ========================================================
-
-
 ,
 and 
 
@@ -69,7 +67,7 @@ class DownCastingDemo {
   static void callMethod2(Object o) {
     //        o.m3();
     ZD z = (ZD) o;
-    z.m3();
+    z.m3();	//OR ((ZD)o).m3();
   }
 
   static void callMethod3(Object o) {
@@ -90,13 +88,14 @@ class DownCastingDemo {
 
     XD x1 = new ZD();
     YD y1 = (ZD) x1;
+	YD y2 = (YD) x1;
     ZD z1 = (ZD) x1;
 
     XD x = new YD();
     YD y = (YD) x;
     //  ZD z = (YD)x; CE:CAN NOT DE DOWNCASTED
 
-    // x1.m1();
+    x1.m1();
     // x1.m2();
     // x1.m3();
 

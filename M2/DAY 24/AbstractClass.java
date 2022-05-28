@@ -42,7 +42,8 @@ abstract class TwoWheeler extends vehicle {
     System.out.println("2 Wheels");
   }
 
-  abstract void engineCpacity();
+//below method already defined by the parent of Twowheelers hence its not neccesary to rewrite these methods
+  //abstract void engineCpacity();
 
   abstract void engineStroke();
 }
@@ -53,7 +54,7 @@ abstract class FourWheeler extends vehicle {
     System.out.println("4 Wheels");
   }
 
-  abstract void engineCpacity();
+  //abstract void engineCpacity();
 }
 
 class Activa125 extends TwoWheeler {
