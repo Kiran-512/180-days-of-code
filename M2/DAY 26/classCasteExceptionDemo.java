@@ -25,7 +25,7 @@ class B extends A{
 
 }
 
-public class classCasteExceptionDemo {
+public class ClassCasteExceptionDemo {
     
     public static void main(String[] args) {
         System.out.println("Before");
