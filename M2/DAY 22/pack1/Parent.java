@@ -7,8 +7,6 @@ public class Parent{
   int c =20;
   private int d = 40;
 
-
-
   public void m1() {
     System.out.println("m1");
   }

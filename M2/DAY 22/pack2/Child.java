@@ -1,11 +1,11 @@
 /*
 Protected can be accessed outside the class only thru inheritence and that too only inside the inherited 
-child class and that too with the inherited class ref variable only
-hence there is error on line 
+child class and that too ONLY with the inherited class ref variable only
+hence there is error on the below lines,
     System.out.println(p.b);
     p.m2();
 
-Also proctedt can be accessed within classes of the same package too!
+Also proctected can be accessed within classes of the same package too!
 
 */
 

@@ -29,6 +29,7 @@ class HirarchicalInheritanceDemo{
 		Parent p2 = new Child1();
 		Parent p3 = new Child2();
 		
+		//If m1 wouldnot have been in 'Parent class' then it wou;ld have checked in the Parent of 'Parent class' and even if its not there then Its a CError
 		p2.m1(); //A::m1
 		//p2.m2();
 		//p2.m3();
@@ -42,7 +43,6 @@ class HirarchicalInheritanceDemo{
 		System.out.println(p2.i);//10
 		//System.out.println(p2.j);
 		//System.out.println(p2.k);
-		
 		
 		System.out.println(c1.i);//10
 		System.out.println(c1.j);//20

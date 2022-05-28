@@ -31,8 +31,9 @@ class Child extends Parent {
 
   @Override
   void m1(int c, int d) {
-    m1(c, d); //this will go in recursion
-    super.m1(c, d); //thi will now call the parents m1 method and then it will come the childs m1 mthod at run time
+    //m1(c, d); //this will go in recursion
+    super.m1(c, d); //this will now call the m1 of super(parent) of currently invoked object and then it will come the childs m1 mthod at run time
+	//if child has more than 1 parent then in that case if m1 is there at anywhere first in the heirarchy, that m1 will be called 
     System.out.println("Child m1");
   }
 }
@@ -43,8 +44,9 @@ class SuperKey {
     Parent p1 = new Parent();
     Parent p2 = new Child();
     Child c = new Child();
-    p1.m1(10, 20);
-    p2.m1(10, 10);
-    c.m1(10, 10);
+	
+    p1.m1(10, 20); //parent m1
+    p2.m1(10, 10);//child m1
+    c.m1(10, 10);//child m1
   }
 }
