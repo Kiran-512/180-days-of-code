@@ -38,13 +38,13 @@ C:\CDAC\Github\180-days-of-code\M2\DAY 15>
 */
 /* 
 Notes:
-
+-- =======================================
 Source file declaration:
 If main method is not defined then it will throw Run Time Error stating main method is not defined
 File name can be diffent than the class names and the file can contains the any no class with any no of main method inside each class(one main inside one class)
 If class is public then file name must be same as class name and yet main method must bein that class and it can also be inside another class with the public class /Source file declaration is important for javac and nothing to do with java
 Only one class can be public
-
+-- =======================================
 Identifers Name conventions:
 class :
 
@@ -56,18 +56,21 @@ class :
     rest identifiers:
     follows camelCase naming conventions e.g. int nameIsInt = 19;
     a-z A-Z and & and _ are permistted to use to name identifier
-
+-- =======================================
 Assignment:
 invoke add method inside class
-with if else check if the a or b is bada and which ever is bada is it divisible by 2 and kitna bada than chota
+with if else check if the a or b is bada and which ever is bada is it divisible by 2 and 
+kitna bada than chota
 Print the tables 
 
-
+-- =======================================
 break and continue use in loops:
 
 BREAK WILL TERMINATE THE LOOP ON MEETING THE CONDITION
+continue will skip the current iteration adn will continue execution till the condition of loop 
+gets false
 
-continue will skip the current iteration adn will continue execution till the condition of loop gets false
+-- =======================================
 
 Literals:
 
@@ -98,13 +101,12 @@ hexadecimal:
 
 static variables and static methods:
 
-method:
-static keyword comes before return type e.g. static void or static int
+Main Method declaration :
+static keyword comes before return type in the method signature e.g. static void or static int
 pulic static combination can be anythging e.g. public static or static public
-
 
 When we compile the program and run particular class then in JVM first instance of this code will ve created and then static variables will be loaded in the memory and assigned the values if any after which the main method will be loaded and then main thread generated hence we can directlky access static variables and methods without any reference variable.
 
-
+-- =======================================
 
 */
