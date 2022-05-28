@@ -1,3 +1,8 @@
+/*
+We can access the static variables inside the init block, but we can not access the instanc evariabvles inside the static block
+
+*/
+
 class InitBlock {
     int x =10;
     static{
