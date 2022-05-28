@@ -1,6 +1,6 @@
 /*
-In this cdoe, static and instance variables and methods are been called in the main method.
-Static are called with the class
+In this dcoe, static and instance variables and methods has been called in the main method.
+Static are called with the class/ static can also be called with the objects or alone if its in the same class
 Instance are called with the object  
 */
 
@@ -18,20 +18,28 @@ class StatInst {
 
     m6();
 
-    //Static method can not access instance var AND Instance method of the same class direclty, obj is needed
+    // ==========================================
+
+    //Static method can not access instance var AND Instance method of the same class direclty, obj is needed here we have created the new object so the default values or values in the instance block or constructor will  be given to these instance variables
     //System.out.println(c); CE :
     System.out.println(b1.c);
     //m2(); CE: can not acces instance method without abject
-    b1.m2();
+    //b1.m2();
+
+    // ==========================================    
 
     //Static method can not access instance var AND Instance method of another class direclty, obj is needed
     StatInstDemo s2 = new StatInstDemo();
     System.out.println(s2.e);
     s2.m3();
 
+    // ==========================================
+
     //Static method can directly access static var and static methds of another class with the class name
     StatInstDemo.d = 100;
     StatInstDemo.m4();
+
+    // ==========================================
 
     System.out.println(StatInstDemo.d);
     //  System.out.println(StatInstDemo.e); CE:
@@ -43,16 +51,24 @@ class StatInst {
     System.out.println(a);
     System.out.println(b);
 
-    //Instance Method can access instance var and methods of same class
+    // ==========================================
+    
+    //Instance Method can access instance var and methods of same class, when m2 is called by any object then this m5 method will also be called with the same object
     System.out.println(c);
     m5();
+
+    // ==========================================
 
     //Instance Method can access static method without class name as m1 belongs to the same class
     m1();
 
+    // ==========================================
+
     //Instance Method can access static var and methods of demo class
     StatInstDemo.m4();
     StatInstDemo.d = 100;
+
+    // ==========================================
 
     //Instance Method can access instance var and methods of demo class
     StatInstDemo s3 = new StatInstDemo();
@@ -112,5 +128,43 @@ becasue its already present in the memory!
 But for instance var and method we need object compulsorily to call them anywhere in the program
 
 Hence we can use static var and methods in instance method too but vice a versa is not true!
+
+*/
+
+// OUTPUT for the above code is 
+
+/*
+10
+10
+20
+10
+10
+Static Method 6
+20
+100
+Method in Demo class
+Method in Demo class
+100
+100
+10
+10
+20
+Instance Method 5
+10
+10
+Static Method 6
+20
+100
+Method in Demo class
+Method in Demo class
+100
+100
+Method in Demo class
+Method in Demo class
+Method in Demo class
+Method in Demo class
+
+[Done] exited with code=0 in 1.79 seconds
+
 
 */

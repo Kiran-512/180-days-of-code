@@ -7,7 +7,9 @@ class NotesDemo {
 
   static int a = 10;
   public static void main(String[] args) {
-    System.out.println(Notes.a);
+    System.out.println(Notes.a); // 0
+    System.out.println(a);// 10
+
   }
 }
 /*
@@ -32,8 +34,8 @@ it from memory as already its loaded in the memory
 Order of execution:
 1.Class is loaded in the memory
 2.instance of the class will be created
-3.Staic var and static methods will be loaded in memory and initialised with the assigned values if no values assigned then it will assigndefault values
-4.static block will be executed irrepective of its position (above or below main method) and loded in memory only once
+3.Staic var and static methods will be loaded in memory and initialised with the assigned values if no values assigned then JVM will assign the default values
+4.static block will be executed irrepective of its position (above or below main method) and loded in memory ONLY ONCE
 5.main method execution will start 
 
 stack and heap memory:

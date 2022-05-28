@@ -35,27 +35,10 @@ class ObjectDemo{
     System.out.println(d2.b);
 
     d2.m1();
+    
+    d1.m1();
 
 
     }
 
 }
-
-/*
-C:\CDAC\Github\180-days-of-code\M2\DAY 16>javac Object.java
-
-C:\CDAC\Github\180-days-of-code\M2\DAY 16>java ObjectDemo
-default value 0
-default value 0
-10
-10
-Instance:M1
-The sum is 20
-default value 0
-default value 0
-0
-0
-Instance:M1
-The sum is 0
-
-*/

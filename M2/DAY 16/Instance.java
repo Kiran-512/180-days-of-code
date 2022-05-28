@@ -16,7 +16,7 @@ class InstanceDemo {
     Instance i = new Instance();
     System.out.println(i.j);
 
-    new Instance(); //here object is created but no instace variable to access that object
+    new Instance(); //here object is created but no instance variable to access that object
 
   }
 }

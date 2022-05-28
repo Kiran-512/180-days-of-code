@@ -1,3 +1,9 @@
+/*
+static block is used to initialise the static variabls and it will get executed in a sequence from top to bottom in a class, 
+sattic variales, static block, static variables ETC. IN A SEQUENCE
+If we declare the static varibale bellow static block, and access it from the static block then we will get ERROR.
+*/
+
 class StaticBlock {
 
   static byte b;
@@ -8,9 +14,7 @@ class StaticBlock {
     System.out.println("Value of b after assiinig in static block is " + b);
     //System.out.println(c); it error here as c must be specified above static block to acces in it
   }
-
   static byte c;
-
   static {
     System.out.println(c);
   }
