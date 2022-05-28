@@ -28,14 +28,6 @@ public class TypeCast {
         char ch2 = 'abcd';// not allowed
         char ch3 ="a";
 
-
-
-
-
-
-
-
-
     }
 
 }
