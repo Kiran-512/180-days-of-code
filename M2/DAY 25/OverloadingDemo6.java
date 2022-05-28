@@ -2,7 +2,7 @@
 In this case compiler will prefer normal widening and will stop 
 */
 
-public class BothWide {
+public class OverloadingDemo6{
     
     static void m1(long a){System.out.println("3");}
 

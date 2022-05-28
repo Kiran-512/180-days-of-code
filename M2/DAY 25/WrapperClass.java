@@ -8,7 +8,7 @@ the string. In that case if we pass the string like "ABC" instead of nunbers the
 Also if the value we pass an an paramter for partiular method ins tring if its beyond the range of primitives then it will
 thropw an Run time exception i.e. NumberFormatException
 =======================
-  When we pass paramter to the the method or object which accepts arguments of byte then the parameter must be byte ONLY.
+When we pass paramter to the the method or object which accepts arguments of byte then the parameter must be byte ONLY.
 
 e.g.
 
@@ -35,8 +35,8 @@ public class WrapperClass {
     Byte bvar = 10;
     Byte b = new Byte((byte) 10);
     Byte b1 = new Byte(bvar);
-    Byte b2 = new Byte((byte) 130); //RTException :  radix 10 NumberFormatExcption at run time
-
+    //Byte b2 = new Byte(130); //ERROR : no suitable constructor found for Byte(int)
+    Byte b2 = new Byte((byte)130);
     System.out.println(b); //10
     System.out.println(b1); //10
     System.out.println(b2); //-126
@@ -44,7 +44,17 @@ public class WrapperClass {
     Long l = new Long(10); // here 10 is int and there is still not error as int is compatile with the long
 
     short svar = 10;
-    Short s = new Short((short) 10);
+    //Short s = new Short(10);
+	/*
+	ERROR for the above line of code:
+	
+	 constructor Short.Short(short) is not applicable
+      (argument mismatch; possible lossy conversion from int to short)
+    constructor Short.Short(String) is not applicable
+      (argument mismatch; int cannot be converted to String)
+	*/
+	
+	Short s = new Short((short)10);
     Short s1 = new Short(svar);
 
     System.out.println(s); //10
@@ -73,6 +83,10 @@ public class WrapperClass {
     // public static java.lang.Byte valueOf(byte);
     Byte bt = Byte.valueOf("120"); //here as an args we can pass either string or byte value and not an int value
     Byte bt1 = Byte.valueOf((byte) 130); //since this value is out of range of byte hence we have typecase it to byte
+
+
+//IMPORTANT : here bt and bt1 are the reference variable and whenever we print the reference variable we always gets ClasName@hashCode
+//...but here we are getting direct values of the content inside the object at which these ref variables are pointing becasue toString() method is overriden for all Wrapper classes and String class
 
     System.out.println(i1); //10
     // System.out.println(sh1); //100
@@ -112,7 +126,8 @@ public class WrapperClass {
 
     System.out.println(i1.hashCode()); //10
     // System.out.println(stt.hashCode());// there is no any hashcode for primitives
-
+	
+	
   }
 }
 /*
@@ -124,8 +139,9 @@ C:\CDAC\Github\180-days-of-code\M2\DAY 25>java WrapperClass
 -126
 10
 10
+iv5 value is 262143
+Sv1 value is 1023
 10
-100
 120
 -126
 10
@@ -133,6 +149,7 @@ C:\CDAC\Github\180-days-of-code\M2\DAY 25>java WrapperClass
 16
 10
 32767
+10
 10
 10
 

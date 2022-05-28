@@ -1,4 +1,4 @@
-public class WideShort {
+public class OverloadingDemo2 {
     
     static void m1(long a){System.out.println("3");}
 

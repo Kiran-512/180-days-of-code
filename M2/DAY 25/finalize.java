@@ -20,7 +20,7 @@ class Island {
 
     i1 = i2 = i3 = null;
 
-    System.gc();
+    System.gc(); // Deprecated method, not recommended to use  
     Runtime rt = Runtime.getRuntime();
     rt.gc();
 

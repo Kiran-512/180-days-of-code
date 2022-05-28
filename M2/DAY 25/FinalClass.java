@@ -4,7 +4,7 @@ We can not inherit final class in another class
 */
 final class A {}
 
-class B extends A {}
+//class B extends A {}//Invalid 
 
 class FinalDemo {}
 
@@ -55,7 +55,7 @@ class D extends C {
 class FinalDemo {}
 
 */
-//We can not use final and abstratct together as final wont allow for override and abstratc forces for override
+//We can not use final and abstract together as final wont allow for override and abstract forces us to override
 /*
 
 class C {

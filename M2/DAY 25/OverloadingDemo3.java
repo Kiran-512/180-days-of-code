@@ -3,7 +3,7 @@ Widening is always prefered over boxing
 
 */
 
-class WideBox {
+class OverloadingDemo3{
 
        static void m1(int a){System.out.println("1");}
    

@@ -11,7 +11,7 @@
     }
 }*/
 //O/P is 2 it means 
-public class VargBoxWide {
+public class OverloadingDemo4{
     static void m1(int... a){System.out.println("1");}
    
     static void m1(Byte... a){System.out.println("2");}

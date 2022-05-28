@@ -15,7 +15,14 @@ in case of both the method having ags data type of larger size than the paramete
 
 Widening is always prefered over boxing
 
+IMPORTANT :
 
+#Overloading
+- Method with the same type of datatype is always preferred widening
+- if two widenings are there then first in the sequence will be prefered e.g. if arguments is of type byte and two methods with the long and int parameter then method with ht eint parameter will be prefered 
+- widening is always prefered over boxing and var_args
+- Boxing is always prefered over var_args
+- varargs always gets the last prefeering in method overloading
 
 
 */

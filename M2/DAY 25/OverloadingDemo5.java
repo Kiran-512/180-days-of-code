@@ -2,7 +2,7 @@
 Boxing is prefered over var args
 */
 
-public class VarargsBox {
+public class OverloadingDemo5{
 
     static void m1(byte... a){System.out.println("1");}
    

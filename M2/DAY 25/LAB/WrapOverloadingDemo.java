@@ -34,8 +34,6 @@ class Wrap {
     static void m8(Byte... a){System.out.println("Boxing");}
 	
 	
-
-
     public static void main(String[] args) {
         
         byte b =10;
