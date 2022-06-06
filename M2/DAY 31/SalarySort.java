@@ -1,3 +1,5 @@
+//In case salary is float i.e. primitve 
+
     import java.util.Comparator;
 
 public class SalarySort implements Comparator<Employee>{

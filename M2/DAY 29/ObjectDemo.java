@@ -16,7 +16,7 @@ class Employee {
   @Override
   public String toString() {
     //   return super.toString();
-    return this.EmployeeID + this.name + this.gender + this.salary;
+    return this.EmployeeID +" "+ this.name +" "+ this.gender +" "+ this.salary;
   }
 
 /*We override this method of Object class, basically we do it because equals method of obejct class compares the binary representation instead of content of the object;
@@ -32,7 +32,7 @@ to avoid this we have defined this method here to compare the content of the Obj
     so to ensure that the object is instanceof Employee type we have wrote below if condition
     */
     if (obj instanceof Employee) { 
-      Employee e = (Employee) obj;
+      Employee e = (Employee) obj; 
       if (
         this.EmployeeID.equals(e.EmployeeID) &&
         this.name.equals(e.name) &&
@@ -69,31 +69,80 @@ public class ObjectDemo {
   public static void main(String[] args) {
     Employee e1 = new Employee(10, "Kiran", "Male", 80000.0);
     Employee e2 = new Employee(10, "Kiran", "Male", 80000.0);
+	Employee e3 = new Employee(11, "Akshay", "Male", 80000.0);
+	Employee e4 = null;
+    
 
-    /* Below line will give false Unlike the String class equals method as String class has overriden the equal method of object which do not compare the
+	System.out.println(e1);
+	System.out.println(e2);
+	System.out.println(e3);
+	System.out.println(e4);	//null
+
+/* Below line will give false Unlike the String class equals method as String class has overriden the equal method of object which do not compare the
          content of the two object, instead this method compares the binary representation in Object class
          so String class and Swrapper class has overrideen method of object class but in our userdefined class lets say here in EMmployee class
          to compare th content of the object we must override the object class method
-
         */
-    System.out.println(e1.equals(e2));
-
+	
+    System.out.println(e1.equals(e2));//true
+    System.out.println(e1.equals(e3));//false
+	
     DemotToCheckInstace i = new DemotToCheckInstace();
 
-    e1.equals(e2);
-    e1.equals(i); // this will give ClassCastException as unable to cast Parent to Employee so to avoid this we used instanceof in equals method while overriding
+    e1.equals(e2);//here we need some voolean variable to store the result or can directly display in the print statement
+    e1.equals(i); // this will give ClassCastException in equals method if instanceof operator is not used as unable to cast DemotToCheckInstace Type to Employee Type so to avoid this we used instanceof in equals method while overriding
+
+	System.out.println(e1.equals(i));//false
 
 
-    //since the method is overriden hashcode will be same now for e1 and e4, which is different ethically since both are the diff objects 
-    // but since the content is same we have forceflly overridden the hashcode method of the Obect class
-    System.out.println(e1.hashCode());
-    System.out.println(e2.hashCode());
+
+// HASHCODE
+
+	String s1 = "Krain";
+	String s2 = "Krain";
+    String s3 = "Rahul";
+	
+	System.out.println(s1.hashCode()); // 72756831
+    System.out.println(s2.hashCode());// 72756831
+	System.out.println(s3.hashCode());// 78722128
+	
+	//Conclusion : String class has overridden the hashCode() METHOD OF THE oBJECT CLASS hence for the String with the same content we are getting the similar hashCode
+
+//Before Overrdiing HashCode() in Employee class
+    System.out.println(e1.hashCode()); // 1826771953
+    System.out.println(e2.hashCode()); // 1406718218
+	
+	//Conclusion : Since Employe class has not overrident the HashCode method it will use the HashCode method of the Object class, which generates the unique hashCode for new Object created 
+	
+//since the method is overriden hashcode will be same now for e1 and e2, which should be different ethically since both are the diff objects 
+//but since the content is same we have forceflly overridden the hashcode method of the Obect class
+    System.out.println(e1.hashCode());//- 1420539917
+    System.out.println(e2.hashCode());//- 1420539917
+  
   }
 }
 
 /*
-true
--1420539917
--1420539917
+Final OUTPUT based on the above code
 
-*/ 
+C:\CDAC\Github\180-days-of-code\M2\DAY 29>java ObjectDemo
+10 Kiran Male 80000.0
+10 Kiran Male 80000.0
+11 Akshay Male 80000.0
+null
+true
+false
+false
+72756831
+72756831
+78722128
+- 1420539917
+- 1420539917
+- 1420539917
+- 1420539917
+
+C:\CDAC\Github\180-days-of-code\M2\DAY 29>
+
+C:\CDAC\Github\180-days-of-code\M2\DAY 29>
+
+*/

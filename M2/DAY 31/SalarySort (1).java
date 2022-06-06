@@ -1,3 +1,5 @@
+//In case salary is Float i.e. Wrapper Class Object 
+
 import java.util.Comparator;
 class SalarySort implements Comparator<Employee>{
 

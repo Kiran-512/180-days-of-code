@@ -7,24 +7,27 @@ Incase of checked Exceptions, it is must to have error prone code in try if  we 
 Inner class:
 
 Coupling : The way by which one class knows about the another class
-Loose coupling:
+Loose coupling: In which one class know LESS ABOUT the other class
 
 Cohesion: Whether the class serves the pupoose for which its defined/ how well focused class is 
-Tight cohesion:
+Tight cohesion : class must serve the purpose nad it must be highly focused
 
 Types:
 1.Regular Inner class//Instance Inner class 
 .class file name : OuterClass$Innerclass.class
+- It's the instance member of the outer class
+- ONLY REGULAR inner CLASS CAN HAVE ANY Access modifier
 - Only instance var and methods defined inside this class 
-- static var and method can not be defined inside this class
+- Static var and method can not be defined inside this class
 - Regular Inner class can access the instance members of the OuterClass but reverse is not ture!!
 
 2.Method local class
 .class file name : OuterClass$1MethodLocalInnerclass.class
 
 - class created inside the local method
+- MLIC can only be final, default to hehi
 - Before 1.8 for local var in a method one has to declare it as final but that compulson remover later,
-to access the instance var inside the MLIC
+	to access the instance var inside the MLIC
 - 
 
 

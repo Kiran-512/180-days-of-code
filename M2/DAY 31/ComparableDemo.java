@@ -38,3 +38,27 @@ public static void main(String[] args) {
     System.out.println("The final sorting based on last applied sorting method i.e. names here "+list);
   }
 }
+/*
+COMPARABEL :
+- present in java.lang package
+- compareTo method aceept only one argument as objects
+- functional interface (We can write the lambda expression for this)
+- gives the default sorting order for collection objects
+- All wrapper classes and String class have already implemented this comparable interface hence we can use 
+	the sort() of Collections class directly on these classes Objects in Collection
+- Also we can use TreeSet and TreeMap direclty since these classes have implemented the Comparable interface and 
+	overriden the compareTo method and has given some sorting order 
+- Some the other predefined classes which do not implement the comparable interface for those we can not use Sort() method and also
+	TreeSet and TreeMap
+	So to given some sorting order for these class we can go with the comparator	
+- Also userDefined classes also need to implement the comparbale interafce and give some natural/ default sorting order then ONLY
+	we can use sort() of Collections class and TreeSet and TreeMap
+*/
+	
+/*
+Comparator :
+- belongs to java.util package
+- compare method accept the two objects
+- used to have the alternate sorting orders other than comparable
+- We will create seperate class which implements this operator and in type we willmention the class for which we want the sorting orders
+*/

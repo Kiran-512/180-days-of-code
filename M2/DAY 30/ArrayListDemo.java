@@ -57,7 +57,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ArrayListDemo {
-
+  
   public static void main(String[] args) {
     ArrayList list = new ArrayList(); //Non-Generic Collections
 

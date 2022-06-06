@@ -6,11 +6,12 @@ class OuterClass {
   void m1() {
     System.out.println("Outer class m1");
     // this line gives CE:
-    // System.out.println("We can not access the instance mebers from the inner class in outer class" +y);
-   OuterClass.InnerClass i = new OuterClass.InnerClass(); 
+    // System.out.println("We can not access the instance mebers of the inner class in outer class" +y);
+
+   OuterClass.InnerClass i = new OuterClass.new InnerClass(); 
    OuterClass.InnerClass i1 = new InnerClass(); 
    InnerClass i3 = this.new InnerClass(); 
-   InnerClass i2 = new InnerClass(); // this is acceptable inside the instance method but if we create the object of inner class in static method then we must write as per the first statement 
+   InnerClass i2 = new InnerClass(); // this is acceptable inside the instance method but if we create the object of inner class in static method then we must write as per the first statement on line no 11
 
    i.m1();// Inner m1
 

@@ -1,4 +1,17 @@
+/*
+- Both instance synchronised and static synchronised behaves differently
 
+Scenario No 1 :
+- Lets Say Thread t1 and t2 calling m1 with s1
+- with sleep lets say we gave thread t1 priority and when m1 will be called in T1 by s1 at tha time m1 being 
+	synchronised lock on s1  will be aquired by thread 1 and if after lock aquiring t1 gets premptive (Scheduler can do anything) and came 
+	back to READY state
+- now t2 will get the chance to go ahead any will try to invoke m1 whiuch is being synchronised, t2 will aslo try to aquirre the lock 
+	on s1 as m1 is being invoked by s1 in this case BUT since the lock on s1 is already aquired by the t1 so t2 will go in WAIT state
+- Once t1 finsihes his work on m1 by s1 at that time s1 will notify the t2 to come out of the WAIT state
+
+
+*/
 class Sync{
 	
 	synchronized void m1(){
@@ -70,3 +83,10 @@ class SynchronizedDemo{
 		t2.start();
 	}
 }
+
+/*
+In ncase of instance method called by threads, threa will aquire lock on the reference varibles which calls the synchoronised method
+
+In case of static methdo called by threads, thread will aquired lock on the object of the class Class created to store the meta data of our class which we can see with javap command
+
+*/

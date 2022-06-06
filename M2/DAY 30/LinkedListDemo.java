@@ -6,7 +6,7 @@ public class LinkedListDemo {
     public static void main(String[] args) {
         LinkedList <Character> list = new LinkedList<>();
 
-        list.offer('A');
+        list.offer('A');//this will add the element in the next position i.e. in the end of the list
         list.offer('B');
         list.offer('C');
         list.offer('A');
@@ -31,16 +31,9 @@ public class LinkedListDemo {
         ch=list.pollLast();
         System.out.println(ch);
         System.out.println(list);
-
-        
-        Collections.sort(list);
+		
+        Collections.sort(list);// We can sorted sirectly as Character Wrapper class has implemented comparable interafce in which sorting method compareTo is written to sort the character objects
         System.out.println(list);
-
-
-
-
-
-
 
     }
 }
