@@ -1,0 +1,21 @@
+/* *{margin: 0;padding: 0;box-sizing: border-box;} */
+
+.container{
+    border: 1px solid red;
+}
+.row    {
+    border: 1px solid rgb(98, 208, 20);
+}
+.col,.col-8,.col-3,.col-md,.col-4{
+    border: 1px solid rgb(221, 7, 199);
+    min-height: 100px;
+}
+ul{
+    display: flex;
+    list-style-type: none;
+    gap: 5px;
+    justify-content: flex-end;
+}
+p{
+    border : 1px solid black;
+}
