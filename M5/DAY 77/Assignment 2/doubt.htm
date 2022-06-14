@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+        let employee = [
+            {eid:101,ename:"Karan Singh",email:"karansingh@gmail.com",deptno:10},
+            {eid:102,ename:"Akshay Navale",email:"akshaynavale@gmail.com",deptno:10},
+            {eid:103,ename:"Pranit Jagtap",email:"pranitjagtap@gmail.com",deptno:10}
+            //..........
+        ]
+            function IndexOfEID(oldEmpID){
+            oldEmpID = parseInt(oldEmpID)
+            let res = employee.findIndex((emp,index)=>{ 
+                if(emp.eid === oldEmpID)
+                {
+                console.log("index inside if "+ index)
+                return index;
+                }
+            })
+            console.log("res "+ res)
+            return res;
+        }
+        IndexOfEID(101);
+        IndexOfEID(102);
+        IndexOfEID(103);
+
+</script>
+</html>

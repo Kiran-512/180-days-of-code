@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jquery</title>
+    <style>
+        .en{color: red;}
+        .nm{color: blue;}
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="itemNo" id="itemno">
+    <span id="msg">what happened?</span>
+    <br>
+    <input type="text" placeholder="itemname" id="itemname">
+    <br>
+    <input type="text" id="itemprice" placeholder="itemprice">
+    <br>
+    <br>
+    <button id="add">Add Item</button>
+    <button id="update">Update Item</button>
+    <hr>
+    <p id="contents">Show the details here</p>
+
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded",()=>{
+
+        //assuming tha the array of object rcvd from the server
+        let items = [];
+        items.push({itemno:1,itemname:'penmcil',price:3})
+        items.push({itemno:2,itemname:'scale',price:5})
+        items.push({itemno:3,itemname:'box',price:50})
+        
+        let contents = document.querySelector("#contents")
+        const itemno = document.getElementById("itemno") 
+        const msg = document.getElementById("msg")
+        const itemname = document.querySelector("itemname")
+        const itemprice = document.querySelector("itemprice")
+
+
+        function showContents(){
+            let itemContent =""
+            for(let i =0;i<items.length;i++){
+                itemContent += "<br>"+ items[i].itemno +" " + items[i].itemname+ " "+items[i].price; 
+            }
+            contents.innerHTML = itemContent;
+        }
+
+        showContents();
+
+        itemno.addEventListener("blur",()=>{
+            let ItmNo = itemno.value; 
+            let output = {itemfoundstatus:true,itemdetails:{ itemno:itemno.value,itemname:itemname.value,price:itemprice.value}};
+
+            if(output.itemfoundstatus){
+                msg.innerText="Item found"
+                itemno.value = output.itemdetails.itemno 
+                itemname.value = output.itemdetails.itemname
+                itemprice.value = output.itemdetails.price
+            }else{
+                msg.innerText="Item found"
+                itemno.value = ""
+                itemname.value = ""
+                itemprice.value ="" 
+            }    
+        })
+
+        function getItemOnItemno(itemno){
+            let output = {itemfoundstatus:false,itemdetails:{ itemno:3,itemname:'box',price:50}};
+                for(let i=0;i<items.length;i++){
+                    if(items[i].itemno == itemno){
+                        output.itemfoundstatus = true;
+                        itemdetails=items[i];
+                        // return output;
+                        break;
+                    }
+                }
+
+        }
+
+    })
+</script>
+</html>

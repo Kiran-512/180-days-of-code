@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>self test 2</title>
+    <style>
+        .container{
+            width: 500px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-content: center;
+        }
+        input{
+            display: inline-block;
+        }
+        #btn{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="box" id="t1">
+        <input type="text" class="box" id="t2">
+    </div>
+</body>
+<script>
+    const t1 = document.getElementById("t1")
+    t1.addEventListener("input",()=>{
+        document.getElementById("t2").value = t1.value; 
+    })
+</script>
+</html>

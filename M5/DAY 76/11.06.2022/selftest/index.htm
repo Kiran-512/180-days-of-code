@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Test</title>
+    <style>
+        .container{
+            width: 500px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-content: center;
+        }
+        input{
+            display: inline-block;
+        }
+        #btn{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="box" id="t1">
+        <input type="text" class="box" id="t2">
+        <button id="btn">Copy</button>
+    </div>
+    <script>
+        const t1 = document.querySelector("#t1");
+
+        const btn = document.getElementById("btn")
+        btn.addEventListener("click",()=>{
+            let value1 = t1.value;
+            document.getElementById("t2").value = value1.toUpperCase(); 
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <title>J-query</title>
+    <script>
+      $(() => {
+
+          $("#t1").blur(()=>{
+            $("#t1").prop("disabled",true)
+          })
+
+          $("#t1").click(()=>{
+            $("#t1").prop("disabled",false)
+          })
+
+
+        $("#r1").click(() => {
+          console.log("5 is clicked");
+          let num = $("#t1").val();
+        //   $("#t1").prop("disabled",true)
+          let result = num * 5; // no need to parse as * operation is only on the numbers so AUTO TYPECASTING
+          $("#msg").text(result);
+        });
+
+        $("#r2").click(() => {
+          console.log("7 is clicked");
+          let num = $("#t1").val();
+        //   $("#t1").prop("disabled",true)
+          let result = num * 7; // no need to parse as * operation is only on the numbers so AUTO TYPECASTING
+          $("#msg").text(result);
+        });
+        
+      });
+    </script>
+  </head>
+  <body>
+    <input type="text" id="t1" />
+    <span id="msg">result</span>
+    <br />
+    <input type="radio" value="5" name="pocinput" id="r1" />
+    <input type="radio" value="7" name="pocinput" id="r2" />
+    <hr />
+  </body>
+</html>

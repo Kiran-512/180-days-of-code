@@ -51,7 +51,7 @@ document.images;
 document.doctype;
 document.URL; // URL OF THE Document
 document.domain; // returns the domain
-document.baseURI; // returns the RETURNS the entire link
+document.baseURI; // returns the entire link
 
 document.getElementById("header"); // returns the collection of all the  elements with id specified //
 document.getElementsByClassName("nav"); // returns the collection of all the elements with the class specified //
@@ -77,9 +77,10 @@ Text
 innerText
 
 Attributes
-getAttribute()
-getAttributeNode
-Attributes
+getAttribute("attributeName") // return the value of attributeName specified
+getAttributeNode("attributeName") // returns the key:value pair for the attributeName specified, we can acces by uding ".value"
+Attributes // returns the collection of all the attributes of the targeted element, we can access by "attributes[index]"
+
 */
 
 //to view properties of document
@@ -113,6 +114,9 @@ Career
 Contact us
 Login
 */
+
+// =============== getAttribute(attributeName)
+
 element = document.getElementById("header").getAttribute("class"); //menu
 console.log(element);
 
@@ -122,13 +126,15 @@ console.log(element);
 element = document.getElementById("header").getAttribute("onClick"); //func()
 console.log(element);
 
+// ============ getAttributeNode("attributeName")
+
 element = document.getElementById("header").getAttributeNode("onClick"); //onClick ="func()"
 console.log(element);
 
-element = document.getElementById("header").getAttributeNode("onClick").value; //func()
-console.log(element);
+// element = document.getElementById("header").getAttributeNode("onClick").value; // func()
+// console.log(element);
 
-//Attributes will returnt he mapped collection of all the attributes on that element with id "header"
+//Attributes will return the mapped collection of all the attributes on that element with id "header"
 element = document.getElementById("header").attributes;
 console.log(element);
 /*
@@ -271,11 +277,14 @@ console.log(document.querySelector(".list").style.border); // 10px dotted tomato
 
 // all CSS properties joined with "-" e.g background-color must be writtewn in camel case in JS styling
 
+
+//We can also change the properties with "style" as below
 document.querySelector(".list").style.backgroundColor = "pink";
 
 // =================== className
 
 //className - will update the class to the given values, we can set one or multiuple class values with this className method
+//Only problem is that it willremove the old class
 
 //Before changing the class names
 element = document.querySelector(".col-md-6 ul ").className;
@@ -302,15 +311,15 @@ length: 2
 diff is
 className returns the all classes in a string format
 wherein 
-classList return all the classes in array format with the peroper
+classList return all the classes in array format with the proper
 index for each class
 */
 
 element = document.querySelector(".abc").className;
-console.log(element); // abc xyz
+console.log(element, typeof element); // abc xyz string
 
 element = document.querySelector(".abc").classList;
-console.log(element);
+console.log(element,typeof element); // object
 /*
 DOMTokenList(2) ['abc', 'xyz', value: 'abc xyz']
 0: "abc"
@@ -323,6 +332,7 @@ value: "abc xyz"
 //classList has it's own method too!
 //add
 //remove
+//and many more...
 
 //===================== addEvenListner()
 
@@ -398,10 +408,298 @@ function backcolor() {
 // item(index)
 // Length 
 
-
 // add()
 // remove()
 // toggle()
 // contains()
 // item(index)
 // Length 
+
+// ==================== DOM traversal Methods
+
+//parentElement -- will return null if elements has no parent
+//parentNode -- will return somehting always even ifelements has no parent
+//Children
+//childNodes
+//firstChild
+//lastChild
+//firstElementChild
+//lastElementChild
+//nextElementSibling
+//nextSibling
+//previousSibling
+//previousElementSibling
+//nextElementSibling
+
+var a = document.getElementById("inner").parentElement // returns the direct parent
+console.log(a)//div#outer
+
+a = document.getElementById("inner").parentNode// returns the direct parent
+console.log(a)//div#outer
+
+a = document.getElementById("main").parentElement
+console.log(a) // null
+
+a = document.getElementById("main").parentNode
+console.log(a)//#document
+
+//============ children and childNodes
+
+document.getElementById("outer").children// returns the collection of direct childs
+
+document.getElementById("outer").childNodes // returns the collection of all direct and nested children of direct childrens this also COUNTS THE ENTER OR SPACE as text node
+
+//IMP NOTE : We can not style the UNDEFINED(Enter or blank space returned by the childNodes)
+
+//We can access those by providing the index of particular child
+// children[index]
+// childNodes[index]
+
+
+// Difference between first child and firstElemenChild
+/*
+As we have seen that chiuldNodes returns all the childincluding the enter and blank spoaces as text
+and Children return ONLY direct element childs of particular element
+
+Similarly firstElementChild targets the first element child of the collection which is returned by the Children method
+
+and firtChild targets the first child returned by the childNodes collection
+*/
+document.getElementById("outer").firstElementChild; // target the h2 element
+
+document.getElementById("outer").firstChild // targets the first child which is text (due to enter and space)
+
+document.getElementById("outer").lastElementChild // targets the last direct child element of the outer element returned by the collection of children
+
+document.getElementById("outer").lastChild// targets the last child returned by the colelction of the childNodes
+
+//Since there is no space in the div with id #C-Child, firstChild would be C and firstElementChidl is null as there is no any element in that div
+a = document.getElementById("C-Child").firstChild
+console.log(a) //C
+a = document.getElementById("C-Child").firstElementChild
+console.log(a)//null
+
+// ============= sibling
+
+//nextSibling
+//previousSibling
+//nextElementSibling
+//previousElementSibling
+
+//element methods
+//We we specify element it will search for html element to target
+// in case if we have the sapce or enter it will ignore the space and enter
+
+
+//non-element methods
+//it will target the those nodes which may or may not be the html elements (text node generated due to space or enetr is noth the html element and it has value UNDEFINED which can no tbe styled)
+
+// ==================== DOM create Methods
+
+//createElement
+//createTextNode
+//createComment
+
+
+//We can not direclty creat elemnemnt l;ike this so check oput below process till appendChild
+
+// var a = document.getElementById("section2").createElement("h2");
+/*
+Uncaught TypeError: document.getElementById(...).createElement is not a function
+at myScriptDOM.js:493:37
+*/
+
+var Newelement = document.createElement("h2");
+console.log(Newelement) // <h2></h2>
+
+var newText = document.createTextNode("This is heading with the JS");
+console.log(newText) // <
+
+//==================== DOM Append Methods
+
+// appendChild
+// insertBefore
+
+Newelement.appendChild(newText)
+
+document.getElementById("section2").appendChild(Newelement)
+
+// ========== insertBefore
+// Since wit the help of appendCHild we can append the childs in the heirachy i.e next in the dom sequence
+// If we want to append before any child or elemengt tag then we must go with the insertBefore as below
+
+var Newelement2 = document.createElement("h1")
+
+var newText2 = document.createTextNode("Heading goes here...")
+
+Newelement2.appendChild(newText2)
+
+var target = document.getElementById("section2") 
+target.insertBefore(Newelement2,target.children[0])
+
+// ========== 75-80
+
+// ============= Form Events
+
+document.getElementById("Name").addEventListener("focus",funcFocus)
+
+function funcFocus(){
+  document.getElementById("Name").style.backgroundColor = "lime"
+}
+
+function onFocus(element){
+  element.style.backgroundColor = "lime"
+}
+
+function BlurrFunc(element){
+  element.style.backgroundColor=" "
+}
+
+// ============ oninput event
+
+// document.getElementById("pass").addEventListener("input",inputFunc)
+
+function inputFunc(){
+  var a = document.getElementById("pass").value;
+  // console.log(a)
+  // document.getElementById("section2").innerHTML=a;
+
+  // var len = a.length;
+
+  // if(len!=8){
+  //   alert("Please enter password of 8 character ")
+  // }
+}
+
+
+// ================ onchange event
+
+document.getElementById("pass").addEventListener("change",function() {
+  var a = document.getElementById("pass").value;
+  // console.log(a)
+  // document.getElementById("section2").innerHTML=a;
+  var len = a.length;
+  if(len<8){
+    alert("Please enter password of 8 character ")
+  }
+})
+
+document.getElementById("Country").addEventListener("change", function(){
+  var a = this.value;
+  document.getElementById("section2").innerText = a;
+
+})
+
+//Difference between input and change events is that
+// - oninput will get active all the time we input something
+// - onchange will active only when the focus is lost from particular input element
+
+//============= onselect event
+// when user select the text this event is triggered
+
+//NOT APPLICABLE ON OTHER ELEMENT OTHER THAN FORM ELEMENTS
+document.getElementById("section4").addEventListener("select",function(){
+  var a = this.value;
+  console.log("User selected the text")
+})
+
+//Applicable only on the form elements
+document.getElementById("textAREA").addEventListener("select",function(){
+  var a = this.value;
+  console.log("User selected the text")
+})
+
+//=============== onsubmit event
+//When user clicks on submit then this event gets triggered
+
+document.getElementById("farum").addEventListener("submit",function(){
+  var x = document.getElementById("Name").value;
+  x = x.trim();// use of trim function as the type of every input is string
+  console.log(typeof x)
+      alert("Welcome onboard Mr. " + x)
+})
+
+// ============ invalid event
+// applicable only for html 5 features
+
+document.getElementById("email").addEventListener("invalid",function(){
+  alert("Please correct dalo yar tum email ID")
+  // document.getElementById("msg").innerText = "Enter the correct email ID"
+})
+
+// ============ setInterval(funcName,nilliseconds)
+// used in JS animations
+// 1 seconds = 1000 ms 
+
+// to stop the animation at particular time we use clearInterval(variableName)
+// here "variableName" is the varioable which stores the setInterval()
+
+var a = 0;
+var inter = setInterval(anim,100) // here function anim is called after eveyr 0.5 seconds
+
+function anim(){
+  a = a+10
+  var target = document.getElementById("box")
+  if(target.style.marginLeft == 500 + "px"){
+    // a = 0 ;
+    clearInterval(inter)
+  }
+  else{
+    target.style.marginLeft = a + 'px'; 
+    console.log(target.style.marginLeft)
+  }
+}
+
+
+// =========== setTimeout(functName,milliseconds)
+// here after milliseconds the function will be called ONLY once
+
+var timee = setTimeout(anima,5500)
+
+function anima(){
+  console.log("Executed Only once")
+  var target = document.getElementById("box")
+  if(target.style.marginLeft == 500 + 'px')
+  {
+    target.style.backgroundColor ="pink"
+    target.style.border="2px solid black"
+  }
+}
+
+//alternate wayof writing function without name
+
+/*
+setTimeout(function (){
+  console.log("Executed Only once")
+  var target = document.getElementById("box")
+  if(target.style.marginLeft == 500 + 'px')
+  {
+    target.style.backgroundColor ="pink"
+    target.style.border="2px solid black"
+  }
+},5000)
+*/
+
+//clearTimeout()
+
+document.getElementById("box").addEventListener("click", funcClearTimeOut)
+
+function funcClearTimeOut(){
+  console.log("Animation stopped")
+  clearTimeout(timee);  
+}
+
+document.getElementById("btn").addEventListener("click", funcClearTimeOut)
+
+function funcClearTimeOut(){
+  console.log("Animation stopped")
+  clearTimeout(timee);  
+}
+// ================ BOM Broswer Object Model
+// methods realted tothe broswers
+//window.innerHeight
+//window.outerHeight
+
+//window.open(URL,target,size(height, width etc.))
+//window.close()
+

@@ -45,7 +45,7 @@ const con = 100;
 /*===============DATA TYPES============== */
 
 //Primitive: String Number Boolean
-//Non Primitve : Array,object,null, undefined
+//Non Primitve : Array,object,null, undefined,function
 
 var st = "Kiran"; //String
 st = 125; //Number
@@ -296,6 +296,20 @@ function demo(a, b) {
 // demo(12,13);
 
 //NOTE : There is no issue even if we pass more or less arguments than defined in the function, If given less arguments then parameter who didnt got any value will be "undefined"
+//==================== events in JS
+//onclick
+//ondblclick
+//onmouseenter // same as hover 
+//onmouseout //
+//onmousedown // same as click nut click involves both mouse down and up
+//onmopuseup 
+//onkeypress // works only on body and form elements
+//onkeyup 
+//onscroll
+//onresize 
+//onscroll // we can apply in body div wherever content overflows
+//onload - whenever page loads event occurs
+//onunload //whenever the we go to close the page this event occurs 
 
 // ==================== Arrays in JS ==============
 
@@ -425,9 +439,14 @@ document.write("</table>");
 
 document.write("</br> </br> </br>");
 
+// modify the values
+// arrayName[index] = newValue
+a[0] = 20;
+a[1] = 220;
+
 // deleting an element from an array
 
-// delete array[index] -- this will delete and that index will become undefined
+// delete array[index] -- this will delete and value at that index will become "undefined"
 
 delete a[1][0];
 
@@ -511,8 +530,8 @@ document.write(a); // 7,6,5,47,4,3,2,10,2,100,,200
 document.write("</br>");
 
 // ==================
-// Shift() -- opposide of pop() -- remove elements from starting index
-// Unshift() -- opposide of push() -- adds element in the starting index
+// Shift() -- opposide of pop() -- remove elements from starting index and return the element
+// Unshift() -- opposide of push() -- adds element in the starting index and return the length
 
 document.write(a.shift()); //7
 document.write("</br>");
@@ -1138,7 +1157,7 @@ document.write(ob.name, " ", ob.age); // Kiran 30
 // toFixed()
 // toPrecision()
 
-// ============ number()
+// ================ number()
 
 var a = 100;
 console.log(a, typeof a); //100 'number'
@@ -1161,7 +1180,8 @@ console.log(a, typeof a); //12 23 string
 b = Number(a);
 console.log(b, typeof b); // NaN 'number'
 
-// parseInt()
+// =================== parseInt()
+
 a = "12 23";
 console.log(a, typeof a); //12 23 string
 b = parseInt(a);
@@ -1192,7 +1212,7 @@ console.log(a, typeof a); //true 'boolean'
 b = parseInt(a);
 console.log(b, typeof b); // NaN 'number'
 
-// parseFloat()
+// =====================   parseFloat()
 a = "10 33";
 console.log(a, typeof a); //10 33 string
 b = parseFloat(a);
@@ -1208,7 +1228,7 @@ console.log(a, typeof a); //100 'number'
 b = parseFloat(a);
 console.log(b, typeof b); // 100 'number'
 
-// isFinite()
+// =============   isFinite()
 a = 10.33;
 console.log(a, typeof a); //10.33 'number'
 b = isFinite(a);
@@ -1238,29 +1258,29 @@ console.log(b, typeof b); // false 'boolean'
 a = 10;
 console.log(a, typeof a); //10 'number'
 b = Number.isInteger(a);
-console.log(b, typeof b); // true 'boolean'
+console.log(b, typeof b); // true 'number'
 
 a = 10.0;
 console.log(a, typeof a); //10 'number'
 b = Number.isInteger(a);
-console.log(b, typeof b); // true 'boolean'
+console.log(b, typeof b); // true 'number'
 
 a = 10.5;
 console.log(a, typeof a); //10 'number'
 b = Number.isInteger(a);
-console.log(b, typeof b); // false 'boolean'
+console.log(b, typeof b); // false 'number'
 
 a = "100 in a string";
 console.log(a, typeof a); //100 string
 b = Number.isInteger(a);
-console.log(b, typeof b); // false 'boolean'
+console.log(b, typeof b); // false 'string'
 
 a = true;
 console.log(a, typeof a); //true boolean
 b = Number.isInteger(a);
 console.log(b, typeof b); // false 'boolean'
 
-// toFixed()
+// ============  toFixed()
 a = 5.5678;
 console.log(a, typeof a); //5.5678 'number'
 b = a.toFixed(2);
@@ -1276,7 +1296,7 @@ console.log(a, typeof a); //5.5678 'number'
 b = a.toFixed(a);
 console.log(b, typeof b); // 5.5678 string
 
-// toPrecision()
+// =========== toPrecision()
 a = 5.5678;
 console.log(a, typeof a); //5.5678 'number'
 b = a.toPrecision(2);
@@ -1439,21 +1459,21 @@ console.log(Math.PI); // 3.141592653589793
 
 // ================== Date Methods
 // toDateString()
-// getDate()
-// getFullYear()
-// getMonth()
 // getDay()
+// getDate()
+// getMonth()
+// getFullYear()
 // getHours()
 // getMinutes()
 // getSeconds()
 // getMilliseconds()
 // setDate()
+// setMonth()
 // setFullYear()
 // setHours()
-// setMilliseconds()
 // setMinutes()
-// setMonth()
 // setSecond()
+// setMilliseconds()
 
 // this picks up the date and time from local or client and NOT from server side
 

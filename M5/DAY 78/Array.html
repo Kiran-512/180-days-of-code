@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+window.addEventListener('DOMContentLoaded',()=>{
+
+
+    let items=[];
+    items.push({no:1,name:'pen',price:10});
+    items.push({no:2,name:'pencil',price:5});
+    items.push({no:3,name:'book',price:50});
+    console.log(items);
+
+    function showContents(){
+        let contents=document.querySelector("#ans");
+        let items1="";
+        for(let i=0;i<items.length;i++){
+            items1=items1+"<br/>"+items[i].no+" "+items[i].name+" "+items[i].price;
+        }
+        console.log(items1);
+        contents.innerHTML=items1;
+    }
+
+    function getItemno(itemno){
+        let output={status1:false, itemsdeatils:{no:3,name:'book',price:50}};
+        for(let i=0;i<items.length;i++){
+            if(items[i].no==itemno){
+                output.status1=true;
+                itemsdeatils=items[i];
+                return output;
+            }
+        }
+        return output;
+    }
+
+    let no=document.getElementById('no');
+    let name1=document.getElementById('name');
+    let price1=document.getElementById('price');
+    let sp=document.getElementById('sp');
+
+
+    no.addEventListener('blur',()=>{
+        console.log("gggggg");
+        let output={status1:true,itemsdeatils:{no:3,name:'book',price:50}};
+        output=getItemno(parseInt(document.getElementById('no').value));
+        console.log
+if(output.status1){
+    console.log("hhh");
+    name1.value=output.itemsdeatils.name;
+    price1.value=output.itemsdeatils.price;
+    sp.innerHTML="Entered element is found"
+    sp.classList.add("em");
+}
+else{
+
+}
+
+    });
+
+
+
+    showContents();
+});
+    </script>
+    <style>
+        .em{
+            color: red;
+        }
+        .rm{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+   <input type="text" id="no" placeholder="number"><span id="sp">What happen</span>
+   <br>
+   <input type="text" id="name" placeholder="name">
+   <br>
+   <input type="text" id="price" placeholder="price">
+   <br>
+   <input type="button" id="b1" value="add">
+   <input type="button" id="b2" value="update">
+   <br>
+   <p id="ans">Answer</p>
+</body>
+</html>
