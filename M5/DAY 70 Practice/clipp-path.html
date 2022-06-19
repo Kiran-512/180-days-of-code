@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip path</title>
+    <style>
+        body{
+            background-color: tomato;
+        }
+        .container{
+            display: flex;
+            min-height: 100vh;
+            background-color: white;
+        }
+        .box{
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            background-color: tomato;
+            /* clip-path: circle(20% at 50% 50%); */
+            /* clip-path: ellipse(10% 30% at 50% 50%); */
+            /* clip-path: inset(10% 20% 10% 0%); */
+            border: 10px solid red;
+            outline: 10px solid red;
+            clip-path: polygon(50% 0,100% 100%,0 100%);
+
+            /* // Since we can not use that aread which got clipped with this poroperty */
+            /* use shape outside for that */
+            shape-outside: polygon(50% 0,100% 100%,0 100%);
+            shape-margin: 10px;
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+    
+</body>
+</html>

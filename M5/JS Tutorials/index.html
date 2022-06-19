@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" id="main">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS tutorials</title>
+    <style>
+        #outer{
+            padding: 30px;
+            background-color: rgb(233, 198, 146);
+        }
+        #inner{
+            display: flex;
+            justify-content: space-between;
+            background-color: pink;
+            padding: 30px;
+        }
+        #inner div{
+            height: 100px;
+            width: 200px;
+            background-color: aquamarine;
+            text-align: center;
+            line-height: 100px;
+            border: 1px solid black;
+        }
+        #section4, #section2{
+            min-height: 100px;     
+            background-color: rgb(240, 194, 137);
+            margin-top: 100px;
+            border: 1px solid red;
+        }
+        label,input{
+            display: block;
+        }
+        #box{
+            height: 100px;
+            width: 100px;
+            background-color: blueviolet;
+            margin: auto;
+        }    </style>
+</head>
+<body>
+       <!-- <div id="header" class="menu" style="outline: none;" onclick="func()"> -->
+       <div id="header" class="menu" style="outline: none;" >
+        
+        <div id="title">
+           <h1>WorkForce</h1>
+        </div>
+           <div class="nav">
+               <ul class="menu-options">
+                   <li><a href="">Home</a></li>
+                   <li><a href="">About</a></li>
+                   <li><a href="">Career</a></li>
+                   <li><a href="">Contact us</a></li>
+                   <li><a href="">Login</a></li>
+               </ul>
+           </div>
+       </div> 
+       <div class="main">
+           <div class="container">
+               <div class="row">
+                   <div class="col-md-6">
+                       <ul class="list" style="border: 1px solid red;">
+                           <li>tagging</li>
+                           <li>v</li>
+                           <li>c</li>
+                           <li>d</li>
+                           <li>e</li>
+                       </ul>
+                       <p class="list">
+                           <ul>
+                               <li>
+
+                               </li>
+                           </ul>
+                       </p>
+                   </div>
+               </div>
+               <div class="list">
+                   <ol type="A" start="F">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                   </ol>
+               </div>
+           </div>
+       </div>
+
+       <!-- DOM traversal Methods -->
+
+       <div id="outer">
+        <h2>Outer</h2>
+        <div id="inner">
+            <h2>Inner</h2>
+            <div>A</div>
+            <div>B</div>
+            <div id="C-Child">C</div>
+            <div>D</div>
+            <div>E</div>
+        </div>
+       </div>
+
+        <!-- append and creat together -->
+       <div id="section2">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, est?</p>
+       </div>
+       <!-- Form events -->
+       <div class="section3">
+        <form id="farum">
+            <label for="Name">Name</label>
+            <input type="text" id="Name" onfocus="onFocus(this)" onblur="BlurrFunc(this)">
+            <label for="pass">Password</label>
+            <input type="text" id="pass" onfocus="onFocus(this)" onblur="BlurrFunc(this)">
+            <label for="Country">Country</label>
+            <select name="" id="Country">
+                <option value="India">India</option>
+                <option value="UK">UK</option>
+                <option value="USA">USA</option>
+                <textarea name="" id="textAREA" cols="30" rows="10"></textarea>
+                <input type="submit" value="Submit">
+            </select>
+            <input type="email" name="" id="email">
+            <div id="msg" style="color:red"></div>
+        </form>
+       </div>
+       <div id="section4">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio excepturi neque corporis earum, animi vel blanditiis. Porro, beatae corrupti. Molestias odit accusantium quasi? Numquam illo velit, aliquam temporibus enim culpa.</p>
+       </div>
+       <!-- JS animation -->
+
+       <div id="box">
+
+       </div>
+       <button id="btn">Stop Animation</button>
+
+       <div class="footer" style="height: 10vh;background-color: aqua;overflow:hidden">
+            <p>Lorem ipsum dolor sit amet consectetur voluptates porro aperiam aliquid officia sit quos excepturi? Repudiandae cumque accusantium nam ex facere, eos inventore? Minima provident quas deleniti vitae debitis, enim qui sed magni repellat harum quidem dicta quo doloremque perspiciatis ipsum dolorum numquam placeat fugit, ex exercitationem odit voluptate. Iure temporibus quos eveniet est perspiciatis vel culpa, iste repellendus mollitia quisquam sapiente reiciendis consequatur vero dignissimos laudantium nisi ab sunt debitis possimus quasi doloremque! Quibusdam mollitia commodi repudiandae cumque quis! Perferendis unde dolorem ad magni laborum alias sint quasi, ipsa molestiae tempora animi itaque, blanditiis et soluta nesciunt corporis fugit?</p>
+       </div>
+
+    <script src="Advance.js"></script>
+    </script>
+</body>
+</html>

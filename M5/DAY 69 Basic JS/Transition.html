@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+        Transition Properties::
+        transitionduration
+        Transition delay:
+        transition timing function
+        */
+        *{
+            margin: 0;padding: 0;box-sizing: border-box;
+        }
+        .box{
+            margin: 50px;
+            width: 150px;
+            height: 150px;
+            background-color: blueviolet;
+            transition: 1s 0.01s steps(4,end);
+        }
+        .box:hover{
+            height: 500px;
+            width: 500px;
+            background-color: navy;
+        }
+        .line{
+            margin-left: 100px;
+            height: 15px;
+            width: 2px;
+            border: 1px solid black;
+            transition: width 3s steps(100,end);
+        }
+        .line:hover{
+            width: 600px;
+        }
+        input{
+            display: inline-block;
+            margin-right: 200px;
+            margin-top: 100px;
+            width: 80px;
+            transition: 1s ease-in;
+        }
+        input:focus{
+            width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="search" placeholder="search">
+        <div class="box"></div>
+        <div class="line"></div>
+
+    </div>
+</body>
+</html>

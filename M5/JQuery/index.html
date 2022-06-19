@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box h4{
+            color: aqua;
+            background-color: black;
+        }
+        #dyn{
+            border: 1px solid red;
+            }
+        .box50{
+            width: 300px;
+            border: 1px solid red;
+        }  
+        #box1{
+            border: 1px solid black;
+        }  
+        .red{
+            background-color: red;
+            color: green;
+        }
+        .pink{
+            background-color: pink;
+            color: blueviolet;
+        }
+        .black{
+            background-color: black;
+            columns: #fff;
+        }
+        #onDemo{
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h3>Some heading here...</h3>
+            <p class="lead">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis inventore pariatur nisi consequuntur.
+            </p>
+        </div>
+        <div class="row">
+            <ul id="nav">
+                <li>Home</li>
+                <li>about</li>
+                <li>Contact</li>
+                <li>Career</li>
+                <li>More</li>
+            </ul>
+        </div>
+    </div> 
+
+    <form action="" id="formid">
+        <input type="text" id="name">
+        <input type="text" id="lname">
+        <select name="" id="SCountry">
+            <option value="India">India</option>
+            <option value="Russ">Russia</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+
+        </select>
+        <input type="submit" value="submit">        
+    </form>
+    <div id="box" class="box100 box">
+        <h3>some heading goes here...</h3>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        </p>
+    </div>
+    <button id="btn">Click Here</button>
+
+    <hr size="4">
+
+    <div id="box1" class="first">
+        <h2>Text Box</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, aliquid?</p>
+    </div>
+    <br>
+    <button id="addclass" >addClass</button>
+    <button id="removeclass" >removeClass</button>
+    <button id="toggle">toggleClass</button>
+
+    <div id="onDemo">
+        <h2>heading..</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, maiores.</p>
+    </div>
+    <button id="btn1">Remove events</button>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="jquery.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Contact Form</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #textbox{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+    <form style="background-color: dodgerblue; height:100vh;text-align: center;" action="mailto:kiranyadav267@gmail.com" method="post" enctype="text/plain">
+      <fieldset style="width:fit-content;margin:auto;background-color: powderblue">
+        <legend>Contact Details</legend>
+        <label for="">Name</label> <br>
+        <input type="text" name="Name : " required><br>        
+        <label for="">Contact</label><br>
+        <input type="tel" name="Contact Number : " maxlength="12"  required><br>
+        <label for="">Message</label><br>
+        <textarea id="textbox" name="Message : " id="" cols="30" aria-setsize="30" rows="10"></textarea> <br>
+        <input style="margin: 30px;" type="submit" value="Submit">
+      </fieldset>
+    </form>
+</body>
+</html>

@@ -1,0 +1,67 @@
+.container{
+    border: 10px solid red;  
+}
+.container-fluid{
+    border: 10px solid red;  
+}
+.row{
+    border: 1px solid black;
+    min-height:100px;
+}
+.row2{
+    min-height: 300px;
+}
+.col{
+    border: 1px dotted green;
+}
+
+/* MEDIA QUERIES */
+
+/* Noone can take the printout of the page we created */
+@media print{
+    body{
+        display: none;
+    }
+} 
+
+/* MOBILE FIRST APPROACH */
+/* IN THIS WE design first on small devices and then move on to the larger screens */
+@media all and (min-width : 576px){
+    .container{
+        width: 80%;
+        margin: auto;
+    }
+} 
+@media all and (min-width : 776px){
+    .container{
+        width: 100%;
+        margin: auto;
+    }
+}
+@media all and (min-width : 996px){
+    .container{
+        width: 50%;
+        margin: auto;
+    }
+}
+
+/* DESKTOP FIRST APPROACH */
+/* first design is made for the desktop and then designed for the smaller devices */
+
+@media only screen and (min-width:576){
+    .container{
+        background-color: tomato;
+    }
+}
+@media only screen and (min-width:776){
+    .container{
+        background-color: aqua;
+    }
+    
+}
+@media only screen and (min-width:996){
+
+    .container{
+        background-color: blue;
+    }
+}
