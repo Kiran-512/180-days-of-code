@@ -29,11 +29,7 @@ what will keep inside the static folder in context of express
 3. javscript files like jquery.. 
 which should not be processed by nodejs but should be processed by the browser.
 
-
-
 for everydoubt answer always should be searched first in architecture..
-
-
 
 in any every web technology figure out where to
 keep client side comonents

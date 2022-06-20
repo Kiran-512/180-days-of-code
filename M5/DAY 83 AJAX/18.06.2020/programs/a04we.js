@@ -24,9 +24,6 @@ app.get("/login", (req, resp) => {
     resp.send(loginstatus);
 });
 
-
-
-
 app.get("/updateprofile", (req, resp) => {
     resp.send("ok for update profile");
 });

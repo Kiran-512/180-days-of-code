@@ -7,13 +7,13 @@ let y = require('url')
 
 x.createServer(
 
-    (req,res)=>{
+    (req, res) => {
         //this function will get called only when req is made
-        let q = y.parse(req.url,true).query//why? I want to read parameters
-        res.write(q.adults + " "+q.child +" "+q.infants)
+        let q = y.parse(req.url, true).query//why? I want to read parameters
+        res.write(q.adults + " " + q.child + " " + q.infants)
         console.log("req handling function")
-        res.end()// iof this si not written then iot will take alot of time to load in the browser 
+        res.end()// if this is not written then it will take alot of time to load in the browser 
     }
-    
-    ).listen(99)
+
+).listen(99)
 

@@ -14,7 +14,7 @@
         function getItemOnItemno(itemno) {
           let output = {
             itemnofoundstatus: false,
-            itemdetails: { itemno: 3, itemname: "box", price: 50 },
+            itemdetails: { },
           };
           for (let i = 0; i < items.length; i++) {
             if (items[i].itemno == itemno) {
@@ -45,10 +45,8 @@
               break;
             }
           }
-
           return updated;
         }
-
         //ui function to show the detailed list of items
         function showContents() {
           let contents = document.querySelector("#contents");
