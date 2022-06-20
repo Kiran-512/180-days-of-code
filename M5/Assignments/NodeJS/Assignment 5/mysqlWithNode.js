@@ -168,3 +168,6 @@ userid  password
 a        d
 c        d
 */
+
+
+// We can do the delete also in the same way but delete is not recommended as we update the status to inactive instead of deleting any record

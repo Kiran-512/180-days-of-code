@@ -6,10 +6,8 @@
     <script>
         $(() => {
 
-
             $("#loginbutton").click(
                 () => {
-
                     //input that the server needs
                     let ip = { username: $("#username").val(), password: $("#password").val() };
 
@@ -32,18 +30,10 @@
                         },
                         error: (errorgivenbyserver) => { console.log("failed to contact server " + errorgivenbyserver) }
                     };
-
                     //time to call the function
                     console.log("is the function working");
                     $.ajax(parameterstothefunction);
-
-
-
                 }
-
-
-
-
 
             );//end of registration for click event
 

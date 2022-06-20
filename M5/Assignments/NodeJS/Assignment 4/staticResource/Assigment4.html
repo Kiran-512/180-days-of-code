@@ -20,18 +20,16 @@
                 let paramsToAjax = {
                     data: input,
                     type: "GET",
-                    url : "http://localhost:1000/MathOperations", // this url here is in small letters :I
+                    url : "http://localhost:1000/MathOperations", // this url here is in small letters 
                     dataType : 'JSON',
-                    success : (OPfromServer) => { 
+                    success : (OPfromServer) => { //server send output and that output is stored in the variable "OPfromServer" here in this function so we can use the properties of the output from server here as output is object from server
                         console.log("success called by the system on reaching server ..")
                         console.log(OPfromServer) 
                         console.log(OPfromServer.status, typeof OPfromServer.status) 
                         if(OPfromServer.status){
                             $("#msg").text(OPfromServer.result)
                         }
-
                     },
-
                     error : (errorMessage) => { console.log(errorMessage) }
                 }
                 $.ajax(paramsToAjax);

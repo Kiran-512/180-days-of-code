@@ -1,19 +1,19 @@
 const express = require('express');
 const app = express();
 
-app.use(express.static("sf")) ;// here sf is folder which will contains html
+app.use(express.static("sf"));// here sf is folder which will contains html
 //files and other javascript files which should not be processed by the server.
 
 //setup up URI's what is URI, a scenario in your http
 
 
-app.get("/login",(req,resp)=>{
+app.get("/login", (req, resp) => {
 
     console.log("this is login being procesed" + req.query.username);
     resp.send("ok for login we need to do some logic" + req.query.username);
 });
 
-app.get("/updateprofile",(req,resp)=> {
+app.get("/updateprofile", (req, resp) => {
     resp.send("ok for update profile");
 });
 

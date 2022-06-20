@@ -37,11 +37,11 @@ app.get("/MathOperations",(req,res)=>{
     if(symbol == "+"){
         output.status = true;
         output.result = parseInt(num1) + parseInt(num2);
-        console.log("Addition done")
+        console.log("Addition done " +output.result)
     }else if(symbol == "-"){
         output.status = true;
         output.result = parseInt(num1) - parseInt(num2);
-        console.log("substraction done")
+        console.log("substraction done" + output.result)
     }
     res.send(output) // this output is passed as argument in success in ajax to OPfromServer variable
 })

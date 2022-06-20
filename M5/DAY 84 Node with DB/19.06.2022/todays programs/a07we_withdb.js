@@ -39,7 +39,7 @@ app.get("/login", (req, resp) => {
             if (err) {
                 console.log("error has occured let us see");
             } else {
-                if (rows.length > 0) {
+                if (rows.length > 0){
                     loginstatus.status = true;
                     loginstatus.message = "login successful";
                 }
