@@ -18,14 +18,14 @@ $(()=>{
             type :'GET',
             dataType : "JSON",  
             url : "http://localhost:1000/login",
-            success :(dataFromServer)=>{
+            success : (dataFromServer)=>{
                 console.log(dataFromServer)
                 if(dataFromServer.status==true)
                 $("#msg").text(dataFromServer.message)
                 else
                 $("#msg").text(dataFromServer.message)
-            }, 
-            error :(Error)=>{
+            },
+            error:(Error)=>{
                 console.log("failed to contact server")
             } 
         }

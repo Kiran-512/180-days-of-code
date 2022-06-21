@@ -12,10 +12,12 @@ app.get("/login",(req,resp)=>{
     console.log(password,typeof password)
 
     let output = { status:false, message : "login failed"}
+
     if(username == password ){
         output.status = true;
         output.message ="Login Successfull";
     }
+    console.log(output)
     resp.send(output);
 })
 

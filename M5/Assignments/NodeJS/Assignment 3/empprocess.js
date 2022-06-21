@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express();
 
-app.use(express.static("sf"))
+app.use(express.static("sf")) //  
 
 app.get("/login",(req,res)=>{
 

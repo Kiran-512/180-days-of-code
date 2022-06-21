@@ -10,9 +10,11 @@ let dbparams = { //hudappa
 
 const conn = xmysql.createConnection(dbparams); // Connection established
 
-let userid = 'Kiran';
+//assuming these values are coming from client
+let userid = 'Kundan';
 let password = 'myPass';
 
+//to insert the user id and password in cusers table 
 conn.query('insert into cusers(userid,password) values (?,?);',[userid,password],
 (err,res1)=>{
     if(err){
@@ -23,9 +25,10 @@ conn.query('insert into cusers(userid,password) values (?,?);',[userid,password]
         console.log(res1.affectedRows)    
     }
 })
+
 userid = "a";
 password ="Welcome@123" // update successfull for user id 'a'
-password ="b" // update successfull for user id 'a'
+// password ="b" // update successfull for user id 'a'
 
 // userid ="U101" //Update failed as no such userID exists in the table so the affectedRows === 0
 
@@ -171,3 +174,4 @@ c        d
 
 
 // We can do the delete also in the same way but delete is not recommended as we update the status to inactive instead of deleting any record
+
