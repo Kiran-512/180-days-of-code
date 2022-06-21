@@ -12,7 +12,7 @@ create schema user3_schema;
 
 # command line MySQL:
 -- to switch in between users on command line
-#mysql -u user_name -p
+#system mysql -u user_name -p
 
 -- ================================================
 
