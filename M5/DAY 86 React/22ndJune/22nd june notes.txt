@@ -1,0 +1,316 @@
+idea is people will respect architectcure and not syntax.
+
+react.
+1. how do you setup events and upate sectionsof the page. ( react has an opinion)
+2. how do you contact server, here react tells I dont know also. wehave
+to use some library which is not react based to contact the server .. most common
+library used is axios or fetch .. syntax in so many flavours concept same.
+3. how do state management
+4. how to one go from one place to another .. routing.
+
+stick with first thing is read this 
+
+advantages we will come it to later on.. but first step what did we do with jquery
+1. we setup events and changed sections of the page.
+2. same thing we will focus on in react.
+
+3. we contacted server
+3.we contact by server by some library.
+
+the most common way to build react is by using a development environment
+on nodejs.
+
+build react code by using some libraries on nodejs
+and finally during deployment the Boss browser does not care whether
+it is react, angular or jquery .. becuase boss likes finally html, css and javascript.
+
+what is first step in building web prsentation.
+1. think which part will change, which part will not change.
+2. we give ids for the parts which change.
+3. then we access the html via javascript and make the changes.
+
+
+div tag is used to logically section the page into regions.
+what do we with div tag nothing until you start using css properties.
+
+<p id="root"></p>
+
+you write something components...
+set of html + dynamic thing
+
+you can do two things in react.
+
+1. create some elements.  -- can you recognize which part does not change
+which part changes..
+2. tell where it needs to be put in the html.
+
+
+never understand the code frm function defintiion always go from function calling.
+except for fate functions.. 
+
+when we define the function, think who is going to call it.
+when we call the function, always open documenttion and read the function
+what it does..
+
+any terminology comes X.
+hey look I knnow 3 tier architecture , you tell me in which layer it is used.
+
+X=babel.
+X is used in presentation layer.
+ok in what presentation. web or non web.
+web
+in web I know only http, js and css, explain babel here.. if he tells I cant explain
+then tell I dotn want to learn babel.
+
+Babel takes javscript which is present day javascript and converts into 
+a version which the browser understands..
+
+most important skill for the project.
+i will not know so many things, when I dont know either syntax or concept
+are we willing to write a small program to clarify our concept or syntax.
+
+let it be x, y, z style of react.
+1. are we creating content
+2.where are we using it.
+
+dont get over enthusiastic about codng, relax focus on react terminologies
+first and see can you give an example Icant code ok fine. that is ok.
+
+take a break till 4.00PM and we will join back.. dont switch off
+
+
+we are mixing html and javascript in this process we have to identify parts
+which change, parts which dont change.
+
+
+
+
+
+when are building react. what we do is
+
+1. section the page into components.
+each part with its static content and dynamic content.
+each component.
+dynamic part is called as state.
+when we tell things change, it means we have chanted the state.
+
+concept called as immutability what does it mean.
+things that cannot be changed.
+
+what are things we should have learnt in react as of now.
+1. too many opinions, you should not care for anything rather focus
+on "how to setup events change sections of the page."
+
+2.in entire  react code.
+identify sections which are creating content  ( static and dynamic)
+create h1 tag and its content is xyz.
+identify sections which tell where content should go.
+where should h1 tag go.
+
+
+3. from a project point of view. we tell identify the page into components.
+each component will have its own dynamic part and static part.
+dynamic part of the component needs to go into something called "state".
+
+4. what i should do.. continue reading dont code..I have time
+then figure how to do file uploads using nodejs.
+
+5. what is most important at the end of the day , react is just a web based presntation
+that means the boss the browser is not going to care whether it is react or jquery
+or ... he tells I like html, javascript and css that's all other things are "developers"
+convenience.
+to talk between two component it is props
+to keep  keep track of a dynamic thing in same component it is called as state.
+
+architecture mvc.
+
+expand mvc = Model View Controller.
+what is mvc?
+mvc is an architecture used in presenttion  so that when model changes
+view need not change, or view changes, model need not change
+this is done by using a controller.
+
+
+photoframe and photo.
+model = photo
+photoframe  =view
+screw = controller.
+
+computer science example.
+model == data.
+view = excel, pdf, html
+
+in web pages.
+
+1 . html tags are nothing but view.
+2. dynamci thing ... model.
+3. events which we setup are controller.
+
+
+Session.
+what do you mean by session.?
+session word in http means.
+
+1. it is particular to a user.
+2. there has to be multiple request.
+3. some information has to be avaialble over this multiple requests.
+if you have the need doing 3 keeping 1 and 2 in mind. then we say
+we need a session.
+
+login -- request .. inbox page -- response.
+compose mail -->new request  -- but then it must remember who logged in.
+ok during second request , we need to remember the information got
+during first request ie login. hence we need a session.
+
+we are doing login
+we are doing logout
+after login, let us person has to add two numbers.
+during login we give userid and password(information) we got the postlogin page.
+in postlogin page, there is an option to add two numbers, when wwe click submit
+in the postlogin page, a new request starts.(second request) we have to remember
+the person who logged in.. ok that means in this scenario we need to put
+userd in a session.
+
+
+what is meaning of logout
+we did some X after logging in. we should not able to do X after logging off.
+during logoff we remove teh information from the session.
+
+
+when it comes to session, all of you must remember..it is always a map
+where. in any web technology..
+you put both key and value
+while removing you remove both key and value, after specifying the key.
+
+we have a tag in html called A href , anchor tag.
+what does anchor tag do it helps in navaigation from page to page..
+
+<A href="where to go"> what to show </A>
+
+textbox  [	2	]
+button
+
+it is an odd number then we must go  page x.html
+if is even number then we must go page y.html
+
+
+for people it is boring
+whether it is react or jquery or angular .. or dont assume about event
+handling check..
+
+routing  -- context, which page to show.
+
+css ...
+:-- pseudo class.
+
+what is a pseudo class.
+1. system knows what is it and when to apply
+we only tell what kind of decoration we want to do.
+how to recognize teh syntax :
+
+CSS box model.
+it it important super important in real life.. for people who use css
+for us also important..
+
+bootstrap is primarily a css library.
+
+
+
+in css
+
+# it means id 
+. it means class
+X it means element
+: it means pseudoclass.
+box model.
+
+if we know css and ul. li tags we can build menus.
+
+fianlly in the project dont build your own html from teh beginning
+as far stying goes pick up ready made templates.
+
+javascript part any how you ahve to write..
+
+
+post mode of request
+
+css box model.
+
+
+f1(3);
+
+
+1.
+http modes of request.
+get  -- querying
+post --adding 
+put  --updating
+delete --removing.
+
+according to http standard.. get mode of request does not need any body..
+body of request, comes only if mode of request is post or put. and never get.
+get is expected to carry information as part of its header..
+
+get is not secure
+post is secure
+all this is non sense..
+
+/two.html?v1=x&v2=y so people tell it is not secure..
+
+two.html
+during post, information is not revelated why.. infomration
+goes as part of the body.. hence it is not revealed
+
+nothing is secure..
+why it is http..
+
+
+what is difference between get and post, some people can do phd but
+we are programmers so dont talk complicated things ..
+
+
+talk like this.
+1. get mode of request, information is revelated in the address bar
+becuase information goes as part of the http header and get does
+not have a body.
+
+by convention we use get mode of request for querying
+
+2. in post mode of request, information is not revelaed
+as part of header, becuase information goes as part of the body.
+
+by convention we use post mode of request for adding information.
+
+
+https://www.cleartrip.com/flights/results?adults=6&childs=0&infants=0&class=Economy&depart_date=22/06/2022&from=DEL&to=JAI&intl=n&origin=DEL%20-%20New%20Delhi,%20IN&destination=JAI%20-%20Jaipur,%20IN&sd=1655898661966&rnd_one=O
+
+
+https://www.redbus.in/bus-tickets/mumbai-to-goa?fromCityName=Mumbai&fromCityId=462&toCityName=Goa&toCityId=210&onward=24-Jun-2022&srcCountry=IND&destCountry=IND&opId=0&busType=Any
+
+how to send information in postmode..
+
+when we dont mention any mode what is defaut mode of request.. get mode of request.
+
+
+quick summary
+
+1. dont worry about the code. just know the terminology first..
+coding can come in different styles
+1. using nodejs
+2. without using nodejs
+concept does not change whether we do it by 1 or 2.
+what is concept.
+1. creating content ( dynamic  -- state, static )
+2. where is the content used.
+3. session-- for a particular user, multiple requests an dsome information
+needs to survive over multiple requests.
+4. routing ... moving from one place to another.. tag that should come to your mind
+should hyperlink ahref.
+5. in css, box properties.. what is margin, what is padding, what is border...
+6. in http protocol, get and post.. ok dont talk in terms of security, just talk 
+in terms of its features
+get carries information as apart of its header hence information is revealed.
+post carries information as part of its body, henc einformation isn ot revealed.
+
+
+
