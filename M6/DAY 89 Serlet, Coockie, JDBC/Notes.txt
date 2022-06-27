@@ -1,0 +1,24 @@
+==============================
+double click on tomcat to change the port no
+
+find out port is used by which process ...netstat - | findstr :8080
+==============================
+//Chage the tomcat port 
+C:\Users\Kiran>netstat -a -n -o | find "8080"
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       12700
+  TCP    127.0.0.1:60240        127.0.0.1:8080         TIME_WAIT       0
+  TCP    127.0.0.1:60242        127.0.0.1:8080         TIME_WAIT       0
+  TCP    [::]:8080              [::]:0                 LISTENING       12700
+
+C:\Users\Kiran>
+
+==============================
+
+
+
+
+==============================
+
+
+
+==============================
