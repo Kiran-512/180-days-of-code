@@ -2,9 +2,9 @@ let dbparams =
 {
     host: 'localhost',
     user: 'root',
-    password: '1234',
+    password: 'cdac',
     database: 'pleasework',
-    port: 3309
+    port: 3306
 };
 const mysql = require('mysql2'); //fate
 const con = mysql.createConnection(dbparams);//fate  
@@ -16,13 +16,14 @@ app.use(express.static("sf"));
 
 
 app.get("/getItem", (req, resp) => {
-    let input = req.query.x;
+    let input = req.query.itemno;
     console.log(input);
+
     let output = { itemnofoundstatus: false, itemdetails: { itemno: 33, itemname: 'wheat', price: 350 } };
 
     con.query('select * from item where itemno =?', [input], (error, rows) => {
 
-        if (rows.length > 0) {
+        if (rows.length == 1) {
             output.itemnofoundstatus = true;
             output.itemdetails = rows[0];
         }
@@ -37,13 +38,13 @@ app.get("/addItem", (req, resp) => {
     //later on we will see how to read the complete item object itself from http request
     let input = { itemno: req.query.x, itemname: req.query.y, price: req.query.z };
     console.log(input);
-    let output = true;
+    let output = false;
 
     con.query('insert into item(itemno,itemname,price) values (?,?,?)',
         [input.itemno, input.itemname, input.price],
         (error, whathappenedtoinsert) => {
             if (error) {
-
+            console.log(error);
             }
             else if (whathappenedtoinsert.affectedRows > 0) {
                 output = true;
@@ -51,7 +52,6 @@ app.get("/addItem", (req, resp) => {
             resp.send(output);
         }
     );
-
 });
 
 app.get("/updateitem", (req, resp) => {
@@ -86,7 +86,6 @@ app.get("/updateitem", (req, resp) => {
 app.get("/getAllItems", (req, resp) => {
 
     con.query('select * from item', [], (error, rows) => {
-
 
         resp.send(rows);
 

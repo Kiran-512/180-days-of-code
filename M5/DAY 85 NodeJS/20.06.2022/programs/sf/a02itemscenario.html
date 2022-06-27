@@ -19,6 +19,7 @@
           }
           return output;
         }
+      
         function updateItem(updatedObject) {
           let updated = false;
           for (let i = 0; i < items.length; i++) {
@@ -64,14 +65,13 @@
           document.querySelector("#itemno").disabled = true;
 
           let ajaxparams = {
-            data: { x: y },
+            data: { itemno : y },
             url: "http://localhost:900/getItem",
             type: 'get',
             dataType: "json",
             success: (output) => {
 
               if (output.itemnofoundstatus) {
-
 
                 $("#message").text("item details found");
 
@@ -83,11 +83,6 @@
 
                 $("#itemprice").val(output.itemdetails.price);
 
-
-
-
-
-
               }
 
               else {
@@ -96,38 +91,13 @@
                 $("#itemname").val("");
                 $("#itemprice").val("");
 
-
-
-
-
-
-
               }
-
 
             },
             error: (error) => { console.log("failure " + error) }
 
           };//end of the object creation for ajaxparams
           $.ajax(ajaxparams);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         });//end of the blur event on itemno
 
@@ -140,12 +110,10 @@
 
         $("#add").click(
           () => {
-
-
-
             let input = {
               x: $("#itemno").val(),
-              y: $("#itemname").val(), z: $("#itemprice").val()
+              y: $("#itemname").val(), 
+              z: $("#itemprice").val()
             };
 
             let ajaxparams = {
@@ -160,23 +128,15 @@
                   //message.innerText="added successfully";
                   $("#message").text("added succesfully");
                   $("#message").removeClass("nm").addClass("em");
-
                 }
                 else {
                   $("#message").text("could not add item");
-
                 }
-
-
-
 
                 $("#itemname").val("");
                 $("#itemprice").val("");
 
-
                 showContents();
-
-
 
                 document.querySelector("#itemno").disabled = false;
 
@@ -202,9 +162,6 @@
 
           }); //end of add event
 
-
-
-
         $("#update").click(() => {
 
           //hard thing begins
@@ -225,14 +182,11 @@
               //only after you got data from the server, update the ui
               if (output) {
                 $("#message").text("updated successfully");
-                $("#message").removeClass("em").addClass("nm");
+                $("#message").removeClass("em").addClass("nm");//stupid things
 
               }
               else {
-
                 $("#message").text("could not update item");
-
-
               }
               $("#itemname").val("");
               $("#itemprice").val("");
@@ -241,45 +195,15 @@
 
               document.querySelector("#itemno").disabled = false;
               document.querySelector("#itemno").focus();
-
-
-
-
-
-
-
-
-
-
             },
             error: (mistake) => { console.log("error " + mistake); }
           };
           $.ajax(ajaxparams);
 
-
-
-
-
-
-
-
         });
-
-
-
-
-
+       
         showContents();
-
-
-
-
-
-
       });
-
-
-
 
   </script>
   <style>
@@ -287,7 +211,6 @@
       color: green
         /* total stupid */
     }
-
     .nm {
       color: blue
     }
