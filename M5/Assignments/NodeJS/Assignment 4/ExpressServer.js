@@ -3,12 +3,14 @@ let app = express();
 
 app.use(express.static("staticResource"));
 
+//URI - Unifrom resource  Identifier
+//URL - Unifrom resource  locator
 app.get("/login",(req,resp)=>{
 
     let username = req.query.username;
     console.log(username, typeof username)
 
-    let password = req.query.password;
+    let password = req.query.pass;
     console.log(password,typeof password)
 
     let output = { status:false, message : "login failed"}
@@ -52,3 +54,4 @@ app.listen(1000,()=>{
 
     console.log("Server is listening at port no 1000....")
 })
+

@@ -8,13 +8,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
 $(()=>{
-    console.log("is it working...")
-    $("#btn").click(()=>{
+        console.log("is it working...")
+        $("#btn").click(()=>{
 
-        let input = { username :$("#EmpID").val() ,password :$("#password").val() }
+        let input = { username :$("#EmpID").val() ,pass :$("#password").val() }
 
         let paramsOfAjaxFunc = {
-            data :input,
+            data : input,
             type :'GET',
             dataType : "JSON",  
             url : "http://localhost:1000/login",
