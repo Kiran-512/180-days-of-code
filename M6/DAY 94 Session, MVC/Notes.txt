@@ -1,0 +1,5 @@
+TODO:
+How can we configure a servlet using web.xml file?
+What are the different types of elements in a JSP? (<% ... %>)
+What are the different types of implicit objects in a JSP? (application -> ServletContext)
+What are custom tags in JSPs and how can we create one of our own?

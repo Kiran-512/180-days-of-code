@@ -1,0 +1,72 @@
+TODO:
+1. role of web/http server
+2. difference between web server and web container
+3. what is the role of servlet/jsp
+4. what are the steps for writing and running a servlet/jsp
+
+5. what is the role of HTTP protocol and how it works?
+So HTTP protocols are nothing but the set of rules like to doGet into doPost
+
+File transfer : 
+Over the Internet there are multiple protocols available FTP protocol is there 
+it's a file transfer protocol 
+
+//Deployment : 
+We will upload all our files on the web server via FTP which includes uploading of all the files.
+
+
+Protocols for exchanging email between client and server :
+POP3 and SMTP protocols and IMP protocol
+
+6. What are different methods of HTTP protocol (GET, POST, ...)
+7. What is the difference between GET and POST method of HTTP protocol
+ANS : 
+via get method we can send data via URL and the body or payload
+
+via post we have the body to send the data via..
+url is not used to send the data
+
+Limitation of get method : we can send only 2 KB to 8 KB of data via get method but then there is no restriction on the date assigned by the post method
+
+- None of them are secured
+
+Request and response has got the two part:
+Headers / MetaData
+Body / Payload
+
+doPost will take little bit more time to read the data from client or server than doGet
+
+
+
+8. What is Servlet interface? What is GenericServlet? What is HttpServlet?
+
+
+9. What is the life-cycle of a Servlet?
+
+
+
+10. What is the life-cycle of a JSP?
+
+
+=> Path of the servlet from JSP file :
+C:\CDAC\Github\Assignments\M6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\MyWebApp\org\apache\jsp
+
+JSP internally translated into the Servlet and then it follows similar life cycle!
+
+11. What is ServletConfig? What is ServletContext?
+	If possible, try some program on it on your own
+
+TODO:
+Write one servlet which will fetch the records from customer table and display the same
+Similarly write the JSP version of the above code
+
+
+
+
+
+
+
+
+
+
+
