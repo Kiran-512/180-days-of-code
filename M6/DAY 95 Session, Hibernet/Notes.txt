@@ -1,0 +1,166 @@
+Session Tracking in Servlets : 
+
+Session simply means a particular interval of time.
+
+Session Tracking is a way to maintain state (data) of an user. It is also known as session management in servlet.
+
+HTTP is stateless that means each request is considered as the new request.
+
+Http protocol is a stateless so we need to maintain state using session tracking techniques. Each time user requests to the server, server treats the request as the new request. So we need to maintain the state of an user to recognize to particular user.
+
+Coockies are stored on the client side
+
+Session Objects are used for maintaining state between server and client
+
+One session object will be created for each user in memory
+
+1 user - 1 session object
+10000 user - 10000 session object
+.
+.
+.
+n user - n session object
+
+For each session object , alphanumeric string as an ID will be created internally in the memory. 
+
+IP is dynamic to purchase static ip it will cost huge.
+
+
+
+Session Tracking Techniques
+
+Cookies
+Hidden Form Field
+URL Rewriting
+HttpSession
+
+
+Session Timeout : 
+- After 5 minutes of inactivity of client session gets expired.
+<session-config>
+	<session-timeout>5</session-timeout> // in minutes
+</session-config>
+
+tomcat default timeout time is : 30 mins
+
+
+
+===============================
+
+Cookies in Servlet
+
+A cookie is a kind of information that is stored at client side.
+A cookie is a small piece of information that is persisted between the multiple client requests.
+
+A cookie has a name, a single value, and optional attributes such as a comment, path and domain qualifiers, a maximum age, and a version number.
+
+
+How Cookie works
+By default, each request is considered as a new request. In cookies technique, we add cookie with response from the servlet. So cookie is stored in the cache of the browser. After that if request is sent by the user, cookie is added with request by default. Thus, we recognize the user as the old user.
+
+Types of Cookie
+There are 2 types of cookies in servlets.
+Non-persistent cookie
+Persistent cookie
+
+Non-persistent cookie
+It is valid for single session only. It is removed each time when user closes the browser.
+
+Persistent cookie
+It is valid for multiple session . It is not removed each time when user closes the browser. It is removed only if user logout or signout.
+
+
+= > Advantage of Cookies
+- Simplest technique of maintaining the state.
+- Cookies are maintained at client side.
+
+= > Disadvantage of Cookies
+- It will not work if cookie is disabled from the browser.
+- Only textual information can be set in Cookie object.
+
+
+Cookie class
+javax.servlet.http.Cookie class provides the functionality of using cookies. It provides a lot of useful methods for cookies.
+
+Constructor of Cookie class
+Constructor	
+
+Cookie()	constructs a cookie.
+Cookie(String name, String value)	
+constructs a cookie with a specified name and value.
+1. public void setMaxAge(int expiry)  
+Note : expiry -time in seconds
+2. public String getName()
+3. public String getValue()
+4. public void setName(String name)
+5. public void setValue(String value)
+
+= > Other methods required for using Cookiespublic void - addCookie(Cookie ck):method of HttpServletResponse interface is used to add cookie in response object.
+
+- public Cookie[] getCookies():method of HttpServletRequest interface is used to return all the cookies from the browser.
+
+
+========================
+Hibernate  : ORM
+
+- Hibernate ORM is an object–relational mapping tool for the Java programming language. 
+- It provides a framework for mapping an object-oriented domain model to a relational database
+
+Object-Relational Mapping (ORM) is a technique that lets you query and manipulate data from a database using an object-oriented paradigm.
+
+
+Maven  : 
+- Its like a D-MART WHERE WE FIND ALL NECESARRY THINGS UNDER ONE ROOF
+
+- Maven is an tool where w efind all the java library and frameworks and we can simply donwload then and use in our project
+- it simplifys our project-work
+- Performs the same role like npm
+- a very powerful project management tool
+
+- Maven is a popular open-source build tool developed by the Apache Group to build, publish, and deploy several projects at once for better project management. The tool provides allows developers to build and document the lifecycle framework.
+
+- Maven is a build automation tool used primarily for Java projects. Maven can also be used to build and manage projects written in C#, Ruby, Scala, and other languages. The Maven project is hosted by the Apache Software Foundation, where it was formerly part of the Jakarta Projec
+
+similar eg.
+npm, neuget,pip etc.
+
+Maven Dependencies :
+- All downloaded libraries will find here in .M2 folder
+
+
+POM file :
+- A Project Object Model or POM 
+- is the fundamental unit of work in Maven. 
+- It is an XML file that contains information about the project and configuration details used by Maven to build the project. 
+- It contains default values for most projects.
+- All the libraries and frameworks we will import here in this file from mvnreposiory
+
+persistence.xml File
+- The persistence. xml file is a standard configuration file in JPA. 
+- It has to be included in the META-INF directory inside the JAR file that contains the entity beans. 
+- The persistence. xml file must define a persistence-unit with a unique name in the current scoped classloader.
+
+
+Java DPF - creation :
+https://www.baeldung.com/java-pdf-creation
+
+Dao layer:
+- Data Access Object
+- Design pattern
+- Class which contains the database connection code called as Dao layer
+
+
+ACID principles :
+
+- One step fails then all steps should be rolledback
+- In the context of transaction processing, the acronym ACID refers to the four key properties of a transaction: 
+- atomicity, consistency, isolation, and durability. 
+- All changes to data are performed as if they are a single operation. 
+- That is, all the changes are performed, or none of them are.
+
+=> in live project autocommit is kept off
+- Set autocommit=0; 
+
+HQL - Hibernate Query Lang
+JPQL - Java persistance Query Lang
+

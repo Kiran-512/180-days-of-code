@@ -1,0 +1,141 @@
+Q. What is a servlet?
+- Servlet technology is used to create a web application (resides at server side and generates a dynamic web page).
+- They are basically Java programs that run inside the boundaries of a container. and they are responsible for accepting a request, processing it, and sending a response back
+
+
+Q. Explain Servlets Lifecycle? Q. How does the servlet container manage the servlet life cycle, when and what methods are called?
+A servlet life cycle can be defined as the entire process from its creation till the destruction. The following are the paths followed by a servlet.
+The servlet is initialized by calling the init() method.
+The servlet calls service() method to process a client's request.
+The servlet is terminated by calling the destroy() method.
+Finally, servlet is garbage collected by the garbage collector of the JVM.
+
+The init() Method
+- The init method is called only once. It is called only when the servlet is created, and not called for any user requests afterwards. 
+- So, it is used for one-time initializations, just as with the init method of applets.
+- The servlet is normally created when a user first invokes a URL corresponding to the servlet, but you can also specify that the servlet be loaded when the server is first started.
+- When a user invokes a servlet, a single instance of each servlet gets created, with each user request resulting in a new thread that is handed off to doGet or doPost as appropriate. The init() method simply creates or loads some data that will be used throughout the life of the servlet.
+
+The service() Method
+- The service() method is the main method to perform the actual task. 
+- The servlet container (i.e. web server) calls the service() method to handle requests coming from the client( browsers) and to write the formatted response back to the client.
+- Each time the server receives a request for a servlet, the server spawns a new thread and calls service. The service() method checks the HTTP request type (GET, POST, PUT, DELETE, etc.) and calls doGet, doPost, doPut, doDelete, etc. methods as appropriate.
+- The doGet() and doPost() are most frequently used methods with in each service request.
+
+The destroy() Method
+- The destroy() method is called only once at the end of the life cycle of a servlet. This method gives your servlet a chance to close               database connections, halt background threads, write cookie lists or hit counts to disk, and perform other such cleanup activities.
+- After the destroy() method is called, the servlet object is marked for garbage collection.
+
+
+Q. What is a servlet container?
+- It provides the runtime environment for JavaEE (j2ee) applications. The client/user can request only a static WebPages from the server. If the user wants to read the web pages as per input then the servlet container is used in java.
+- The servlet container is the part of web server which can be run in a separate process. 
+- We can classify the servlet container states in three types
+1. Standalone: It is typical Java-based servers in which the servlet container and the web servers are the integral part of a single program. For example:- Tomcat running by itself
+
+2. In-process: It is separated from the web server, because a different program runs within the address space of the main server as a plug-in. For example:- Tomcat running inside the JBoss.
+
+3. Out-of-process: The web server and servlet container are different programs which are run in a different process. For performing the communications between them, web server uses the plug-in provided by the servlet container.
+
+The Servlet Container performs many operations that are given below:
+Life Cycle Management
+Multithreaded support
+Object Pooling
+Security etc.
+
+Q. What is ServletContext Interface?
+- An object of ServletContext is created by the web container at time of deploying the project.
+- This object can be used to get configuration information from web.xml file. 
+- There is only one ServletContext object per web application.
+- If any information is shared to many servlet, it is better to provide it from the web.xml file using the <context-param> element.
+
+=> Advantage of ServletContext
+- Easy to maintain if any information is shared to all the servlet, it is better to make it available for all the servlet. We provide this information from the web.xml file, so if the information is changed, we don't need to modify the servlet. Thus it removes maintenance problem.
+
+There can be a lot of usage of ServletContext object. Some of them are as follows:
+- JavaTpoint
+
+
+
+Next>><<Prev
+ServletContext Interface
+ServletContext Interface
+Usage of ServletContext Interface
+Methods of ServletContext interface
+How to get the object of ServletContext
+Syntax to provide the initialization parameter in Context scope
+Example of ServletContext to get initialization parameter
+Example of ServletContext to get all the initialization parameter
+An object of ServletContext is created by the web container at time of deploying the project. This object can be used to get configuration information from web.xml file. There is only one ServletContext object per web application.
+
+If any information is shared to many servlet, it is better to provide it from the web.xml file using the <context-param> element.
+
+Advantage of ServletContext
+Easy to maintain if any information is shared to all the servlet, it is better to make it available for all the servlet. We provide this information from the web.xml file, so if the information is changed, we don't need to modify the servlet. Thus it removes maintenance problem.
+
+Usage of ServletContext Interface
+There can be a lot of usage of ServletContext object. Some of them are as follows:
+- The object of ServletContext provides an interface between the container and servlet.
+- The ServletContext object can be used to get configuration information from the web.xml file.
+- The ServletContext object can be used to set, get or remove attribute from the web.xml file.
+- The ServletContext object can be used to provide inter-application communication.
+
+Q. What actions do you need to do when creating servlets?
+- process of servlet creation
+
+
+Q. How to call another servlet from one servlet?
+- 4 methods
+
+Q. What is Request Dispatcher?
+- to call another servlet from one servlet
+
+Q. What are the differences between forward() and sendRedirect() methods?
+
+
+What is the JDBC?
+- JDBC stands for Java Database Connectivity. JDBC is a Java API to connect and execute the query with the database. 
+- It is a part of JavaSE (Java Standard Edition). 
+- JDBC API uses JDBC drivers to connect with the database. There are four types of JDBC drivers:
+
+JDBC-ODBC Bridge Driver,
+Native Driver,
+Network Protocol Driver, and
+Thin Driver
+
+= > A list of popular interfaces of JDBC API are given below:
+Driver interface
+Connection interface
+Statement interface
+PreparedStatement interface
+CallableStatement interface
+ResultSet interface
+ResultSetMetaData interface
+DatabaseMetaData interface
+RowSet interface
+
+A list of popular classes of JDBC API are given below:
+
+DriverManager class
+Blob class
+Clob class
+Types class
+
+
+Why Should We Use JDBC
+
+
+Explain the JDBC Architecture?
+What are the new features available in JDBC 4.0?
+What are the advantages of using PreparedStatement in Java?
+What is ResultSet?
+What are types of ResultSet?
+What is the difference between executing, executeQuery, executeUpdate in JDBC?
+
+What is JSP?What are the different Life-Cycle methods? 
+Mention some important JSP Action Tags.
+Why are the request.getRequestDispatcher() and context.getRequestDispatcher() used?
+What are the various Implicit Objects used in JSP 
+How can we stop errors on Display in a JSP Page?
+
+Explain Client-Side and Server-Side Validation.
