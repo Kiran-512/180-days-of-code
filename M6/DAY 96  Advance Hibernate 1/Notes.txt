@@ -1,0 +1,49 @@
+
+--------------------------------
+Association :
+one to one 
+many to one
+one to many
+many to many
+--------------------------------
+
+@Column(name = "column_name") 
+note : here "name" isused only when the attribute na,e is different than the column name
+
+If both the name are same then no need to use  @Column with the Fields
+
+--------------------------------
+Domino effect:
+
+Cascading effects : if one is inserted the linked things should also get inderted
+
+@OneToOne (cascade = CscadeTyep.ALL) 
+For all operations cascade will be performed
+
+@OneToOne (cascade = CscadeTyep.PERSIST	)
+--------------------------------
+
+ select C.CUST_NAME, a.city from tbl_cust c,tbl_add a where c.addr_id=a.addr_id and a.city="Mumbai";
++-----------+--------+
+| CUST_NAME | city   |
++-----------+--------+
+| Kiran     | Mumbai |
+| Akshay    | Mumbai |
+| Pranit    | Mumbai |
++-----------+--------+
+
+--------------------------------
+uml diagrams
+A UML diagram is a diagram based on the UML (Unified Modeling Language) with the purpose of visually representing a system along with its main actors, roles, actions, artifacts or classes, in order to better understand, alter, maintain, or document information about the system.
+
+--------------------------------
+Unidirectional and Bidirectional Association
+
+- Only car has engine ka object is unidirectional
+
+- Car class has engine ka object and Object has car ka object so its bidirectional
+
+--------------------------------
+
+Cardinality in UML
+In UML, cardinality is represented by characters: “..1” (meaning that an instance of the first entity class can be associated with no more than one instance of the second class) or “.. *” (meaning that the first entity can be associated with an unlimited number of instances of the second class).

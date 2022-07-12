@@ -1,0 +1,41 @@
+-----------------------------------------------------
+Generally, We put cascade property on hte parent side as without parent child won't exist!
+-----------------------------------------------------
+
+OMR's
+
+- Hibernate
+- Toplink
+- EclipseLink
+- BataNucleus
+- ObjectDB
+-----------------------------------------------------
+Every ORM has is own API:
+
+JPA : Java Persistence API
+ 
+Id we use hibernate underlying API then our code only work with the  hibernate only, so infuture if we shift to shor other ORM then we need to write some other code for that...
+
+So oracle made a common API (JPA) for all the ORM SO THAT WE CAN USE IT WITH ANY OTHER ORM
+
+-----------------------------------------------------
+
+We can skip the annotations and specidy the table details and its mapping withthe class in xml file.
+
+-----------------------------------------------------
+
+THE oBJECT OF ENTITY LASS CAN BE IN ONE OF THE BELOW STAGES:
+	
+Transient
+- The Object which is in the memoru but not persisted yet
+
+Persistent
+- the objectis saved in teh database and persisted
+
+Detached
+- The object is persisted but if any changes made then it won't reflect inth database
+
+-----------------------------------------------------
+On hibernate/JPA, ther eis concept of lazy and eager loading
+
+-----------------------------------------------------

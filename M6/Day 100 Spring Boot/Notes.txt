@@ -1,0 +1,4 @@
+Spring framework: 
+- Creating object of our class
+- Managing dependencies between our object (DI - Dependencies )
+
