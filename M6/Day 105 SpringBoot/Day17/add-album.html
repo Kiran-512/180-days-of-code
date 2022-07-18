@@ -1,0 +1,35 @@
+<html>
+<head>
+<script>
+	function add() {
+		var album = {
+			name : document.getElementById("alb-name").value,
+			releaseDate : document.getElementById("alb-release").value,
+			copyright : document.getElementById("alb-copyright").value
+		}
+		//alert(JSON.stringify(album));
+		
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+			//alert(this.responseText);
+			document.getElementById("status").innerHTML = "<b>" + this.responseText + "</b>";
+	    }
+	    
+		xhttp.open("POST", "http://localhost:8080/add-album", true);
+		xhttp.setRequestHeader('Content-type', 'application/json');
+		xhttp.send(JSON.stringify(album));
+				
+		return false;
+	}
+</script>
+</head>
+<body>
+	<form onsubmit="return add()">
+		Enter album name : <input type="text" id="alb-name" /> <br />
+		Enter release date : <input type="date" id="alb-release"/> <br />
+		Enter copyright : <input type="text" id="alb-copyright"/> <br />
+		<button type="submit">Add Album</button>
+	</form>
+	<div id="status"></div>
+</body>
+</html>

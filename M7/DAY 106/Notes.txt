@@ -1,0 +1,288 @@
+VC++ / VB6 =>  For desktop applications
+ASP => Web applications
+
+Major diff : DeskTop app are installed on PC and web applications are installed on server
+
+COM : Component Object Model 
+- Create components that can be used by anyone else
+
+- Issues with the previous version :
+- Mainly versioning and deployment peroblem!
+- If the guidlines were not followed then COM was creating helll like a problem
+
+One of the Com components was Activix DLL file! and the problme associated with it was caled DLL HELL!
+
+So the problems associated with 
+
+
+.Net Feaures!
+- OO Code
+- Multiple Languages
+- Multiple platforms*
+- Multiple project types!(web,desktop, mobile applications etc.)
+- Better Security
+- Improved Performance!
+
+
+Web Apps, Windows forms, console apps, Web services, WPF, WCF, ASP.NET MVC, .Net Core, Xamarin(Mobile Computing platform), Windows Services, Web API etc.
+
+.Net Base Class Library
+System.DII
+System.Data.DII
+System.Xml.DII etc.
+
+Assembly that we create in the .net are similar to the modules orpackages in javaScript and java respectively!
+
+
+Source Code:
+Over 50 languages has got the support in .Net
+We will learn C#
+
+Compilation in .Net:
+- Once compilation is done, We will get a assembly (exe/dll)
+
+Byte Code MSIL(MicroSoft IL)/CIL(Common IL)/IL(Intermediate Language)
+
+Native Code : Its already in machine code format and that can be run directly without compilation!
+
+CLR : Common Language Runtime 
+
+JIT :
+Memory Management :
+Garbage Collection :
+App Domain context :
+Common Langugae Specification :
+Common Type System :
+Thread Management :
+Security Management :
+Debugging :
+Exception handling :
+
+main{
+
+func1();
+func2();
+func3();
+func1();
+
+}
+
+
+here first only main will be compiled when compiler reaches func1(); that timw JIT will compile func1(); and 2 and then 3 and it will again compile func1 but will take less time!
+
+
+main(){
+
+Class1 o;
+
+0 = new Class1();
+
+//delete o 
+//o = null;
+
+}
+
+=======================
+GC runs only when the certain limit is reached formemory management!
+
+eg.TeaCup Collector 
+
+Destructor : 
+A destructor is used to delete or destroy the objects when they are no longer in use. Constructors are called when an instance of a class is created. Destructors are called when an object is destroyed or released. Memory allocation. Releases the memory.
+
+tip: finalize method or finally method :
+
+//Bit tricky!!
+When the memory is low CLR calls the
+GC.
+
+Memory is relaesed by the GC 
+
+Destructor is getting called when the memory is released!
+
+Conclusion : We should not write any code in destructor as we are not when destructor runs!
+
+Generations in Garbade collector: ======================= 
+=> App domain Context : 
+Process adn thread:
+
+process 1 runs App1 
+
+process 2 runs App2
+
+needs diff space
+
+So the solution is threads in a single process:
+
+Process 1 runs App1 and App2  
+but its unstable as if one App goes bad then it willblock entire process!
+
+Application context is created so that even if the one thread goes bad so another wont get affected!
+
+=> CLS 
+- Set of rules that all .net languages must follow!
+
+
+=> Common Type System : 
+- data type in which ever lang we write ultimately gets converted into .net data types!
+
+Tu run .net code on any machine we need CL runtime and libraries, etc.  
+
+=======================
+
+=> Project Mono / Mono
+- For linux one team which is not from MS created mono which has support for the .net framework!
+
+=======================
+
+=> .NetCore
+- framework that works on other OS as well!
+
+=> Key Deature:
+- Open source
+- Cross platforms
+- LightWeight
+- Extensible
+
+.netCore
+- Upto  version 2.2 only supports asp.next mvc and web apis
+- version 3+ suppoorts winforms and wpf also
+- course covers version 5 .net 5
+.net6 released in Nov 2021!
+
+=======================
+What we will be working with :
+
+=> VS 2019 Community EDITION 
+=> .Net Framework:
+=> C# 
+=> Console Apps/Class Library
+=> Asp .Net MVC
+=> Web Services
+=> WCF
+=> WEB API
+=> .Net Core Intro
+
+=======================
+
+Managed VS Unmanaged Code
+Mngd Cde - is run by CLR (all .net code) 
+Unmanaged code is not run by CLR 
+
+
+=> Assembly Structure :
+MyAssembly.dll
+Assembly Manifest
+Type metadata
+MSIL code
+Resources
+
+
+=> Assembly Name : contains list of asembly details
+Version name
+culture
+Strong name
+lift of files contained
+References
+
+=======================
+
+metadata => Reflection 
+
+Not all assembly have the resources!
+
+Clone a repository!
+
+open only 
+open a project or solution 
+.csproj
+.sln file
+
+do not double click on that
+do not opena local folder
+
+To create a new project : 
+Create a new project :
+
+=======================
+Local Function :
+
+- lf can be defined within another func
+- local func is implicitely private 
+- lf can access variables defined in outer func
+- can be called only from outer func
+
+
+Major Advantage of Local Func : 
+They can access the variables of local Func
+=======================
+
+1) Method Overloading
+- same as in java
+
+2) Opion arguments with the default values : 
+
+Rule 1 : We can give default values :
+public int Add(int a, int b, int c=0){return a+b+c;}
+
+public int Add(int a=0, int b=0, int c=0){return a+b+c;}
+
+
+Rule 2 :
+We must keep default params last in method argument
+
+//not allowed in case of positional params
+public int Add(int a=0, int b, int c){return a+b+c;}
+
+
+Rule 3 : named params
+public int Add(int a=0, int b=0, int c){return a+b+c;}
+
+//named
+ans = obj.Add(c:10);
+
+//positional + named
+ans = obj.Add(30,c:10);
+here b has default value of 0
+
+//Error on below code 
+ans = obj.Add(c:10,30);
+
+
+//Accessing the local variables of the main method into the static method of the same class without passing it as args.
+
+
+//local Method inside Main method
+static void Main(){
+
+int a=100;
+
+void localFunc(){
+Console.Writeline(++a);	
+	
+}
+}
+
+//
+static void Main(){
+
+int a=100;
+
+void localFunc(){
+Console.Writeline(++a);//101
+}
+
+Console.WriteLine(a);//100
+LocalFunc();
+Console.WriteLine(a);//101
+}
+=======================
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<html>
+<head>
+<script>
+	function checkStatus() {
+		var pnrNo = document.getElementById("pnrNo").value;
+		
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+	    	//alert(this.responseText);
+	    	var pnr = JSON.parse(this.responseText);
+	    	
+	    	var statusDiv = document.getElementById("statusDiv");
+	    	var line1 = "<p>Here is the status of your pnr</p>";
+	    	statusDiv.innerHTML += line1;
+	    	var line2 = "<p>Pnr no  " + pnr.pnrNo + "</p>";
+	    	statusDiv.innerHTML += line2;
+	    	var line3 = "<p>Train no " + pnr.trainNo + "</p>";
+	    	statusDiv.innerHTML += line3;
+			for(let passenger of pnr.passengers) {
+				var line4 = "<p>Passenger Name " + passenger.name + ", Status = " + passenger.status + "</p>";
+	    		statusDiv.innerHTML += line4;
+			}	    	
+	    }
+	    
+		xhttp.open("GET", "http://localhost:8080/pnr-status.irctc?pnrNo="+pnrNo, true);
+		xhttp.send();
+		
+		return false;
+	}
+</script>
+</head>
+<body>
+	<form onsubmit="return checkStatus()">
+		Enter pnr no : <input type="text" id="pnrNo" /> <br />
+		<button type="submit">Check Status</button>
+	</form>
+	<div id="statusDiv"></div>
+</body>
+</html>
