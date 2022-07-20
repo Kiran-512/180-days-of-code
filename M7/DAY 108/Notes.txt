@@ -1,0 +1,298 @@
+=======================
+Inheritence Continued...
+
+Constructor chaining :
+For every child created we must have no params constructor in the parent class!
+If not then we must pass values as pr the params constrct and call it explicitely!
+
+Derived o = new Derived();
+
+Overloading :
+- o.BaseMethod();
+- o.DerivedMethod();
+
+Overhiding :
+- o.DerivedMethod();
+- here method with the same signature(DerivedMethod) available in the abse class
+- Any method can be hidden!
+- Here the refrence type is of derived class
+- Compiler warns : use new keyword if hiding is intended!
+
+
+Overiding :
+- o.DerivedMethod();
+- here method with the same signature(DerivedMethod) available in the abse class
+- Only Virtual method can be overridden!
+- Can be achieved with the upcasting and reference type can be of derived class or fo base class
+- to achieve late binding the reference type must be oif base class
+
+==========================
+
+Virtual vs Non-virtual Method : 
+All virtual methods are late bound methods .. run time binding, runtime polymorphism, dynamic polymorphism : 
+
+
+sealed method : makes method from virtual to non-virtual
+
+so if we seal method then the next class which will be derieved from this class with the sealed method won't be overidden!
+
+
+Purpose of sealed  keyword:
+- to stop the late binding 
+- if we declare reference type of shape and chessboard extends the 
+class square which extends the shape which has calcArea virtual method
+- so if we make the calcArea as sealed in the square then at the run time when we write
+Shape s = new ChessBoard();
+s.calcArea();
+
+here calcArea() of square will be implemented as we have sealed that method at sqaure class
+
+which mena that we have made that methodnon-virtual from sqaure class onwards and that can not be overriden and if we try to do so compiler will give an erro!
+
+Why we sealed it at sqaure?
+- becasue sqaure class gives the ebst implementation of that method hence we dont want to repeat it again!
+- but we could have not implemented that method in the chessboard even thought it would have implemented the method of sqaure class but what if in case the chessboard needs to implement that method in that case late binding will override the method of the sqaure hence by making it sealed we stopped the overriding!!!
+
+==========================
+
+In java all methods are bydefault virtual
+whereas in .net all methods are non virtual
+
+
+All late bound methods impacts performance as at un time 
+compilers keeps checking the reference type and then the 
+Object type and then methods accordingly hence its kept as non virtaul in .net
+
+So the performance is improved in .net!
+
+Virtual function - late binding
+
+pure virtual function - does not have code body in the abstract class
+
+==========================
+=> Abstract class :
+
+abstract function can oly exist in abstract classes only but reverse is not true! 
+
+In c++, abstract class must have at least one method which is virtual 
+but that is not the compulsion in .net and java!
+
+
+=> Sealed class : final class
+- can be instantiated but can not be inherited from sealed class.
+
+Practical use of sealed class : 
+- to restrict the code reusability
+
+==========================
+
+Multiple Inheritence : Interfaces 
+
+Not allowed as it creates the ambiguity 
+
+class A{  
+void msg(){System.out.println("Hello");}  
+}  
+class B{  
+void msg(){System.out.println("Welcome");}  
+}  
+class C extends A,B{//suppose if it were  
+   
+ public static void main(String args[]){  
+   C obj=new C();  
+   obj.msg();//Now which msg() method would be invoked?  
+}  
+}  
+
+
+Also, If any class extending two other classes having the same copy of the code hen it creates the ambiguity hence there multiple inheritence can not be implemented!
+
+But if we have one class that extends one class and other abstract class so there wont be duplication and ambiguity as abstract class wont be having implementation!
+Assume - no variables and that class must be implementing the abstract method!
+
+class Employee{
+
+}
+abstract class DbFunctions{
+abstract void Insert();
+abstract void delete();
+abstract void Update();
+}
+class Manager : Employee, DbFunction{
+
+} 
+
+But then the condition that we have  for the multiple inheritece is that there wont be any method with the implementation hence interface concept was intorduced 
+
+Inerface has only method signature and hence we can implement more than one interface!
+
+But the purpose of nheritence was code reusability, but in interface we do not have any implementation, So interfaces are not the substitute for the multiple inheritence or by inheriting the interface we achieve no code reusability!
+
+Interface have multiple purpose to define other than multiple inheritence!
+
+1. Interfaces can not serve the purpose of multiple inheritence but they are very important on their own!
+
+2. Interfaces allows us to write polymorphic code!
+
+3. There a contract between interface and implementing class to implement all the methods of the interface!
+
+4. Design Patterns are implemented with the help fo interfaces!
+
+
+
+All methods in the interface are public implicitely hence even if we give it explicitely it will give us an error!
+
+
+Interfaces are like abstract class only and it also inherits from Object class!!!
+
+interface Person{
+void m1();
+}
+student : Person{
+void m1(){
+  Console.WriteLine("");	
+     }
+}
+
+Student s = new Student();
+s.m1();
+
+Person p;
+p=s;
+s.m1();
+
+(s as Person).m1();
+
+((Person)s).m1();
+
+=>  Two ways of implementing the methods of interfaces!
+
+
+
+
+
+
+=======================
+diff between method hiding of instance methods in java and /net
+
+in java all methods are virtual hence in case of method with the same signature, in both parent and child class we write 
+Parent p = new Child();
+p.commonMethod();
+
+here it should be early binding but since all methods are virtual in java in this case it becomes late binding and affects the performance!
+
+eg.
+
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+    
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+    
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine ("Hello Mono World");
+            Child c = new Child();
+            c.m1(10);//M1 Parent
+            c.m1();//M1 Parent
+            
+            c.m2();//M2 CHILD method hiding
+            c.m2();//M2 CHILD method hiding
+            
+            c.m3();//M3 CHILD
+            
+            Parent p = new Child();
+            
+            p.m1();//M1 Parent - normal Exectuion
+            
+            p.m2();//M2 Parent - normal execution
+            
+            p.m3();//M3 CHILD - Overriding
+            
+            p.m4();//M4 CHILD - Overiding
+
+    }
+}
+
+
+public class Parent{
+
+public  void m1(){Console.WriteLine ("M1 Parent");}
+
+public void m2(){Console.WriteLine ("M2 Parent");}
+
+public virtual void m3(){Console.WriteLine ("M3 Parent");}
+
+public virtual void m4(){Console.WriteLine ("M4 Parent");}
+}
+
+public class Child : Parent  {
+
+public void m1(int a){Console.WriteLine ("M1 CHILD");}
+
+public new void m2(){Console.WriteLine ("M2 CHILD");}
+
+public override void m3(){Console.WriteLine ("M3 CHILD");}
+
+public override void m4(){Console.WriteLine ("M4 CHILD");}
+}
+
+
+Parent  p = new Parent();
+Child c = new Child();
+
+=> Overloading
+c.m1();// parents method
+c.m1(10);// childs method 
+
+=> Hiding
+c.m2();// childs method
+c.m2();// childs method
+
+=> Overiding
+c.m3();//childs method
+c.m3();//childs method
+
+=> Overloading
+p.m1();// parents method
+p.m1(10);// error!
+
+=> Hiding
+p.m2();// parents method
+p.m2();// parents method
+
+=> Overiding // late binding
+p.m3();//childs method
+p.m3();//childs method
+
+=> Overiding // late binding
+p.m4();//childs method
+p.m4();//childs method
+
+So the dotNet gives choice if want to make late binding or not and then only it does it check difference between m2() and m4() here!
+
+=======================
+
+
+
+
+
+
+
+
+
+=======================
+
+
+
+
+
+
+
+
+
+=======================
