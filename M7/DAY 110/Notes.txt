@@ -1,0 +1,389 @@
+===================================
+=> Arrays in .net 
+
+If there's an existing namespace or class with the names that we used in our code
+then in that case preference will be given to the names used by us and not to the 
+inbuild classes or namespaces!
+So avoid using keywords for namespaces and classes!
+
+===================================
+
+Arrays : 
+- all arrays inherits from Array class
+- Array class is an abstract class hence no object of it
+
+- eg. int[] arr;
+ here there no inbuild class of int[], but it is creating a derived class(int[]) 
+from the Array class
+
+=> Size of an array :
+int[] arr = new int[5];
+
+===================================
+=> Interating thru an array :
+
+for(int i=0;i<i.Length;i++)
+{
+   Cosole.WriteLine("Enter arrr[{0}] : ", i);
+	arr[i] = int.Parse(Console.ReadLine());
+}
+
+Note :
+- here, the {0} will be replaced by i, for each iteration
+- int.parse(string s) -> converst into the type int 
+
+ALTERNATIVE : Recommended but slower as this internally calls above int.Parse(string s)
+	Convert.ToInt32(string s);
+
+- Length is of type int, if the size of an array is larger than the int size then 
+  LongLength can be used which return Long
+
+===================================
+=> PRINTING AN ARRAY : 
+1.placeholders method 
+
+for(int i=0;i<i.Length;i++)
+{
+   Cosole.WriteLine("Enter arrr[{0}] : {1} ", i, arr[i]);
+}
+- here 0 and 1 is the order of placeholder and it starts from 0 we cant take 1 and 2 if there are two!
+
+===================================
+2.without placeholder : String interpolation
+
+for(int i=0;i<i.Length;i++)
+{
+   Cosole.WriteLine($" The value of arrr[{i}] is {arr[i]} ");
+}
+
+===================================
+
+=> Foreach loop
+
+foreach(int item in arr)
+{
+   Console.WriteLine(item);
+}
+NOTE : 
+- CAN NOT BE USED FOR ACCEPTING THE ARRAY VALUES, 
+- IS USED JUST TO Print the values of an array 
+
+===================================
+=> Array Methods : 
+
+- Methods which have <> are used with the generics concepts
+
+1.IndexOf(variable_name,value)
+- returns index if ounf and -1 if not found
+- linear search
+
+int pos = Array.IndexOf(arr,10);
+
+2.LastIndexOf();
+
+3.BinarSearch(arr,10);
+- Array Must be sorted
+
+4.Clear(arr,startingPos, noOfEleemnt_to_clear_from_array);
+- array elkements will be removed i.e. the elements values will be set to default values
+Array.Clear(arr,2,2)
+
+5.copy(arr,arr2,noOfelementToCopy)
+
+Array.copy(arr,arr2,4);
+
+- While copying the elements if we gets the error on 11th, it'll stop coping the elements, and half of the elements till 10 will get copied
+
+
+=> to avoid this and to rollback after the error we can use below method :
+
+6.ConstraintedCopy(arr,0,arr2,0,arr.length)
+
+7.Array.sort();
+
+8.Array.reverse();
+
+9.createInstace();
+
+===================================
+
+=> Multi-dimentional Array :
+int[] arr - 1D
+int[,] arr; - 2D
+int[,,] arr; - 3D
+int[,,,] arr; - 4D
+
+
+=> Size :
+
+int[,] arr = new int[3,2];
+arr[0,0] arr[0,1]
+arr[1,0] arr[1,2]
+arr[2,0] arr[2,2]
+
+- arr.Length
+
+- arr.Rank // number of dimentions
+
+- arr.GetLength(0)// 0 indicates first dimention  // 3
+- arr.GetLength(1) //1 indicates second dimention // 2
+.
+.
+.
+- arr.GetLength(n)
+
+
+- arr.GetUpperBound(0); //getLength(0) - 1 
+
+- arr.GetLowerBound(); //starting index of an array
+
+
+=> Iterating thru an 2D array :
+
+for(int i = arr.getLowerBound(0); i< arr.GetLength(0);i++)
+{
+	for(int j = arr.getLowerBound(1); j< arr.GetLength(1);j++)
+	{
+	Console.WriteLine($"Enter array element arr[{i},{j}]");
+	arr[i,j] = int.Parse(Console.ReadLine());	
+	Console.WriteLine($"The value of arr[{i},{j}] is {arr[i,j]} ");	
+	}
+}
+
+
+#BigBang
+=> Methods of Array class don't work for Multi-dimentional array
+
+#Scanerios for Multi-dimentional arrays : 
+
+=> Cdac each bacth has 5 studnet and each student has 3 marks
+int[5,3] arr = new int[5,3];
+
+=> Cdac has 2 bacthed and each bacth has 5 studnet and each student has 3 marks
+int[2,5,3] arr = new int[2,5,3];
+
+=> cdac has 3 centers and each center has 2 bacthed and 5 students and 3 marks for each studnet
+int[3,2,5,3] arr = new int[3,2,5,3];
+
+=> cdac is in 4 citites and ....
+int[4,3,2,5,3] arr = new int[4,3,2,5,3];
+
+=> cdac is in 8 countires and in 4 cities...
+int[8,4,3,2,5,3] arr = new int[8,4,3,2,5,3];
+
+===================================
+
+=> JAGGED ARRAY :
+A jagged array is an array whose elements are arrays, possibly of different sizes. 
+A jagged array is sometimes called an "array of arrays."
+
+=> four batched and each batch has diff students
+
+int[][] arr = new int[4][];
+arr[0] = new int[3];// arr[0][0],arr[0][1],arr[0][2]
+arr[1] = new int[4];// arr[1][0],arr[1][1],arr[1][2],arr[1][3]
+arr[2] = new int[2];// arr[2][0],arr[2][1]
+arr[3] = new int[3];// arr[3][0],arr[3][1],arr[3][2]
+
+for(int i = 0; i< arr.Length;i++)
+{
+	for(int j = 0; j< arr[i].Length;j++)
+	{
+	   Console.WriteLine($"Enter array element arr[{i},{j}]");
+	   arr[i,j] = int.Parse(Console.ReadLine());	
+	   Console.WriteLine($"The value of arr[{i},{j}] is {arr[i,j]} ");	
+	}
+}
+
+===================================
+
+=> Array of Objects:
+
+Employee[] emp = new Employee[4];
+
+Note : 
+- in above line new doesn't allocate memory to each object of employee, 
+- it is achieved as below :
+ 
+for(int i =0;i<emp.Length;i++)
+{
+     emp[i] = new Employee();
+}
+
+===================================
+=> Collections
+- Array can not be resized
+- Arrays are static so memory point of view arrays are not efficient
+
+COLLECTIONS ARE MUCH ORE FLEXIBLE THAN ARRAY
+
+1.Regular collections
+2.Generic collections
+
+
+=> Generic collections
+- similar to Templates in C++
+
+class MyClass<T>
+{
+void Swap(ref T i, ref T j)
+{
+T temp;
+temp= i;
+i=j;
+j=temp;
+}
+}
+
+Main(){
+
+MyClass<int> oi = new MyClass<int>();
+MyClass<decimal> od = new MyClass<decimal>();
+
+oi.Swap(ref a, ref b);
+
+}
+
+=> IMPLEMENT STACK USING GENERIC 
+class MyStack<>
+where T : new()  // T must have no param constructor which string class dont have we cant write => string o = new string();
+where T : InterfaceName // T can only be a class that implements the Interface
+where T : ClassName // T can only be a class specified or its derived class 
+where T : struct // T can only be a value type
+where T : class// T can only be a refernce type
+where T : className, InterfaceName, new()// T can only combined of all the three
+where T : class, struct// error - there no such things which is value type and refernce type at the same time
+{
+T arr[];
+
+public MyStack(int size){
+
+arr = new T[size];
+}
+
+}
+
+Nullable and Generics :
+int? a = 100;
+Nullable<int> b = 100;
+
+
+//Applicable only for value types
+public struct Nullable<T> where  T : struct
+{
+
+
+}
+
+=====================================
+
+=> Collections : using System.Collections
+
+1.Non- Generic Collections
+2.Generic Collections
+
+=> Non- Generic Collections
+- All collection implements ICollection directly or indirectly
+- using System.Collections
+
+=> IEnumerable
+- ICollection inherits from IEnumerable
+- All collections supportss Enumerationand hence we can use foreach lop for each collections
+
+=> class Stack and class Queue Implements the ICollection interface
+
+-> Interface IList
+-> Interface IDictionary
+- Has key and a values
+- key is unique and value can be duplicate
+
+=> Interface IList
+- ArrayList
+
+=> Interface IDictionary
+- HashTable
+- SortedList
+
+===================================
+=> ArrayList 
+
+Collection give three standar options
+
+Add()
+Remove() -- removeAt()
+PROPERTY -> Count 
+Counts the total no of elements in the collection
+
+ArrayList alist = new ArrayList();
+alist.Add(10);
+alist.Add(1.23);
+alist.Add("Kiran");
+
+Cosole.WriteLine(alist.Count); // 3
+
+foreach(object item in alist)
+{
+Console.WriteLine(item);
+}
+
+alist.Remove(10);
+alist.RemoveAt(0);
+
+
+alist.AddRange(list2);
+alist.Insert(2."Kiran"); // ads kiran at 2nd index and shifts other elements
+alist.InsertRange(index, ICollection);
+alist.InsertRange(1,list2);
+
+
+alist.RemoveRange(START_INDEX, CountOfELEMENTTOBEREMOVED);
+
+alist.Clear();
+
+=> Clear();
+- in collection it will removed all elements 
+- in array it reinitialises the elements to the default values
+
+
+alist.Conains(10);
+- returns true and false if found and not found
+
+alist.IndexOf()
+alist.LastIndexOf()
+alist.BinarySearch()
+
+
+=> Convert from arryList to array
+alist.copyTo(arr);
+
+NOTE : size of the array will be alist.Count
+
+=> To take out part of an ArrayList
+ArrayList list3 = alist.GetRange(start_index, countOfElementoincludenewinlist);
+
+=> IsFixedSize() // alwasy returns false
+
+=> alist.Reverse 
+
+=> alist.sort();
+
+=> 
+alist.SetRange(star_index, Collection C);
+VALUES FROM COLLECTION C WILL BE PUT INTO THE ALIST
+
+
+=> print the elements of an ArraysList 
+
+Console.WriteLine(alist[0]);
+
+=> ToArray
+- returns an object array
+object[] arr = alist.ToArray();
+
+=> o.Capacity = no of records in db
+
+=> TrimToSize
+
+
+===================================
+=> Shallow Cloning and Deep cloning

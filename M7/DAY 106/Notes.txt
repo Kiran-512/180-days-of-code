@@ -3,17 +3,28 @@ ASP => Web applications
 
 Major diff : DeskTop app are installed on PC and web applications are installed on server
 
+===============================
+
 COM : Component Object Model 
 - Create components that can be used by anyone else
+COM was most popular 
 
 - Issues with the previous version :
-- Mainly versioning and deployment peroblem!
-- If the guidlines were not followed then COM was creating helll like a problem
+VC++ -> Had OO and threading but
+Complex
+VB6 -> Not OO and no threading but
+Simple
+ASP -> Script based, Interpreted, Late
+Bound, Difficult to maintain and debug, not
+OO
+COM -> DLL HELL! (Mainly versioning and
+deployment)
 
-One of the Com components was Activix DLL file! and the problme associated with it was caled DLL HELL!
+One of the Com components was activist dll file! and the problem associated with it was caled DLL HELL!
 
-So the problems associated with 
+Solution to these problmes is .netFramework
 
+===============================
 
 .Net Feaures!
 - OO Code
@@ -23,168 +34,169 @@ So the problems associated with
 - Better Security
 - Improved Performance!
 
+===============================
 
 Web Apps, Windows forms, console apps, Web services, WPF, WCF, ASP.NET MVC, .Net Core, Xamarin(Mobile Computing platform), Windows Services, Web API etc.
+
+===============================
 
 .Net Base Class Library
 System.DII
 System.Data.DII
 System.Xml.DII etc.
 
-Assembly that we create in the .net are similar to the modules orpackages in javaScript and java respectively!
+All the assemblies that .net provides comes under base class library!
 
+Assembly that we create in the .net are similar to the modules or packages in javaScript and java respectively!
 
-Source Code:
+===============================
+
+Source Code : 
 Over 50 languages has got the support in .Net
 We will learn C#
+eg. C#, VB.net etc.
 
 Compilation in .Net:
 - Once compilation is done, We will get a assembly (exe/dll)
 
-Byte Code MSIL(MicroSoft IL)/CIL(Common IL)/IL(Intermediate Language)
+Assembly is in ByteCode format : 
+Byte Code => MSIL(MicroSoft IL)/CIL(Common IL)/IL(Intermediate Language)
 
 Native Code : Its already in machine code format and that can be run directly without compilation!
 
-CLR : Common Language Runtime 
+=> IL code is converted into native code befoe running with the kelp of CLR
 
-JIT :
-Memory Management :
+===============================
+
+=> CLR : Common Language Runtime 
+
+=> JIT : converts IL to native code
+
+.net has multiple jit compilers
+
+=> Memory Management :
+- All the operations like loading and unloading the assemblies
+- Assigning memoru on stakc and on heap
+- Upon creation new objects assining  memory
+
 Garbage Collection :
-App Domain context :
-Common Langugae Specification :
-Common Type System :
-Thread Management :
-Security Management :
-Debugging :
-Exception handling :
-
-main{
-
-func1();
-func2();
-func3();
-func1();
-
-}
-
-
-here first only main will be compiled when compiler reaches func1(); that timw JIT will compile func1(); and 2 and then 3 and it will again compile func1 but will take less time!
-
-
-main(){
-
-Class1 o;
-
-0 = new Class1();
-
-//delete o 
-//o = null;
-
-}
-
-=======================
-GC runs only when the certain limit is reached formemory management!
-
-eg.TeaCup Collector 
+- releasing the memory or unused memroy
+- freeing the memory of the garbadge is no longer task of programmer its job of GC
+- Runs on reaching the threashold level of Garbage
+- When GC runs, memory is released
 
 Destructor : 
-A destructor is used to delete or destroy the objects when they are no longer in use. Constructors are called when an instance of a class is created. Destructors are called when an object is destroyed or released. Memory allocation. Releases the memory.
+- Special function having ''~ Class{}'
+- used to release the resources hold by the garbage objects
+- it is called just before the memory is released (trigger point)
 
-tip: finalize method or finally method :
+#BigBang :)
+- GC run on reaching threashold
+- We can't predict when the memory would get low and threshold reached in our code 
+- hence cantpredict when GC runs!!
+- hence we can't even redict when memory will get released and - hence we can not predict when destrctor will run! 
 
-//Bit tricky!!
-When the memory is low CLR calls the
-GC.
+Hence, We should not write code in destructor : 
 
-Memory is relaesed by the GC 
+Code written inside destructor won't run at a give time it will run only when GC runs which is unpredictable!
 
-Destructor is getting called when the memory is released!
+Hence its not recommened to write code to release resources in destructor!  
 
-Conclusion : We should not write any code in destructor as we are not when destructor runs!
+This is Non deterministic finalisation : 
+We can not determine when destructor runs!
 
-Generations in Garbade collector: ======================= 
-=> App domain Context : 
-Process adn thread:
+=> Replacement to this is Disponse method IDisposable interface 
 
-process 1 runs App1 
+READ : Generation in Garbade Colelction from e-book (GC)
 
-process 2 runs App2
+=> App Domain context :
+- APPLICATIO RUNS WITHIN A PROCESS 
+- In multithreading multiple application runs inside the one process
+- buts its highly unstable as if one app crashed it would crash entire process casuingother apps to stop
+- hence app domain is introduced!
+- Each app runs in its own app domain inside a single process if any app crashed its app domain will be impacted and other will runs smoothly
 
-needs diff space
+=> Common Langugae Specification :
+- Set of rules that all .net lang must follow
+- over 50+ lang
+- If any code not following CLS rules, will throw compiletion error in .net
 
-So the solution is threads in a single process:
+=> Common Type System :
+c# 
+doSomething(int i){} => converted into System.int32 - 4 bytes
 
-Process 1 runs App1 and App2  
-but its unstable as if one App goes bad then it willblock entire process!
+vb.net
+Dim i as Integer  => converted into System.int32 - 4 bytes
 
-Application context is created so that even if the one thread goes bad so another wont get affected!
+#BigBang
+Its possible to write Int32 j; in c# or any lang supported by .net
 
-=> CLS 
-- Set of rules that all .net languages must follow!
+=> Thread Management :
+=> Security Management :
+=> Debugging :
+=> Exception handling :
+
+============================== 
+.NetFramework
+base class libraries + Utilities (eg. Compiler) +CLR
+
+=> To run .net code we need :
+base class libraries +CLR
+
+=> to run .net application on linux
+Initially .net code ran only on windows :
+
+Team of Project Mono wrote .netframework for linux
+Spanish programmer .. mono - monkey
+
+Microsoft later on came up with the .netcore which works for all OS!
+as with the mono the issue was there was always a gap of version  and not all features were implemented in the mono!
+
+Xamarin used for all platforms (Android and Ios and windows )
+
+============================== 
+=>.netCore 
+- neuget central hub to import all libraries 
 
 
-=> Common Type System : 
-- data type in which ever lang we write ultimately gets converted into .net data types!
+.netframework version 4.8 is the last version after that these is only .netcore development and ccurrently it is .netcore version 6.0 
 
-Tu run .net code on any machine we need CL runtime and libraries, etc.  
+after .netcore 3 there directly .netcore 5, 4 is skipped as .netframwork is stopped after 4.8
+
+============================== 
+=> Managed VS Unmanaged Code
+=> Mngd Cde 
+- all code written in .net is Manged code 
+- is run by CLR (all .net code)  
+
+=> Unmanaged code 
+- code that was created before .net
+- is not run by CLR 
+
+eg. Windows DLL's Pinvokes, Com app  etc.
 
 =======================
-
-=> Project Mono / Mono
-- For linux one team which is not from MS created mono which has support for the .net framework!
-
-=======================
-
-=> .NetCore
-- framework that works on other OS as well!
-
-=> Key Deature:
-- Open source
-- Cross platforms
-- LightWeight
-- Extensible
-
-.netCore
-- Upto  version 2.2 only supports asp.next mvc and web apis
-- version 3+ suppoorts winforms and wpf also
-- course covers version 5 .net 5
-.net6 released in Nov 2021!
-
-=======================
-What we will be working with :
-
-=> VS 2019 Community EDITION 
-=> .Net Framework:
-=> C# 
-=> Console Apps/Class Library
-=> Asp .Net MVC
-=> Web Services
-=> WCF
-=> WEB API
-=> .Net Core Intro
-
-=======================
-
-Managed VS Unmanaged Code
-Mngd Cde - is run by CLR (all .net code) 
-Unmanaged code is not run by CLR 
-
 
 => Assembly Structure :
 MyAssembly.dll
+
 Assembly Manifest
+- List of things about the assembly
+
+- Assembly Name : contains list of asembly details
+- Version name
+- culture
+- Strong name
+- list of files contained
+- References
+- Type of Reference
+
 Type metadata
+- details of a class
+- what are the vairables, method, its return type, paramaters, properties etc.
+
 MSIL code
 Resources
-
-
-=> Assembly Name : contains list of asembly details
-Version name
-culture
-Strong name
-lift of files contained
-References
-
 =======================
 
 metadata => Reflection 
@@ -276,13 +288,112 @@ Console.WriteLine(a);//100
 LocalFunc();
 Console.WriteLine(a);//101
 }
+============================ 
+main{
+
+func1();
+func2();
+func3();
+func1();
+
+}
+
+
+here first only main will be compiled when compiler reaches func1(); that timw JIT will compile func1(); and 2 and then 3 and it will again compile func1 but will take less time!
+
+
+main(){
+
+Class1 o;
+
+0 = new Class1();
+
+//delete o 
+//o = null;
+
+}
+
+=======================
+GC runs only when the certain limit is reached formemory management!
+
+eg.TeaCup Collector 
+
+Destructor : 
+A destructor is used to delete or destroy the objects when they are no longer in use. Constructors are called when an instance of a class is created. Destructors are called when an object is destroyed or released. Memory allocation. Releases the memory.
+
+tip: finalize method or finally method :
+
+//Bit tricky!!
+When the memory is low CLR calls the
+GC.
+
+Memory is relaesed by the GC 
+
+Destructor is getting called when the memory is released!
+
+Conclusion : We should not write any code in destructor as we are not when destructor runs!
+
+======================= 
+
+Generations in Garbade collector: 
+=> App domain Context : 
+Process adn thread:
+
+process 1 runs App1 
+
+process 2 runs App2
+
+needs diff space
+
+So the solution is threads in a single process:
+
+Process 1 runs App1 and App2  
+but its unstable as if one App goes bad then it willblock entire process!
+
+Application context is created so that even if the one thread goes bad so another wont get affected!
+
+=> CLS 
+- Set of rules that all .net languages must follow!
+
+
+=> Common Type System : 
+- data type in which ever lang we write ultimately gets converted into .net data types!
+
+Tu run .net code on any machine we need CL runtime and libraries, etc.  
+
 =======================
 
+=> Project Mono / Mono
+- For linux one team which is not from MS created mono which has support for the .net framework!
 
+=======================
 
+=> .NetCore
+- framework that works on other OS as well!
 
+=> Key Deature:
+- Open source
+- Cross platforms
+- LightWeight
+- Extensible
 
+.netCore
+- Upto  version 2.2 only supports asp.next mvc and web apis
+- version 3+ suppoorts winforms and wpf also
+- course covers version 5 .net 5
+.net6 released in Nov 2021!
 
+=======================
+What we will be working with :
 
+=> VS 2019 Community EDITION 
+=> .Net Framework:
+=> C# 
+=> Console Apps/Class Library
+=> Asp .Net MVC
+=> Web Services
+=> WCF
+=> WEB API
+=> .Net Core Intro
 
-
+======================= 

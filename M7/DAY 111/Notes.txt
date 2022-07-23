@@ -1,0 +1,416 @@
+====================================
+=> SortedList : 
+
+SortedList slist = new SortedList();
+
+slist..Add(1,"Kiran");
+slist.Add(2,"Rahul");
+
+slist.[2] = "Pankaj";
+
+
+slist.ContainsValue();
+slist.ContainsKey();
+
+IList ilist1 = slist.GetKeyList();
+IList ilist2 = slist.GetValueList();
+
+slist.IndexOfKey
+slist.IndexOfValue
+
+slist.Keys()
+slist.Values()
+
+====================================
+=> Stack :
+Stack s = new Stack();
+
+s.Push("aa");
+s.Peek();
+s.Pop();
+
+====================================
+=> Queue : 
+
+Queue q = new Queue();
+q.Enqueue("aa");
+q.Peek();
+q.Dequeue();
+
+====================================
+=> Boxing and Unboxing :
+
+
+e.g.
+object o1;
+int i = 100;
+o1= 100;
+
+- earlier at int i = 100, 100 was in stack but when we assigned 100 to o1,
+that time 100 moved on heap and boxing is done
+=> Converting the value type into the reference type is BOXING.
+
+int j;
+j=(int)o1; 
+ 
+- Now, J stores the value of 100 on stack and its Unboxing.
+=> Converting the reference type into the value type is UNBOXING.
+
+RECOMMENDED : TO AVOID THE Boxing and Unboxing in code, impacts the performance.
+How?: 
+
+====================================
+=> Generic Collection :
+
+Using System.Collections.Generic;
+
+=> Why two diff types of Collections?
+Generic was not in version 1 and it came in version 2, So in version1 only option available was non generic collection but fromv2 onwards there is better option availables
+So all code available from v2 uses generic collections
+But in certains cases if we need older code without generic, Hence there are two diff Collections 
+
+IEnumerable<T>
+
+ICollection<T>
+Stack<T>
+Queue<T>
+
+IList<T>
+List<T>
+
+IDictionary<TKey, TValue>
+SortedList<TKey, TValue>
+Dictionary<TKey, TValue>
+
+====================================
+=> List<T>
+
+
+List<int> ilist = new List<int>();
+ilist.Add(10);
+ilist.Add(20);
+
+for(int item in ilist)
+{
+Cosole.WriteLine(item);
+}
+
+====================================
+
+=> For NonGenerics iteration will be 
+
+for(object item in ilist)
+{
+Cosole.WriteLine(item);
+}
+
+====================================
+=> SorteList<T,T>
+
+SorteList<int,string> sl = new SorteList<int,string>();
+
+foreach(KeyValuePair<int,string> item in sl)
+{
+     Console.WriteLine(item.Key);
+     Console.WriteLine(item.Value);
+}
+
+====================================
+=> Stack<T> :
+Stack<string> s = new Stack<string>();
+
+s.Push("aa");
+s.Peek();
+s.Pop();
+
+====================================
+=> Queue<T> : 
+
+Queue<string> q = new Queue<string>();
+q.Enqueue("aa");
+q.Peek();
+q.Dequeue();
+
+====================================
+=> List of Employee :
+
+
+List<Employee> empList = new List<Employee>();
+
+
+empList.Add(new Employee{EmpNo = 1, Name ="Kiran"});
+empList.Add(new Employee{EmpNo = 2, Name ="Akshay"});
+empList.Add(new Employee{EmpNo = 3, Name ="Pranit"});
+
+
+foreach(Employee emp in listEmp)
+{
+    Console.WriteLine(emp.EmpNo);
+    Console.WriteLine(emp.Name);
+}
+
+=> Read More on Collections ...
+https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0
+
+
+====================================
+=> Delegates
+- similar to function pointers in c++
+
+"to delegate" - Assign a task to somebody for you
+
+=> to call a function  not directly but in a indirect manner via delegates
+
+=> Why?
+- to make indirect call to the function
+- to make asynchronous call
+- the function to call can be received as a parameter
+- 
+
+- Deligate is a class that inherits from the System.Delegates
+
+namespace DelegatesDemo{
+
+	Step 1 : Create a delegate class having the same signature (return type and params)as the function to call
+
+	public delegate void Del1();
+
+
+	public class Program{
+
+	Static void Main(){
+
+	  step 2: create an object of delegate class, passing a function to it as a params	
+	  Del1 objDel = new Del1(Dsiplay);
+ 	  //Del1 objDel = Dsiplay; // same thing as above syntax is diff
+
+	step 3: cal the function via delegates Obj
+	objDel();// will call Display
+
+	objDel = Show;
+
+	objDel(); // will call show
+
+	objDel += Show;
+
+	objDel += Display; 
+	objDel();// it'll call Show, Show, Display
+	
+	objDel -= Display;
+	objDel();// last occurance of Display is removed and op will be Show, Show
+	
+	}
+
+	static void Display(){
+	Console.WriteLine("Display");
+	}
+
+	static void Show(){
+	Console.WriteLine("Show");
+	}
+
+	}
+
+}
+
+
+
+Note : Our class Del1 inherits from MultiCastDelegate which inherits from Delegate which inherits from object class
+
+=> What is MultiCastDelegate ?
+- It can cast to or point to multiple functions
+- We can do += and -= with the object that we have created
+- e.g. objDel points to the two diff function and will call then sequencecially
+
+
+Del1 objDel = (Del1) Delegate.Combine(new Del1(Display),new Del1(Show));
+
+*Typecasted above because right hand side returns a Delagate
+- parmas passed here automatically converted into the array 
+- we can pass as many params as we want
+
+So when we do += interanlly its Delegate.Combine();
+
+Alternately,
+
+objDel = (Del1) Delegate.Combine(objDel,new Del1(Show)); 
+
+// to remove the last occurance
+objDel = (Del1) Delegate.Remove(objDel,new Del1(Show));
+
+// to remove the all occurance
+objDel = (Del1) Delegate.RemoveAll(objDel,new Del1(Show));
+
+- Instead of new Del1(Show), We can assign this to the reference as Del1 d = new Del1(Show); and then we can 'd' in that place in Combine();
+
+====================================
+=> Paramaterised delegate and Methods of another class:
+
+namespcae DelegateDemo{
+
+public delegate int Del2(int a, int b);
+
+public delegate void Del1();
+
+class Program{
+
+static void Main(){
+
+DelegateDemo del1; 
+
+DelegateDemo delAdd= Add;
+
+
+delAdd += Add;
+
+delAdd();
+
+Class1 cls = new Class1();
+del1 = Class1.Display;
+
+del1();// calls Display of class1
+
+del1 = cls.Show;
+
+del1();// calls Show of Class1
+
+}	
+
+static int Add(int a, int b)
+{
+	return a+b;
+}
+}
+
+
+public class Class1{
+
+public static void Display(){}
+
+public void Show(){}
+
+}
+}
+
+#BigBang
+Word Delegate can be used in two forms
+- Verb : to assign a task
+- Noun : Representative who uses briefcase with them on work for someone else
+
+Hence, briefcase is shown for delegates in VS :)
+
+============================================
+
+#Action : used for calling functions with void return types
+=> With void and no params
+- Its and inbuild delegate with an no params and return type void 
+
+We could have useddirectly in above eg. as;
+
+Action act = Display;
+act();
+
+act+= Show;
+
+act();// calls Show and Display
+
+=> With void and params(Upt 16 params)
+- if params are more than 16 then we will ahve to go for our own delegate
+
+Action<paramsType> obj;
+
+eg. Action<int,int> obj = DisplayAdd
+obj(10,10);
+
+- here, Static void DisplayAdd(int a,int b){};
+
+eg. Action<int,string> obj = Store;
+obj(100,"Kiran");
+- here, Static void Store(int a,string b){};
+
+============================================
+
+#Func : used for calling functions with non-void return types
+=> return type and params(Upt 16 params)
+- if params are more than 16 then we will ahve to go for our own delegate
+
+
+Func<int,int,int> functObj = Add;
+here, return type is int and Add(int a, int b)
+
+
+Func<int,int,string> functObj = ToString;
+here, return type is string and ToString(int a, int b)
+
+
+=> FOR BOOLEAN RETURN TYPE :
+
+Func<int,bool> o = IsEven;
+
+public static boolean IsEven(int a)
+{
+	if(i%2) return true;
+	else return false;
+}
+
+=> Predicate
+- is a delegates that used for caling methods with return type booleans accepts only one params of any type
+
+for IsEven we can use predicate as :
+
+Predicate<int> o = IsEven;
+Console.WriteLine(o(10));
+
+============================================
+=> Anonymous Methods and Lambda Expression in C#
+---------------------------------
+Action act = delegate(){
+
+Console.WriteLine("anon method called");
+};
+
+act();
+
+#Note : Dont forget ; after anon method.
+---------------------------------
+Fucn<int,int,int> fun = delegate(int a,int b)
+{
+	return a+b;
+}; 
+
+int res = fun(10,20);
+---------------------------------
+Predicate<int> pd = Add;
+
+boolean bool = pd(10);
+---------------------------------
+====================================
+=> Lambda :
+
+static int MakeDouble(int a)
+{
+	retirn a*2;
+} 
+
+Func<int,int> func = MakeDouble;
+int res = func(10);
+
+
+With Lambda :
+
+=> When only 1 params 
+Func<int,int> func = a => a*2;
+
+=> When params other tahn 1, then () becomes compulsory 
+Func<int,int,int> func = (a,b) => a+b;
+
+=> IsEven(int a) with Lamda :
+Func<int,boolean> func = a => a%2?true:false;
+
+Predicate<int> pd = a => a%2?true:false;
+
+OR 
+
+Predicate<int> pd = a => a%2 == 0;
+
+====================================

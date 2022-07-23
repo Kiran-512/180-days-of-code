@@ -1,0 +1,305 @@
+=======================
+=> Default Method Implementation :
+
+interface I1
+{
+
+M1();
+M2();
+------
+M3();// Added later on 
+}
+
+class C1 : I1
+{
+M1(){}
+M2(){}
+}
+
+
+If M3() added in Interface, later on then it will 
+create errorsin the classes which implemented the interface!
+
+Hence interafce method could have an optional code body and 
+it's called as default implementation of the interface method
+
+This code could be the dummy code, just to avoid the error! 
+
+This is introduced in the .net core!
+
+c# version is 7.3 which doent not supports the defaut implementtation of interface methods
+
+version 8 onwards its supported!
+
+But now theere would be ambuiguity in case of multiple inheritence with the inheritence!
+
+Becasue if two interfaces having the same methods with some default implementation, the implementing class gets ambiguity which one to implement!
+
+This concept is brought in just to support for API's writer if brought later on during the project!
+
+
+=======================
+//Code 1
+
+using System;
+
+namespace InterfacesInCore
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Class1 c = new Class1();
+            c.delete();
+
+            //c.DefMethod(); // not available for the Class1 reference type
+
+            //Mehod 2 
+            IDbFunction idb;
+            idb = c;
+
+            idb.DefMethod();
+        }
+    }
+
+    public class Class1 : IDbFunction
+    {
+        public void delete()
+        {
+            Console.WriteLine("Delete");
+        }
+
+        public void insert()
+        {
+            Console.WriteLine("Insert");
+        }
+
+        public void update()
+        {
+            Console.WriteLine("Update");
+        }
+    }
+
+    public interface IDbFunction {
+
+        void insert();
+        void update();
+        void delete();
+
+        void DefMethod() {
+            Console.WriteLine("Default Implementation "); 
+        }
+    
+    }
+}
+
+=======================
+//Code 2 : DataTypes 
+
+    class DataTypes {
+
+        char ch;//Char 2 bytes
+        byte b;//Byte
+        sbyte sb; // SByte
+        short s; // UInt16
+        ushort us; // Int32
+        int i; // Int32 4
+        uint ui; //UInt32 
+        long l; // Int64
+        ulong ul; // UInt64
+        bool bo; // Boolean
+
+        float f; // Single
+        double dbl; // Double 
+        decimal dec; // Decimal
+
+        string str; // String
+        Object O;// Object
+
+    }
+
+
+
+=======================
+=> Struct :
+- No inheritence allowed in struct
+- Parametersless constructors are not allowed in structs!
+- Struct are of VALUE TYPES and Stored on the stack
+
+When to use :
+- When inheritence is not required
+- 
+
+
+
+
+=======================
+=> enums : 
+Enumarated values or constant used in the code
+- useful in writing and making code simpler to understand   
+- easier to write and maintain
+- byf=default all enums are struct
+e.g. switch case with passing key as an interger makes difficult if we replace that with enum its looks easier and simpler
+
+-> Values stars from 0 and next value will be 1 plus ealier
+
+public enum TimeOfDay{
+Morning,
+Afternoon,
+Evening,
+Night
+}
+
+
+-> We can also give starting value
+
+public enum TimeOfDay{
+Morning = 100 ,
+Afternoon,
+Evening,
+Night
+}
+
+
+static void Greeting(TimeOfDay t)
+{
+	if(t == TimeOfDay.Morning)
+	   console.WriteLine("Good Morning");
+	else if(t == TimeOfDay.Afternoon)
+	   console.WriteLine("Good Afternoon
+	else if(t == TimeOfDay.Evening,)
+	   console.WriteLine("Good Evning
+	else if(t == TimeOfDay.Night)
+	   console.WriteLine("Good Night");
+
+}
+
+=======================
+=> NullableTypes :
+values types can not store the null directly but we can store it by amking below changes 
+
+int? i;
+i =10;
+i=null;
+
+but!!
+
+int j;
+j=i; // Error as int i is of nullableType
+
+so to make it work :
+j =(int) i;
+
+but what if 
+
+i = null
+
+j= (int)i;// Error : Not allowed with typecast too  
+
+Soltuion :
+
+if (i!=null)
+     j=(int)i;
+else
+     j=0; 
+
+=> nulltableTypes has two PROPERTIES : 
+HasValue - return true if i is not null
+HasValue - returns false if i is null
+
+Better Soltuion :
+
+if (i.HasValue)
+     j=i.Value;
+else
+     j=0; 
+
+Much Better Soltuion : 
+
+- If i has a value then assign to j or else assign default value as 0
+j =i.getValueOrDefault(); 
+
+- If i has a value then assign to j or else assign default value as 10
+j =i.getValueOrDefault(10);
+
+Another Solution :
+=> null coalescing Operator 
+- If i has a value then assign to j or else assign default value as 10
+j=i??10; 
+
+=======================
+Disposed Method in destrctor : 
+.net follows non deterministic finalisation we 
+wont write destructor but we will write dispose 
+and its in the interface called Idisposable
+
+- Its recommended not to use destructor method instead use disponse method
+
+- close the file or connections 
+
+
+=> Why are we doing it?
+
+
+
+=> How we doing it?
+
+public class Class1 : IDisposable{
+
+public class Program{
+
+
+static void Main(String[] args){
+
+
+Class1 c = new Class1();
+
+c.Display();
+c.Dispose();
+Console.ReadLine();
+
+}
+
+}
+
+public class Class1(){
+
+Console.WriteLine("class1 Cons");
+}
+
+
+public void Dispose(){
+
+Console.WriteLine("Called Dispose method");
+}
+}
+
+#BigBang
+
+Q.Why we have disponse inside Idisposable interface 
+and why can't we have this method directly inside the class
+-> 
+using(Class1 o = new Class1())
+{
+d.Display();
+}
+
+here Class1 implements the IDisposable and hence on the end of using block
+i.r after } 
+dispose method will be automatically called!
+ 
+And thats why Disponse method is there in the IDisposable Interface and which 
+every class implements that interface Dispose 
+method will be called on ending of Using block
+
+
+=> isDisposed boolean flag
+
+Even if the object is disposed then also if we use the object it will call another method
+so to avoid this we can maintaint eh boolean glag and make it it tru once its disposed!
+
+
+=======================
+
+Reminder to Sir!
+=> NullableTypes and generic connection after generic topic is over!
