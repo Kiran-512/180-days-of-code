@@ -1,0 +1,173 @@
+=======================
+=> System.Threading.Task;
+
+- Wrapper class for ThreadPool Class 
+- Internally its suing thread from thread pool
+- More efiicient, overhead of creating new thread is notthere!
+- light weight
+- would run faster
+- intorduced in .net v4, its recommended to work with Task from v4 onwards!
+
+
+Action objAction = Func1;
+Task t1 = new Task(objAction);
+
+OR
+
+Task t1 = new Task(Func1);
+
+OR
+
+Task t1 = new Task(new Action(Func1));
+
+
+t1.Start(); // Task starts here and not above
+
+
+Thread.CurrentThread.ManagedThreadId - ID assigned by CLR will be shown here
+
+----------------------------------------
+
+Task t1 = Task.Run(Func1); // creates a task object and immidietly runs a Func1 
+
+OR
+
+Task t1 = Task.Factory.StartNew(Func1);
+
+
+Diff ?
+-> Task.Run work with the function with the no params
+-> Factory.StartNew() works with the functions with the params
+
+Note :  if params for func then Task.Run can use lambda or anon method 
+
+Params Thread functions : here, Func1(object o){}
+
+Action<object> objAction = Func1;
+Thread t1 = new Thrad(objAction, "aaa");
+
+Task t1 = new Task(objAction, "aaa");
+Task t1 = new Task(Func1,"aaa");
+
+---------------------------------------
+-> Task.Run() with params :
+
+- Task.Run can not be used with functions with the params : 
+- Anon methods can be used to access the variables declared in the calling code
+
+string s ="aaa";
+Task.Run(delegate(){
+Console.WriteLine(s);
+});
+
+Factory : Func with the params
+
+Action<string> objAction = Func2;
+
+Task t1 = Task.Factory.StartNew(objAction, "aaa");
+Task t1 = Task.Factory.StartNew(Func2,"aaa");
+
+
+=======================
+We have used callbackfunction in Asynch with delegate for getting the return value!
+
+With the thread we will use below 
+
+
+if(!t1.IsCompleted)
+t1.Wait();
+Console.WriteLine(t1.Result);
+
+here wait() is similar to the join(), as func can return a value only fater t1 finished its execution and here for task we have wait() instead of join() to wait for execution of task!
+
+=======================
+
+- in .net core BeginInvoke and EndInvoke is not available
+
+
+=======================
+=> AsynchandAwait :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================
+=======================
+=======================
+----------------------------------------
+=> Types of Functions used by Threads : 
+----------------------------------------
+static void Func1(){
+
+	for(int i =0;i<10;i++)
+	{
+	Console.WriteLine("First Thread " + i );
+	}
+
+}
+
+----------------------------------------
+
+static void Func2(object o)
+{
+
+	for(int i =0;i<10;i++)
+	{	
+	
+	Console.WriteLine("First Thread " + i );
+	
+	}
+
+}
+
+----------------------------------------
+
+static int Func3()
+{
+
+	for(int i =0;i<10;i++)
+	{	
+	
+	Console.WriteLine("First Thread " + i );
+	
+	}
+	return i;
+}
+
+----------------------------------------
+static int Func3(object o)
+{
+
+	for(int i =0;i<10;i++)
+	{	
+	
+	Console.WriteLine("First Thread " + i );
+	
+	}
+	return i;
+}
+----------------------------------------

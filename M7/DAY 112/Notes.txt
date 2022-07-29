@@ -1,0 +1,695 @@
+-----------------------------------------
+
+#MultiCastDelegate returns the value from the last function. 
+
+=======================
+Developer ||    User    || End User
+-----------------------------------------
+
+- Developer : One who develops teh class
+
+- User : One who used the class and build something out of it
+
+- End-User : uses what User has created
+
+---------------------------------------
+
+=> Developer should be communicating with the User
+and not with the end User
+
+=> How? 
+- Should inform the user that something has happened.
+1.Critical Situtaion : 
+Developer throws some exception in case of any mishaps then
+
+#BigBang
+Developer throws an exception and User of the class handles exception in try catch
+
+2.Non Critical Situation : Raising an event  
+
+---------------------------------------
+=>  User must be communicating with the End User
+
+=======================
+EXCEPTION HANDLING :
+
+- Exception class is the base class either directly or indirectly
+1.SystemException
+2.ApplicationException
+
+1.SystemException
+- base class for all .net related Exception
+- .net created exception derived from the SystemException 
+
+2.Application.Exception
+- Developer created Exceptions
+- Custom exceptions
+
+----------------------------------------
+=> eg.
+
+1. System.FormatException : Input string is not in a correct format 
+
+Convert.Int32(Console.ReadLine());
+
+Note : 'Convert' is a class
+
+----------------------------------------
+View details :
+
+- message Error Message : case of Exception "Input string is not in a correct format"
+
+- Source : Name of the assembly in which exception occured : "mscorlib"
+
+- TargetSite : NAME OF THE FUNCTION IN WHCIH EXCEPTION OCCURED  - void StringToNumber()
+
+- stackTrace : function available on the stack when the Exception occured 
+Internal calling of function from main till the function in which exception occured in reverse order as on the stack
+
+- InnerException : used in certain case when there is an outerException and innerException, More specific reason why the error occured
+
+OuterExcpetion : database Exception just an outer message
+
+----------------------------------------
+2.ArithmeticException 
+
+i).DevideByZeroException 
+
+obj.P1 = 100/0
+
+ii).
+iii).
+
+----------------------------------------
+3. NulReferenceException :
+
+Obj = null;
+Obj.P1 = 100/10
+
+----------------------------------------
+#try-catch
+- We must have wither catch or finally with the try
+
+- if there is no exception 
+
+try {
+
+obj = null;
+
+int x = Convert.Int32(Console.ReadLine());
+
+obj.P1= 100/x;
+
+Console.WriteLine(obj.P1);
+
+}
+catch{
+Console.WriteLine("Exception handling code");
+}
+
+
+#This catch block is not ideal
+- OK for the common code for all the exceptions
+----------------------------------------
+=> eg.2
+
+try {
+
+obj = null;
+
+int x = Convert.Int32(Console.ReadLine());
+
+obj.P1= 100/x;
+
+Console.WriteLine(obj.P1);
+
+}
+catch(DevideByZeroException){
+Console.WriteLine(DevideByZeroException)handling code");
+}
+catch(FormatException){
+Console.WriteLine(FormatException)handling code");
+}
+catch(NullRefereceException){
+Console.WriteLine(NullRefereceException)handling code");
+}
+=======================
+=> Catch(){}
+
+Exception=>SystemException =>ArithmeticException => DevideByZeroException
+
+
+- in catch block after parentException class catch block we can not use its derived class 
+
+- base class Exc eption class must be used after the derived class Exception in catch heirarchy!
+try{
+
+}
+catch(Exception ex){
+
+Console.WriteLine(ex.TargetSite);
+Console.WriteLine(ex.Source);
+Console.WriteLine(ex.Message);
+Console.WriteLine(ex.StackTrace);
+
+}
+=======================
+=> finally
+- code in finally block runs in all cases whether exception occurs and not occurs or handled or not handled!
+
+try{
+
+}
+catch{
+
+}
+finally{
+//Code to release the resources aquired by the object
+Console.WriteLine("finally");
+
+}
+
+#Note : run it seperately and not in VS
+
+
+eg. When we open connection for db connectivity
+so when connection is done adn ops gets over there the connection needs to be closed which is closed in the finally 
+why?, becasue if exception occured code closing connection being the last line wont get execute so it is written in finally and which will close the connection.
+
+=======================
+=> Nested try-catch
+
+- We can have nested try- catch in try-catch-finally any of the block!
+
+
+class Class1{
+
+private int p1;
+public int P1{
+get{return p1;}
+set{
+if(value<100)
+ {       p1=value;}
+else{
+         Console.WriteLine("Invalid P1");
+      }
+  }
+ }
+}
+
+
+here, if value is greater than 100 the mesasage would be shown to the end user and critical issue is that 
+developer don't know what kind of project is created by using his class and also developer should not contact with the end user.
+
+so instead of catching exception in develping class throw an exception as
+
+Exception ex = new Exception;
+throw ex;
+
+
+but when it is catched by user as
+try{
+Class1 obj = new Class1();
+
+obj.P1 = 200;
+ 
+}
+Catch(Exception ex){
+Console.WriteLine(ex.Message);
+}
+
+Message would be default one as : 
+Exception of type Syetm.Exception "Invalid p1"
+
+=>  to give our own message :
+
+Exception ex = new Exception("Invalid P1");
+throw ex;
+
+=======================
+
+=> Own class of Exception instead of using Exception()
+
+throw new InvalidP1Exception() : 
+Why?
+- More specific Exception can be wrriten by using our class
+
+
+Our calss of Exception must inherit from Exception or ApplicationException
+---------------------------------------
+
+
+
+---------------------------------------
+class InvalidP1Exception : Exception 
+{
+
+  public InvalidP1Exception(string message):base(message){
+  
+  
+  }
+
+}
+
+---------------------------------------
+#Recommended
+#But custom Exception class to be inherited from ApplicationException - 
+
+class InvalidP1Exception : ApplicationException
+{
+
+  public InvalidP1Exception(string message):base(message){
+  
+  
+  }
+
+}
+
+============================
+--------------------------------------------
+=> Userdefined Exception :
+
+Exception ex = new Exception();
+throw ex;
+
+Exception ex = new Exception("Invalid P1");
+throw ex;
+
+USER IS FORCED TO CATCH THE EXCEPTION AS 
+Catch(Exception e){
+	//some code
+}
+
+--------------------------------------------
+=> Custom Exception  :
+
+1.InvalidP1Exception - 
+
+Create our own class : 
+
+public class InvalidP1Exception : Exception 
+{
+	Public InvalidP1Exception(string message) : base(message){
+	
+	}
+
+}
+
+Note : base class constructor has constructor with string which initializes the Message 
+We can not set this.Message = message as, Message is readonly property!
+
+In this case,
+	throw new InvalidP1Exception("Invalid P1 Exception");
+==================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CustomException
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee emp = new Employee();
+
+            try
+            {
+
+                Console.WriteLine("Enter the name of the empployee");
+                string name = Console.ReadLine();
+
+                emp.Name = name;
+
+                Console.WriteLine("Enter the Basic for empployee");
+                decimal val = Convert.ToInt32(Console.ReadLine());
+
+                emp.Basic = val;
+
+
+                Console.WriteLine("Enter the Location for empployee");
+                string loc = Console.ReadLine();
+
+                emp.Location = loc;
+
+                Console.WriteLine(emp.Basic + "  " + emp.Location);
+
+                Employee emp2 = null;
+                emp2.Basic = 100;//Object reference not set to an instance of an object.
+
+            }
+            /*catch// this block will handle all type of exceptions and its father of all so after this catch block all catch block will be unreachable
+            {
+                Console.WriteLine("Exception handled");
+            }*/
+            catch (FormatException e) {
+
+
+            }
+            catch (EmptyNameException e) {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            finally {
+                Console.WriteLine("Finally");
+            }
+            Console.WriteLine("End of Main");
+
+        }
+    }
+
+    class Employee {
+
+        private decimal basic;
+        public decimal Basic { set { if (value != 0) basic = value; else throw new Exception("Basic can not be 'Zero'!");  } get { return basic; } }
+
+        private string location;
+        public string Location { set { if (value != "") location = value; else { Exception ex = new Exception("Location can not be empty!"); throw ex; } } get { return location; } }
+
+        private string name;
+        public string Name { set { if (value != null && value != "" && value != " ") name = value; else throw new EmptyNameException("Name can not be empty"); } }
+    }
+
+    class EmptyNameException : ApplicationException {
+
+        public EmptyNameException(string message) : base(message) { 
+        
+        }
+    }
+}
+
+==================================================
+
+=> Events :
+- Used in GUI environment :
+- User is not forced to handle the event! User may choose to write code to handle events or not to handle them!
+
+
+When User choose to write some code for events :
+
+Double click on button and inside method;
+
+MessageBox.Show("button clicked!"); 
+
+
+When user drag and drop the button, user is creating the object of an Button class, 
+and the button is developed by some developer at Microsoft 
+
+-------------------------------------------------
+
+Developer creates the delegate class and then then 
+objects of those degeldate class are the events eg. click etc.
+
+-------------------------------------------------
+=> Convention for creating the delegate :
+- if the event is x, then delegate would be called as x.eventHandler;
+
+- Events may have extra information to be passed as an params 
+
+eg.
+- When the value of P1 is invaid then rasie the event and noparams are passed at this moment
+STEP 1: 
+    public delegate void InvalidP1EventHandler();
+
+STEP 2: 
+public event InvalidP1EventHandler InvalidP1;
+Note : Here, event is optional but as per convetion msut be added
+
+STEP 3: 
+- RAISE AND EVENT WHEREVER WE NEED;
+    InvalidP1();
+
+ASSUMING ABOVE CODE IN WIRTTIE BY DVEELOPER INSIDE CLASS -> Class1  
+
+Event hanlder method on the User side :
+
+class Program{
+
+	static void Main(){
+
+	Class1 o = new Class1();
+	o.InvalidP1 += o_InvaidP1;
+	o.InvalidP1 += o_Handler2;			
+	o.P1 = 200;
+
+	o.InvalidP1 -= o_Handler2;
+	o.P1 = 300;
+
+	o.InvalidP1 -= o_InvalidP1; //  here NRException as InvalidP1 is null here 
+	o.P1 = 400;
+ 
+	}
+
+
+	static void o_InvalidP1()
+	{
+	Console.WriteLine("Event Handler code");
+	}
+}
+==================================================
+EVENT Examplee - student tage : 
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EventListnerDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student s = new Student();
+//            s.Age = 20;
+            Console.WriteLine(s.Age);
+
+            s.invalidAge += S_invalidAge;
+            s.invalidAge += S_invalidAge2;
+            s.Age = 10;
+            Console.WriteLine(s.Age);
+
+        }
+
+        private static void S_invalidAge()
+        {
+            Console.WriteLine("Kids are not allowed here!");
+        }
+        private static void S_invalidAge2()
+        {
+            Console.WriteLine("Dont worry you can re apply post completion of your age, 18!");
+        }
+    }
+
+
+    class Student {
+
+        public delegate void InvalidAge();
+
+        public event InvalidAge invalidAge;
+
+        private int age;
+        public int Age { set { if (value > 18) age = value; else invalidAge(); }  get { return age; } }
+    
+    }
+}
+--------------------------------------------------
+
+OP :
+
+0
+Kids are not allowed here!
+Dont worry you can re apply post completion of your age, 18!
+0
+
+==================================================
+
+
+Asynch with delegates :
+
+When we are using delegates are using system created threads and
+in multithreading we are creating our own threads by extending the Thread class
+
+
+=> Two imp method 
+1. Without the return type of the function :
+Action o = Display;
+o.BeginInvoke(null,null);
+
+2. With the return type of the function :
+Func<string,string> f = Display;
+o.BeginInvoke("return type is string",null,null);
+
+
+=> What if async function returns a value!
+- In case of function return s some value, and when we use it in Asynch Mode,
+That time callbackfunction is used which 
+will be called on completion of the function 
+called by the delegate in asynch mode and then 
+callbackfunction will be called which will return the value to be returned by the function.
+=======================
+
+=> Non-Critical Way of informing to the User : Events
+
+
+USED IN GUI ENVIRONMENT :
+
+
+Winform Application in create project instead of console
+
+Create Project : 
+Console  -> Desktop
+ConsoleApp -> Winform app
+
+View : Toolbox 
+
+Toolbox : drag and drop in the form openend!
+
+
+=> Run this code : 
+
+Form is also an object of a Form class
+
+Mouse Move event : gives XY co ordinates
+
+=> diff between event and exception is exception is made to handle but event handling is optional
+
+
+double click on button and it will open an code
+
+inside button1_click(), MessageBox.Show("Button Clicked");
+
+
+#BigBang
+Invalid data is the modt critical thing that can ever happen in the program that we are writing
+
+
+=> All events always have a void return type 
+
+and parametrs to the events depend upon what user want to pass
+
+
+=======================
+=> Dynamic Eevnt handling 
+
+.net supports DEH
+
+=======================
+=> Asynch Code with delegate : 
+
+
+Main{
+
+func1();
+func2();
+func3();
+
+}
+
+=> all funcs are synchronous which means func2 can not satrt before func 1 ends!
+
+
+Sometimes it does not matters which function ends when and orders doesnt matters then insteadof running all three func running on a single thread, 
+I can think of starting func1 on a seperate thread, func2 on seperate thread and same with func3.
+No gaurantee that which ine finishes first
+
+What is the advantage? 
+- Code would runs faster in case of multicore processor only(with the multithreading)
+- On single processor it will runs slower, time slicing, where in time slots are made and process becomes pre empt and diff processes runs at diff time interval
+: Hence, multi-threading hould not be used randomly
+
+- In case of synch, if func1 takes longer time then it will block and func2 and fun3 will have to wait longer!
+=======================
+- Asynch code with the delegates :
+
+BeginInvoke(AsynchCall callback, Object object);
+
+public static void Main(){
+
+Console.WriteLine("Before");
+Action o = Display;
+
+o();// Synch Call
+o.BeginInvoke(null,null);
+// Display will runs on a diff thread! - Asynch Call
+
+Console.WriteLine("After");
+
+}
+
+
+---------------------------------------
+#with the one params and no return type to -> public static void display(string s){}
+
+
+public static void Main(){
+
+Console.WriteLine("Before");
+Action<string> o = Display;
+
+o("hello");// Synch Call
+o.BeginInvoke("hello",null,null);
+// Display will runs on a diff thread! - Asynch Call
+
+Console.WriteLine("After");
+
+
+}
+
+---------------------------------------
+#with the one params and return type to -> public static string display(string s){return s;}
+
+
+public static void Main(){
+
+Console.WriteLine("Before");
+Func<string,string> o = Display;
+
+o("hello");// Synch Call
+string res = o.BeginInvoke("hello",null,null);// this approcah is wrong  
+
+// Display will runs on a diff thread! - Asynch Call
+
+Console.WriteLine("After");
+
+
+}
+
+#BigBang :
+string res = o.BeginInvoke("hello",null,null);// this approcah is wrong 
+Here the issue is that since its and asynch call, it wont wait for func to finish and returna value!
+
+callback function : is a func that will be called after our function done with the execution!
+
+What to write in the call back function : 
+code to read the value of string returned by our function.
+
+public static void Main(){
+
+Console.WriteLine("Before");
+Func<string,string> o = Display;
+
+o("hello");// Synch Call
+string res = o.BeginInvoke("hello",CallBackFunc,null);// this approcah is wrong  
+
+// Display will runs on a diff thread! - Asynch Call
+
+Console.WriteLine("After");
+
+
+}
+
+static void CallBackFunc(IAsynchResult ar){
+
+Console.WriteLine("Callback func called");
+
+}
+=======================

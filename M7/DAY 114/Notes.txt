@@ -1,0 +1,232 @@
+=============================
+=> MultiThreading :
+=============================
+
+Thread t1 = new Thread(new ThreadStart(Func1));
+
+static void Main(){
+
+Thread t1= new Thread(Func1);
+Thread t1= new Thread(Func2);
+t1.Start();
+t2.Start();
+
+for(i=0;i<60;i++)
+{
+if(i==10)
+t1.Abort();
+}
+Console.WriteLine("Main end..");
+}
+
+static void Func1(){
+for(int i =0;i<100;i++)
+{
+Console.WriteLine("First " + i);
+}
+}
+
+static void Func2(){
+for(int i =0;i<100;i++)
+{
+Console.WriteLine("First " + i);
+}
+}
+
+Note : here, ThreadStart is delegate!
+
+=============================
+=> Foreground Thread and Backgroud thread 
+
+t1.IsBackground = true;
+
+
+->In Foreground, Main thread will dont kill itslef 
+unless any other thread inside Main gets killed
+
+-> In background Thread, MAIN CAN OMPLETE ITS EXECUTION 
+AND CAN KILL ITSELF EVEN IF THE BACKGROUND THREAD HAS NOT YET COMPLETED ITS EXECUTION!
+
+=============================
+=> Priority :
+
+- Higest
+- AboveNormal
+- Normal
+- BelowNormal
+- Lowest
+
+t1.Priority = ThreadPriority.Higest;
+
+=============================
+=> ThreadStates
+
+- Background
+- Running
+- Stopped
+- StopRequested
+- SuspendRequested
+- Unstarted
+- Suspended
+- WaitSleepJoin
+
+
+if(t1.ThreadState == ThreadState.Suspended)
+{
+
+}
+else if(t1.ThreadState == ThreadState.Running)
+{
+
+}
+
+
+- Deprecated :
+t1.Suspend();
+t1.Resume();
+
+Alternatives : used with UI's
+to Suspend();
+WaitHandle wh = new AutoResetEvent(false);
+wh.WaitOne();
+
+to Resume();
+((AutoResetEvent)wh).Set();
+
+=============================
+=> Join
+
+- this method ensurs that thread which will call this method will 
+complete its execution adn then only next code to that line is executed!
+
+eg. t1.Join();
+- here, there becomesthe contract between t1 and main that main 
+will wait for t1 to complete it's execution!
+
+=============================
+=> new ParameteriseThreadStart(Func)
+- used for function with the paramter and void return type
+
+Thread t1 = new Thread(new ParameteriseThreadStart(Func1));
+t1.Start("o1");
+
+
+static void Func(object o1)
+{
+	for(int i=0;i<10;i++){
+	Console.WriteLine("Thread one " + i.ToString() + O.ToString());
+	}		
+}
+
+=============================
+Find Out what changes to be made if we want to pass more than one params 
+and other than object in above Func!
+
+=============================
+=> Thraedpool
+- Something that is not available to one but to all!
+- In Thread pool one don't get the control, as he gets by creating 
+thread from thread class 
+eg. car pick and drop service to the employee!
+
+
+
+=> ParamaterizedThreads :
+- parameter can be passed in the form of object only!
+
+
+-> How to pass two params ?
+- can create a class or struct which has two properties : 
+- We can use arrayList then typecast it not the function 
+- Array of Objects 
+- Anonymous methods and lambda's, Local Func
+
+=======================
+=> Thread Pool :
+
+In thread Pool we dont create our own threads :
+
+ThreadPool.QueueUserWorkItem(PoolFunc1,"aaa");
+
+ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2));
+
+ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2),"aaaa");
+
+#WaitCallBack - is delegate 
+
+
+=> Methods of ThreadPool :
+ThreadPool.SetMinThreads  - Min pool size
+ThreadPool.SetMaxThreads  - Max thread size
+ThreadPool.GetAvailableThreads(out workerthreads, out iothreads) - No of threads available 
+
+
+workerthreads - used internally by windows
+iothreads -  we are using in our threads
+
+Console.WriteLine(iothreads);
+
+=======================
+=> Synchronisation of Threads :
+
+class Demo{
+
+static int i;
+
+
+	static func(){
+	i++;
+	int j;
+	j=i; 
+	}
+
+	static func(){
+	i=200;
+	int k;
+	k=i; 
+	}
+
+}
+
+- Sync Version :
+
+class Demo{
+
+static int i;
+static object obj = new object();
+
+	static func(){
+lock(obj) --- Monitor.Enter(obj)
+{
+	i++;
+	int j;
+	j=i; 
+}
+	}
+
+	static func(){
+lock(obj)--- Monitor.Exit(obj)
+{
+	i=200;
+	int k;
+	k=i; 
+}
+	}
+
+}
+
+=======================
+=> Interlocked :
+- instead of putting the synch code in diff lock blocks can be put into this class, which has a lot of methods supporting synch!
+
+
+Interlocked.Add(ref i,10); -- i+=10
+
+Interlocked.Increment(ref i); -- ++i
+
+Interlocked.Decrement(ref i); -- --i
+
+Interlocked.Exchange(ref i, 100); -- i =100
+
+
+=======================

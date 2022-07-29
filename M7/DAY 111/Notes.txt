@@ -156,6 +156,7 @@ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-
 ====================================
 => Delegates
 - similar to function pointers in c++
+- call a function in a indrect manner 
 
 "to delegate" - Assign a task to somebody for you
 
@@ -168,6 +169,9 @@ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-
 - 
 
 - Deligate is a class that inherits from the System.Delegates
+- Delegate also need to have the signature(return type and params) of the function to call
+- to call a function we need to create the object of the delegate class
+
 
 namespace DelegatesDemo{
 

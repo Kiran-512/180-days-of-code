@@ -1,0 +1,712 @@
+=============================
+=> Language Features 
+- Implicite variable
+- Anonymous class
+- Partial class
+- Partial methods
+
+
+=============================
+=>implicit variable
+
+int a=100;
+var a =100; // implicit variable
+
+strng s ="hello";
+var s = "hello";
+
+s = 100;//not allowed
+
+Problem :
+- Its not readable , it we want to use int then why to go for var?
+ var a = (long) 100;
+
+We need var, where we dont know the type of value in complex code!!
+there var is the best option!
+
+=============================
+=> GetType()
+- method of the object type
+
+var a =100;
+Console.WriteLine(a.GetType()); // System.Int32
+
+foreach(var item in collection)
+{
+
+}
+
+:Recommended to use explicite variable  here:
+
+foreach…
+=============================
+=> Language Features 
+- Implicite variable
+- Anonymous class
+- Partial class
+- Partial methods
+
+
+=============================
+=>implicit variable
+
+int a=100;
+var a =100; // implicit variable
+
+strng s ="hello";
+var s = "hello";
+
+s = 100;//not allowed
+
+Problem :
+- Its not readable , it we want to use int then why to go for var?
+ var a = (long) 100;
+
+We need var, where we dont know the type of value in complex code!!
+there var is the best option!
+
+=============================
+=> GetType()
+- method of the object type
+
+var a =100;
+Console.WriteLine(a.GetType()); // System.Int32
+
+foreach(var item in collection)
+{
+
+}
+
+:Recommended to use explicite variable  here:
+
+foreach(int item in collection)
+{
+
+}
+
+=============================
+=> Anonymous Types :
+- Anonymous class : class without name
+
+Generally, 
+Class1 o = new Class1();
+
+var o1 = new {}; //object initialiser
+
+var o2 = new {a=10,b="string"}; 
+
+=> Why needed ?
+- send the link 
+
+eg.
+
+var obj1 = {a=1,b="aaa",c=true};
+
+var obj2 = {a=2.b="bbb",c=false};
+
+Console.WriteLine(obj._) // al properties and methods at the palce of _
+
+Console.WriteLine(obj1.GetType());// AnonymousType0`3
+
+Console.WriteLine(obj2.GetType());// AnonymousType0`3
+
+# here the name is same because both the classes have paramters with teh same name :
+and 3 denotes the number of variables inside the anonym class
+
+=============================
+=> Partial class
+- We can break single class into multiple classes and then use it, 
+- Compiler will combine al the partial classes to one!
+- They need to be in the same assembly or project and namespace 
+- partail classes must have the same name
+
+namespace demo{
+
+
+public partial class Class1{ public int i;}
+
+public partial class Class1{public int j;}
+
+
+public class Program {
+
+static void Main(){
+Class1 c = new Class1();
+
+c.i=0;
+c.j=0;
+c.k=0;
+c.l=0;// Not allowed as l is in the class1 which is in diff namespace!
+}
+}
+
+}
+namespace demo{
+	public partial class Class1{public int k;}
+}
+namespace demo2{
+	public partial class Class1{public int l;}
+}
+
+
+Uses :
+- Where multiple developers would be working in the same class 
+- Form class in case of Winform applications
+
+=============================
+=> Partial Methods !!!
+- placeholder is kept for some code which will be written later 
+- for the partial method are written at that palceholder
+- partial methods are written inside the partial class only
+
+partial class c1{
+
+public void DoSomething()
+{
+
+partial method();
+some code....
+placeholder in the code - method();
+some code again...
+
+}
+}
+partial class c1{
+
+method(){
+
+}
+}
+
+=> Two Posiibility :
+
+1. If nobody is writing the code for placeholder
+Compiler will remove that placholder and partial method and executes without that code
+
+2.When somebody writes the code for partial method in partial class then
+Compiler will be calling that partial method  
+
+
+#Its similar to abstract method syntax wise but its totally diff as abstract method must be implemented where in here its optional!
+
+
+Uses :
+- To modify the method Visual Studio provides this feature by having some palceholder in method!
+
+-------------------------------------------------
+
+eg.
+public partial class Class1{
+	
+	private boolean isValid= true;
+
+	partial void Validate();
+
+	public static bool check(){
+
+	Validate();
+	return isValid;
+
+	} 
+	public static void Main(){
+	
+	Check();// false
+		
+	}
+
+}
+public partial class Class1{
+
+	partial void Validate()
+	{
+	isValid = fasle;
+	}
+}
+-------------------------------------------------
+
+eg.
+public partial class Class1{
+	
+	private boolean isValid= true;
+
+	partial void Validate();
+
+	public static bool check(){
+
+	Validate();
+	return isValid;
+
+	} 
+	public static void Main(){
+	
+	Check();// true
+		
+	}
+
+}
+public partial class Class1{
+
+	
+}
+
+-------------------------------------------------
+- Partial Methods can only be defined within a Partial class
+- Partial Methods must return void
+- Partial Methods can be static or instance level
+- Partial Methods can not have out params
+- Partial Methods are always implictely private
+
+=============================
+
+=> Extenstion Methods :
+- Mind blowing stuff!
+- method written for the exisitng types
+
+Main(){
+
+string s ="sbc";
+s.? =// methods of string class
+
+int a =10;
+a._// methods available for int class
+
+}
+
+Lets say if i create my own method as : 
+MyMethod();
+
+I can use it with the exisitng types as 
+s.MyMethod();
+a.MyMethod();
+
+
+Step : Create a static class
+
+public static class MyExMethodClass{
+
+
+//create a static method
+//first params should be the type for which u r writing the method
+//precede the 1st params with the 'this' keyword 
+
+	public static void Display(this string s){
+	Console.WriteLine(s);
+	}
+
+	public static void Show(this int a)
+	{
+	Console.WriteLine(a);
+	}
+	public static int Add(this int a,int b)
+	{
+	Console.WriteLine(a);
+	return a+b;
+	}
+}
+
+class Program{
+
+	static void Main(){
+	
+	string s ="hello";
+	s.Display();//hello
+
+	int a =100;
+	a.Show();//100
+	ints sum = i.Add(5);//15
+	
+	}
+}
+
+
+- Internally, 
+	s.Display() is changed to MyExMethodClass.Dsiaply(s);
+	i.Add(5) is changed to MyExMethodClass.Add(i,5);
+
+=============================
+=> Extension Method for base class :
+
+public static class MyExMethodClass{
+
+
+//create a static method
+//first params should be the type for which u r writing the method
+//precede the 1st params with the 'this' keyword 
+
+	public static void Display(this string s){
+	Console.WriteLine(s);
+	}
+
+	public static void ExtMethodForBaseClass(this object o)
+	{
+	Console.WriteLine(a);
+	}
+	public static void ExtMethodForInterafce(this IMathOperations imo,int i,int j)
+	{
+	Console.WriteLine(i+j);
+	}
+}
+
+-------------------------------------------
+-------------------------------------------
+NOTE : Below Two concepts are used extensively in LINK :
+-------------------------------------------
+-------------------------------------------
+
+BaseClass -- ext methd
+
+DerivedClass :BaseClass  -- ext mtd also avlbl here
+
+-------------------------------------------
+
+Interface -- ext methd
+
+Class1 : Interface-- ext mtd also avlbl here
+
+=============================
+namespace ExtensionMethods
+{
+    class Program
+    {
+        static void Main1()
+        {
+            string s = "abc";
+            s.Display();
+            s.ExtMethodForBaseClass();
+
+            int i = 10;
+            i = i.Add(5);
+            i.Show();
+            Console.ReadLine();
+        }
+        static void Main3()
+        {
+            string s = "abc";
+            MyExtMethodClass.Display(s);
+            int i = 10;
+            i = MyExtMethodClass.Add(i, 5);
+            MyExtMethodClass.Show(i);
+            Console.ReadLine();
+        }
+        static void Main()
+        {
+            ClsMaths o = new ClsMaths();
+            Console.WriteLine(o.Subtract(10,5));
+
+            Console.ReadLine();
+        }
+    }
+    //create a static class
+    public static class MyExtMethodClass
+    {
+        //create a static method in the class
+        //first parameter should be the type for which you are writing the ext method
+        //precede the 1st parameter with the 'this' keyword
+        public static void Display(this string s)
+        {
+            Console.WriteLine(s);
+        }
+        public static void Show(this int i)
+        {
+            Console.WriteLine(i);
+        }
+        public static int Add(this int i, int j)
+        {
+            return i + j;
+        }
+        //if you define an extension method for an interface, 
+        // it is also available to all classes that implement that interface
+        public static void ExtMethodForBaseClass(this object s)
+        {
+            Array.Sort();
+            Console.WriteLine(s);
+        }
+        //if you define an extension method for an interface, 
+        // it is also available to all classes that implement that interface
+        public static int Subtract(this IMathOperations i, int a, int b)
+        {
+            return a - b;
+        }
+    }
+    public interface IMathOperations
+    {
+        int Add(int a, int b);
+        int Multiply(int a, int b);
+    }
+    public class ClsMaths : IMathOperations
+    {
+        public int Add(int a, int b)
+        {
+            return a + b;
+        }
+
+        public int Multiply(int a, int b)
+        {
+            return a * b;
+        }
+    }
+}
+=============================
+=============================
+=> LINQ  ->  Language Integrated Query
+
+-> Array and Colelction Similarity
+- Both are collections and array interannly implements IEnumerable and ICollections
+
+-> DataSet : System.Data.DataSet
+
+-> XML System.Xml
+
+-> DataBase : ADO.Net
+
+-> EntityFrameWork : ORM tool in .net
+
+
+: TO manipulate all of above, 
+Linq-Objects
+Linq-DataSet
+Linq-Xml
+Linq-Sql
+-------------------------------------------
+
+var emps = from emp in lstemp select emp;
+
+selecting entire employee object from list of employees 
+and will iterate thru an entire list ofemployees 
+and stores in emps variable which is of type ,
+-> Ienumerble<Employee> lstEmps;
+
+
+foreach(Employee emp in emps)
+{
+
+}
+
+: Below is recommended :As if the query changes the left hand side of the above statement might return diff and its type will change so its better to keep it as a var for iteration
+
+foreach(Employee emp in emps)
+{
+
+}
+
+
+NOTE : Whatever we are writing the LINQ on, that calss must be implementing the IEnumerable Interface!
+
+=============================
+Anonymous class use in LINQ :
+
+var emps = from emp in lstemp select new {emp.Name, emp.EmpNo};
+
+so here, emps will be of type, IEnumerable<AnonymousType1'2>
+
+foreach(Employee emp in emps)
+{
+Console.WriteLine(emps.EmpNo + emps.Name);
+}
+
+=============================
+=> Conditional LINQ :
+
+var emps = from emp in lstEmp
+		where emp.Basic > 1000 && emp.Basic <12000
+		select emp;
+
+var emps = from emp in lstEmp
+		where emp.Name.StartsWith("V")
+		orderby emp.Name
+		select emp;
+
+
+=============================
+=> Join with LINQ :
+
+var emps = from emp in listEmp
+		join dept in listdepts
+		where emp.DeptNo = dept.DeptNo
+		select {emp.Nmae, dept.Dname};
+
+var emps = from emp in listEmp
+		join dept in listdepts
+		where emp.DeptNo = dept.DeptNo
+		select emp;
+
+var emps = from emp in listEmp
+		join dept in listdepts
+		where emp.DeptNo = dept.DeptNo
+		select dept;
+=============================
+
+=> Group by clasue :
+
+- var demps = from emp in lstEmp group emp by emp.DeptNo into group1 select group1;
+
+	foreach (var item in demps)
+            {
+                Console.WriteLine(item + " ");
+            }
+
+
+- var emps = from emp in lstEmp
+		group emp by emp.DeptNo into group1
+			select new {group1, Count = group1.Count(), Max = group1.Max(x => x.Basic),Min= group1.Min()};
+
+=> Iteration : 
+	foreach (var item in emps)
+            {
+                Console.WriteLine(item.group1.Key + " ");
+                Console.WriteLine(item.Count + " ");
+                Console.WriteLine(item.Max + " ");
+                Console.WriteLine(item.Min + " ");
+            }
+=============================
+--------------------------------------------
+#Extention method for IEnumerable are already defined in the namesapce => System.Linq 
+--------------------------------------------
+Those methods are :
+Select(Func<Employee, TResult>)
+
+var emps = from emp in lstEmp select emp;
+var emps = lstEmp.Select(GetEmployees);
+
+foreach (var item in emps)
+{
+Console.WriteLine(item);
+}
+
+
+static Employee GetEmployees(Employee e){
+
+	return e;
+}
+
+Lambda : var emps = lstEmp.Select(e=>e);
+
+--------------------------------------------
+
+var emps = lstEmp.Select(GetEmployees);
+
+foreach (var Ename in emps)
+{
+Console.WriteLine(Ename);
+}
+
+
+static string GetEmployees2(Employee e){
+	return e.Name;
+}
+
+Anon Method :var emps = lstEmp.Select(delegate(Employee o){return o.Name;});
+
+Lambda : var emps = lstEmp.Select(e=>e.Name);
+
+Anon Type : var emps = lstEmp.Select(e=> new {e.EmpNo,e.Name});
+
+=============================
+=> Where clasue :
+: .Where()
+- takes employee as a params and return  true and false
+- predicate 
+
+var emps = lstEmp.Where(e => e.Basic >1000);
+
+Here, for each emp ojet the condition is checked and those which returns truw will get added to the list
+
+Another form :
+
+var emps = lstEmp.Where(e => e.Basic >1000 && e.Basic < 12000);
+
+: emps is of Type : IEnumerable<Employee>
+
+
+//Below three lines fetching the entrie object hence sequence wont matters and there's no any error also 
+var emps = lstEmp.Where(e => e.Basic >1000);
+var emps = lstEmp.Where(e => e.Basic >1000).Select(e=>e);
+var emps = lstEmp.Select(e=>e).Where(e => e.Basic >1000);
+
+//Below two line wont give any error
+var emps = lstEmp.Where(e => e.Basic >1000);
+var emps = lstEmp.Where(e => e.Basic >1000).Select(e=>e.Name);
+
+####//Error on below line as Select will fetch Names after which e will be just a string and it wont have any property called as Basic! 
+var emps = lstEmp.Select(e=>e.Name).Where(e => e.Basic >1000);
+
+
+=============================
+=> Order by :
+
+var emps = lstEmp.OrderByDsecending(e=>e.Name)
+
+var emps = lstEmp.OrderBy(e=>e.Name)
+
+=> OrderBy with the two columns :
+-> will first order by deptno wise and the again reorder by name
+var emps = lstEmp.OrderBy(e=>e.DeptNo).OrderBy(e=>e.Name);
+
+-> it will order by deotno and then order result by names within the ordered deptno
+var emps = lstEmp.OrderBy(e=>e.DeptNo).ThenBy(e=>e.Name);
+
+
+=============================
+=> Join with the Ext methds :
+
+var emps = lstEmp.Join(lstDept,emp=>emp.DeptNo,dept = dept.DeptNo,(emp,dept)=> emp);
+
+var emps = lstEmp.Join(lstDept,emp=>emp.DeptNo,dept=>dept.DeptNo,(emp,dept)=>dept);
+
+var emps = lstEmp.Join(lstDept,emp=>emp.DeptNo,dept=>dept.DeptNo,(emp,dept)=>emp.DeptNo);
+
+var emps = lstEmp.Join(lstDept,emp=>emp.DeptNo,dept=>dept.DeptNo,(emp,dept)=>dept.DeptNo);
+
+var emps = lstEmp.Join(lstDept,emp=>emp.DeptNo,dept=>dept.DeptNo,(emp,dept)=>new{ dept.DeptName,emp.Name});
+----------------------------------------------
+=============================
+----------------------------------------------
+=> Deferred Execution : If we want latest records then gop for this
+
+Assuming List<Employee> lstEmp; has 8 emps objects,
+
+var emps = from emp in lstEmp select emp;
+
+lstEmp.RemoveAt(0); // this will remove 0th emp object 
+
+foreach(var item in lstEmp){console.WriteLine(item)} and this will also print 7 emp objects
+
+Which means that emps gets executed in iteration :
+
+----------------------------------------------
+=> Immidiate Execution : If we want the records when query ran, then go for this!
+
+var emps = from emp in lstEmps select emp;
+
+emps = emps.ToList();
+//OR
+emps = emps.ToArray();
+//OR
+emps = emps.ToDictionary();// Error h edhar, check thisss, typecasting
+
+lstEmp.RemoveAt(0); // this will remove 0th emp object 
+
+foreach(var item in lstEmp){console.WriteLine(item)} // here total records will be 8
+
+#Resoruces : https://linqsamples.com/
+
+=============================
+
+=> Single(Func)
+
+Employee emp = lstEmp.Single(e=>e.EmpNo == 1);// returns Employeee with empno =1
+
+Employee emp = lstEmp.Single(e=>e.EmpNo == 100); // InvalidOperationExcetption as there no emp with empno as 10 
+
+Employee emp = lstEmp.Single(e=>e.Basic > 10000);// InvalidOperationExcetption as it return multiple records
+
+=> SingleOrDefault
+
+Employee emp = lstEmp.SingleOrDefault(e=>e.EmpNo == 1);// returns Employeee with empno =1
+
+Employee emp = lstEmp.SingleOrDefault(e=>e.EmpNo == 100); // As it return single output which is not there in the lstEmp hence OP is null
+
+Employee emp = lstEmp.SingleOrDefault(e=>e.Basic > 10000);// InvalidOperationExcetption as it return multiple records
+
+================
+--------------------------------------------------
