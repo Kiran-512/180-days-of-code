@@ -144,9 +144,9 @@ eg. car pick and drop service to the employee!
 =======================
 => Thread Pool :
 
-In thread Pool we dont create our own threads :
+In thread Pool we don't create our own threads :
 
-ThreadPool.QueueUserWorkItem(PoolFunc1,"aaa");
+ThreadPool.QueueUserWorkItem(PoolFunc2,"aaa");
 
 ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2));
 
@@ -154,10 +154,14 @@ ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2),"aaaa");
 
 #WaitCallBack - is delegate 
 
+here, PoolFunc2is static void function with object o as params! 
 
 => Methods of ThreadPool :
-ThreadPool.SetMinThreads  - Min pool size
-ThreadPool.SetMaxThreads  - Max thread size
+ThreadPool.SetMinThreads()  - Min pool size
+ThreadPool.SetMaxThreads()  - Max thread size
+ThreadPool.GetMinThreads()  - get the min pool size
+ThreadPool.GetMaxThreads() - get th max pool size
+
 ThreadPool.GetAvailableThreads(out workerthreads, out iothreads) - No of threads available 
 
 
@@ -166,7 +170,12 @@ iothreads -  we are using in our threads
 
 Console.WriteLine(iothreads);
 
+It's not recommende to change the min and max of thread pool let CLR decide it!
+
 =======================
+=======================
+
+
 => Synchronisation of Threads :
 
 class Demo{
@@ -215,10 +224,15 @@ lock(obj)--- Monitor.Exit(obj)
 
 }
 
+
+Note: lock(){} is only available in c# and not in any other lanuguage of .net
+instead Monitor.Enter  and Monitor.Exit
+
 =======================
 => Interlocked :
-- instead of putting the synch code in diff lock blocks can be put into this class, which has a lot of methods supporting synch!
 
+- instead of putting the synch code in diff lock blocks can be put into this class, which has a lot of methods supporting synch!
+- instead of using sinlge statement like i++, i+=100,i--, swaping use interlocked methods directly for synchronisation
 
 Interlocked.Add(ref i,10); -- i+=10
 

@@ -1,0 +1,425 @@
+-------------------------------------------
+System.Threading.Task
+- Overhead of creating the own thread is removed
+- wrapper class for threads
+- improvements in working with threads
+- introduced in v4, and its recommedned to use task instead of thread!
+
+ static void Main1()
+        {
+            Task t1 = new Task(Func1);
+
+            //Action objAction1 = Func1;
+            //Task t1 = new Task(objAction1);
+
+
+            //Task t3 = new Task(new Action(Func1));
+            //Task t1 = new Task(Func1); // can pass func directly!
+
+            Action objAction2 = Func2;
+            Task t2 = new Task(objAction2);
+
+            t1.Start();
+            t2.Start();
+
+            Console.ReadLine();
+        }
+
+static void Func1()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine("first Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
+            }
+        }
+
+static void Func2()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine("second Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
+            }
+        }
+-------------------------------------------
+-------------------------------------------
+- ID managed by CLR for threads:
+Thread.CurrentThread.ManagedThreadID
+-------------------------------------------
+-------------------------------------------
+//calling a method with void return type using Task.Run and Task.Factory.StartNew
+
+static void Main2()
+        {
+            //Action objAction1 = Func1;
+            //Task t1 = Task.Run(objAction1); 
+            Task t1 = Task.Run(Func1);
+
+
+            //Action objAction2 = Func2;
+            //Task t2 = Task.Factory.StartNew(objAction2);
+            Task t2 = Task.Factory.StartNew(Func2);
+
+            Console.ReadLine();
+}
+ static void Func1()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine("first Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
+            }
+        }
+        static void Func2()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine("second Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
+            }
+}
+
+-------------------------------------------
+Task t1 =  Task.Run(func1) -- Runs code on the same line, doesnt need t1.start() 
+Task t2 = Task.Factory.StartNew(func1)
+
+Diff?
+- Task.Run can not be used with the func with the params!
+- Factory.StartNew can be used with the funct with the params
+
+-------------------------------------------
+- BeginInvoke and End Invoke is not available in .net Core : 
+Task :
+- lighter in case of system resource utilisation
+- Improvised performance
+- 
+
+-------------------------------------------
+//TO DO
+
+ class Program1 {
+
+        static void Main() {
+            Console.WriteLine("Main start......");
+            
+            
+            Func<int> funcObj = Func1;
+            Task<int> t1 = Task.Run(Func1);
+    
+            if (!t1.IsCompleted)
+                t1.Wait();
+            Console.WriteLine("Result is " +t1.Result);
+
+            Func<object, int> funObjR = Func2;
+
+            string s = "Result is ";
+                
+           Task<int> t2 = Task.Run(delegate() { Console.WriteLine(s);
+                int i=0;
+               for (i = 0; i < 100; i++)
+               {
+                   Console.WriteLine();
+               }
+               return i;
+           });
+
+            if (!t2.IsCompleted)
+                t2.Wait();
+            Console.WriteLine("Result from Task.Run from Func2 is " + t2.Result);
+
+
+            //=======================
+            Task<int> t3 = Task.Factory.StartNew(Func1);
+
+            if (!t3.IsCompleted)
+                t3.Wait();
+            Console.WriteLine("Result FOR fACTORY 1 is " + t3.Result);
+
+//Task.Factory.StartNew<int>(Func<int> function);
+
+            Task<int> t4 = Task.Factory.StartNew(Func2,"AAAAA");
+            Task<int> t5 = Task.Factory.StartNew(Func2," ");
+
+            if (!t4.IsCompleted)
+                t4.Wait();
+            Console.WriteLine("Result is fACTORY 2" + t4.Result);
+
+
+            Console.WriteLine("Main end......");
+            Console.ReadLine();
+        }
+
+        static int Func1()
+        {
+            int i;
+            for (i = 0; i < 100; i++)
+            {
+                Console.WriteLine("first Func called {0}", i);
+            }
+            return i;
+        }
+        static int Func2(object obj)
+        {
+            int i;
+            for (i = 0; i < 20; i++)
+            {
+                Console.WriteLine("second Func called {0},{1}", i, obj.ToString());
+            }
+            return i;
+        }
+
+    }
+============================================
+Few Important Notes : 
+
+Thread Vs Task : 
+- We can not run a function with the return type in thread 
+- Which is possible with the Task
+
+=> Instead of join() in Thread, we have wait() in Task  
+
+=> If function has a return value then we can use only delegate and not the threads!
+
+=> To have more control on thread : go for Threads
+
+=> Task can do the same thing that we did with Threads!
+
+=> Maj diff between Task and Delegate :
+
+##.net Core have delegates but don't have beginnvoke and endInvoke so the only option available is Task and Thread for calling asynch code in .net core
+
+============================================
+AsyncAwait : 
+
+-> To read a value from function which return a value we need to wait for the thread to complete and then get the returned value/Result!
+if (!t4.IsCompleted)
+t4.Wait();
+Console.WriteLine("Result is fACTORY 2" + t4.Result);
+
+- Instead of these three line Await keyword is used : Function called with await must return a Task<T> :
+- await can only be used inside the asynch function 
+- async method can not be void or int
+- why Task Main? Main si a thread and Task also indicates that its a thread!
+- In .net core develoeprs removed thhis compulsion : We can use async with the void Main in .net core!
+
+ static async Task Main1()
+        {
+            Console.WriteLine("Before");
+            string message = await DoWorkAsync();  //waiting call
+            Console.WriteLine(message);
+            Console.WriteLine("After");
+            Console.ReadLine();
+        }
+
+In above example, new thread will be created for DoWorkAsynch()
+- Main Thread will be free and won't be blocked and Main 
+thread will wait ofrfor that other thread to finish it execution!
+ and after that only it will move ahead further with the execution!
+
+In this why we created new thread and why not ran method in the same Main thread?
+- Main thread wont be blocked
+- It will be free
+- Main benifits is there in UI applications wherein upon calling some reqiuest its send on diff thread and UI running on main thread will be free
+and wont be blocked!
+
+
+static async Task<string> DoWorkAsync()
+        {
+            return await Task.Run(() =>
+            {
+                Thread.Sleep(5000);
+                return "Done with work!";
+            });
+}
+
+- Issue with the await is it performce a blocking call, and wait for the completion of method with await on other thread!
+
+--------------------------------------------
+
+Alteranet Way :
+
+static async Task Main()
+        {
+            Console.WriteLine("Before");
+
+            Task<Task<string>> t1 = new Task<Task<string>>(DoWorkAsync);
+            t1.Start();
+            Console.WriteLine("After");
+
+            string message = await t1.Result; // waiting call here 
+            Console.WriteLine(message);
+            Console.ReadLine();
+}
+============================================
+=> Operator Overloading :
+
+- We can overload the operators by overloading the static method operator
+- eg.
+
+class OverlaodingDemo { 
+    
+    static void Main() {
+
+            Employee e = new Employee();
+            Console.WriteLine(e.Basic);
+
+            e = e + 5000;
+            Console.WriteLine(e.Basic);
+
+        }
+}
+class Employee {
+
+        public decimal Basic = 0;
+        public static Employee operator+(Employee e, int i)
+            {
+            e.Basic += i; 
+            return e;
+            }
+}
+============================================
+=> Indexers :
+
+- refernce varaible can be changed to array :
+- Indexers allows to treat an object of a class as an array!
+
+Class1 o = new Class1();
+o[i]
+
+o[0] = 10; -- set
+o[1] = 20;-- set
+
+CW(a[0]) -- get
+
+Above code is simliar to the property!
+
+============================================
+=> Reflection : 
+
+- It's essentailly like opening an assembly and reading the meta data!
+- Reading the assembly at run time and creating object of one of its classes!
+- To use assembly one must add a reference and reflection allows to load assembly dynamically and use it at run time!
+- We can create an assembly at run time Reflection.init(), which allows to give out IL Code!
+
+Assembly asm = Assembly.LoadFile("D:\Trainings\JKJuly22\Day2\Properties\bin\Debug\Properties.exe");
+
+Assembly.
+- GetAssembly
+- GetCallingAssembly
+- GetExecutingAssembly
+
+
+: Version, Culture, Public Key!
+
+--------------------------------------------
+
+EG.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+
+namespace ReflectionDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Assembly asm = Assembly.LoadFile(@"E:\Kiran dotNet\Sessions\DAY 1\BasicConcepts\bin\Debug\BasicConcepts.exe");
+            Console.WriteLine(asm.FullName);
+
+            Type[] TypeArr = asm.GetTypes();
+
+            foreach (Type t in TypeArr)
+            {
+                Console.WriteLine(t.Name);
+                MethodInfo[] MethodArr = t.GetMethods();
+
+                foreach (var m in MethodArr)
+                {
+                    Console.WriteLine("         " + m.Name);
+                    ParameterInfo[] PropArray = m.GetParameters();
+                    foreach (var p in PropArray) {
+                        Console.WriteLine("                 "+p.Name);
+                    }
+                }
+            }
+
+        }
+    }
+}
+/*
+ BasicConcepts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Data
+         display
+         Equals
+                 obj
+         GetHashCode
+         GetType
+         ToString
+Program
+         Equals
+                 obj
+         GetHashCode
+         GetType
+         ToString
+Press any key to continue . . .
+ */
+
+--------------------------------------------
+=> PRIVATE ASSEMBLY VS SHARED ASSEMBLY!
+
+- VERSION PROBLEM OF COM IS SOLVED BY CREATING ALL ASEMBLIES AS A PRIVATE 
+
+Project1 (Console App)
+Bin/debug
+Project1.exe
+Project2.dll (add a ref v1) // bydefault it's private
+
+Project3 (Console App)
+bin/debug
+Project3.exe
+Project2.dll (add a ref v1) // seperate and diuff from .dll of Project1 and bydefault it's private
+
+Project2 (class Library)
+Project1.dll(v1) => changed TO : Project1.dll(v2)
+
+Here, even if the version of Project2 is changed and made it backward incompatible, the earlier version where ever used won't get affected they remains the same!
+
+
+Problem with the private assembly :
+- If the new version is backward compatible then to useit we will have to make changes in each and every project!
+
+Solution : 
+- so to make it available evrywhere, install it in a common area called as Global Assemblly Cache (GAC)!
+- but the Assembly must have a strong name!
+- Assembly must eb signed with the key pair!
+
+StrongName : Unique name that the assembly will have, No duplicate name 
+How to have strong Name :
+Key : Pair => Public (K) : private (P)
+
+
+- Open Developer CP : Run as a admin : go to the class library folder wecreated :
+=> sn -k key.snk
+
+Displayed Message : Key pair written to key1.snk 
+
+Project => VS => Properties => Signing => sign the assembly => browse and choose the folder in which we created key pair OR new and type name : key2:snk
+
+Then build the assembly!
+
+Now the assembly has the strong Name!
+
+
+- Install it into the GAC: Run it on dveloper comdn prompt in file path inside bin/debug of the project where this will be used!
+
+gacutil / i /ClassLibrary1.dll
+
+Assebmbly has been successfull added tot he cache!
+
+
+
+
+
+
+--------------------------------------------

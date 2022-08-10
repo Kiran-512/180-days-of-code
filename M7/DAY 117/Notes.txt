@@ -1,0 +1,433 @@
+===============================
+DATE : 29
+ 
+=> Advanced Reflection :
+Type t = ....;
+object obj = Activator.CreateInstance(t);
+
+--------------------------------
+--------------------------------
+=> Working with the Files :
+
+- Files are treated like a stream :
+- Set of bytes :
+
+=> Two operations :
+- Reading from a stream
+- Writing in a stream
+
+=> Formated Type
+
+---------------------------------
+Drive :
+Directory :
+DirectoryInfo :
+
+
+byte[] arr = Encoding.Default.GetBytes(s);
+
+FileStream stream = File.Open(@"C:\aaa\a.txt", FileMode._);
+
+FileMode.create => will create new file even if exit and override the earlier file
+FileMode.append => will add to the existing file
+FileMode.CreateNew => wil throw an exception if file already there 
+FileMode.truncate => File must be exist but it will trucate evrything and make it empty file
+FileMode.open => FileNotFound will throw an exception, it has read access only!
+FileMode.openOrCreate => if present it will open it and if not then it will create and open! 
+
+//Write :
+stream.Write(arr,0,arr.Length);
+
+.Write(bytearray,starting bytes, end bytes);
+
+//Read :
+arr = stream.Read(stream,0,stream.Length);
+
+stream.close();
+
+-----------------------------------
+=> StreamWriter
+
+StreamWriter writer = File.CreateText("C:\\aaa\\a.txt");
+writer.WriteLine("Hello World");
+writer.WriteLine("Line 2...");
+writer.close();
+
+
+
+
+
+===============================
+
+=> Serialisation :  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===============================
+
+=> Database Connectivity :
+- RDO : Remote Data Objects
+- DAO : Data Access Object
+- ADO : ActiveX Data Objects
+
+- Odbc and Oledb : are older tech used in com which is unmanaged code which CLR doesnt runs.
+
+- Managed Provider : Instead of above two to connect with the database!
+
+- When to use ODBC nad OLEDB : When we dont have a managed provider then only to go for these.
+
+- Now a days all databases have a managed provider with them which can be downloaded!
+ 
+
+- VS also provides infra to connect with the DB.
+
+=> View => SQL Server Object Explorer => 
+- Free dummy version is installed with the VS, which may not have all the features pf MySQL!
+
+
+System.Data.SqlClient
+System.Data.Oledb
+System.Data.Odbc
+
+Depending on the library that we use Connection class would change:
+SqlConnection
+OledbConnection
+OdbcConnection
+OracleConnection
+
+CRUD Operations!
+To Work with Insert, Update, Delete -> SqlCommand class
+
+=> SqlDataReader :
+- The datareader is a connected, forwardonly, readonly set of records.
+- It is also called firehose cursor!
+
+
+- Connected : When using datareader, the connection to the database must be kept open :
+- ForwardOnly : Once it has read it it wont go backbackward, Record can be read only in one direction!
+- Readonly : Can not be changed, update or delete while accesing datareader!
+
+=> firehose cursor
+- set of record read from database
+- data comes at a great speed!
+
+=> DataReader is the fastest way to ready the data from the database!
+
+===============================
+
+DATE : 30  
+
+SqlConnection cn = new SqlConnection();
+
+cn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JKJuly2022;Integrated Security=True";
+
+Data Source : name of the database sql server
+Initial Catalog : Database Name
+Integrated Security : True // Windows authentication so its getting rights of an admin, withvs code installed sql its always true! uname and pass is corrent loggedin user 
+Connect Timeout : 30 // If not connected within this time then errorwill be displayed!
+ 
+//cn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JKJuly2022;User Id=sa;Password=sa";
+
+
+if(cn.State == ConnectionState.Open )
+{
+ cn.close();
+}
+
+
+cmdInsert.CommandType = CommandType.Text;
+cmdInsert.CommandText = "insert into Employee values({obj.EmpNo},{obj.Name},{obj.Basic},{obj.DeptNo})"  
+here, for CommandType, the prefere optionsi stored procedure always!
+
+Insert issues with the string :
+1. Special character problem : Whenever we have values that contains special character string concatenation fails eg. Name = "D'Souza";
+
+2. sql injection : Possibility of an sql injection attack, hacker can insert sql thru an string   
+
+
+Solution :
+
+Instead of string use @EmpNo,@Name and so on...
+cmndInsert.Parameter.AddWithValue("@EmpNo", obj.EmpNo);
+cmndInsert.Parameter.AddWithValue("@Name", obj.Name);
+
+
+Stored procedure :
+CREATE PROCEDURE [dbo].InserEmployee
+	@EmpNo int,
+	@Name varchar(20),
+	@Basic decimal(18,2),
+	@DeptNo int
+AS
+	insert into Employee values(@EmpNo,@Name,@Basic,@DeptNo)
+RETURN 0
+
+
+Changes :
+CommandType : storedProcedure
+CommandText: Stored_Procedure_Name
+
+---------------------------------------
+=> Returning a sinle value  : ExecuteScalar()
+
+cmdSelect.CommandText = "Select count(*) from Employees";
+object retval = cmdSelect.ExecuteScalar();
+
+---------------------------------------
+=> To read Multiple Columns we must use SqlDataReader
+
+cmdSelect.CommandText = "Select * from Employees";
+SqlDataReader dr = cmdSelect.ExecuteReader();
+
+while (dr.Read())
+{
+Console.WriteLine(dr["Name"]);
+//Console.WriteLine(dr[1]);
+}
+
+dr.Read(); true
+dr.Read(); true
+dr.Read(); true
+dr.Read(); false // control will be out of loop!
+
+Two ways to read from dr here;
+1. dr[index] - inex starts from 0..
+2.dr["column-Name"] -- recommended as it improves readability!
+
+---------------------------------------
+=> NextResult();
+
+
+		cmdSelect.CommandText = "Select * from Employees;select * from Departments";
+                SqlDataReader dr = cmdSelect.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Console.WriteLine(dr["Name"]);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+                dr.NextResult();
+                while (dr.Read()) 
+		{
+                    Console.WriteLine(dr["DeptName"]);// here dr[index] -- index may starts from 0 due nested loops 
+		}
+		dr.Close();
+
+---------------------------------------
+=> MultipleActiveResultSet = true
+
+cn.ConnectionString = @"Data Source=(localdb)\MsSqlLocalDb;Initial Catalog=JKJuly2022;Integrated Security=true;MultipleActiveResultSets=true";
+
+- To read from another dataReader as we can not read from another dataReader directly when one dataReader is open!
+- So to make it work above setting si done in  Connection string
+
+
+	cmdDepts.CommandText = "Select * from Departments";
+
+            SqlCommand cmdEmps = new SqlCommand();
+            cmdEmps.Connection = cn;
+            cmdEmps.CommandType = CommandType.Text;
+
+            SqlDataReader drDepts = cmdDepts.ExecuteReader();
+            while (drDepts.Read())
+            {
+                Console.WriteLine((drDepts["DeptName"]));
+
+                cmdEmps.CommandText = "Select * from Employees where DeptNo = " + drDepts["DeptNo"];
+                SqlDataReader drEmps = cmdEmps.ExecuteReader();
+                while (drEmps.Read())
+                {
+                    Console.WriteLine(("    " + drEmps["Name"]));
+                }
+                drEmps.Close();
+            }
+            drDepts.Close();
+            cn.Close();
+---------------------------------------
+=> CommandBehaviour.CloseConnection
+
+static void CallFuncReturningSqlDataReader()
+{
+            SqlDataReader dr = GetDataReader();
+            while (dr.Read())
+            {
+                Console.WriteLine(dr[1]);
+            }
+            dr.Close();
+
+            //Console.WriteLine(cn.State);
+            Console.ReadLine();
+}
+
+static SqlDataReader GetDataReader()
+{
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JkJuly2022;Integrated Security=True";
+            cn.Open();
+
+            SqlCommand cmdInsert = new SqlCommand();
+            cmdInsert.Connection = cn;
+            cmdInsert.CommandType = System.Data.CommandType.Text;
+            cmdInsert.CommandText = "select * from Employees ";
+
+            SqlDataReader dr = cmdInsert.ExecuteReader(CommandBehavior.CloseConnection);
+            //SqlDataReader dr = cmdInsert.ExecuteReader();
+            //cn.Close();
+
+            return dr;
+}
+---------------------------------------
+=> Transaction :
+
+- cn.Open();
+- SqlTransaction t = cn.BeginTransaction();
+
+try
+{
+                cmdInsert.ExecuteNonQuery();
+                cmdInsert2.ExecuteNonQuery();
+                t.Commit();
+                Console.WriteLine("no errors- commit");
+}
+catch (Exception ex)
+{
+                t.Rollback();
+                Console.WriteLine("Rollback");
+                Console.WriteLine(ex.Message);
+}
+cn.Close();
+
+
+---------------------------------------
+=> Async and Await use with the database connection :
+- While the connection is established it is ran on diff thread!
+- BeginExecuetReader(AnonMehod,null)
+- EndExecuteReader(ar);
+
+static  void AsyncCommand2()
+{
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JKJuly2022;Integrated Security=True";
+
+            cn.Open();
+            
+            SqlCommand cmdInsert = new SqlCommand();
+            cmdInsert.Connection = cn;
+            cmdInsert.CommandType = CommandType.Text;
+            cmdInsert.CommandText = "Select * from Employees";
+            
+            cmdInsert.BeginExecuteReader(delegate (IAsyncResult ar) 
+            {
+                SqlDataReader dr = cmdInsert.EndExecuteReader(ar);
+                while (dr.Read())
+                {
+                    Console.WriteLine(dr["Name"]);
+                    //Console.WriteLine(dr[1]);
+                }
+                dr.Close();
+                cn.Close();
+            }, null);
+
+            Console.WriteLine("code after begin....");
+}
+=======================================
+=> DataSet/DataTable :  
+- disconnected, updatable, XML Set of records.
+
+- Disconnected  :  Connection is not 
+- Updatable : We can update the data
+- XML : This is not specific to one data type,  and hence it is kep in the XML format to support all kinf od data!
+
+- It's common for darabases like sql, oralce oledb or odbc unlike SqlDataReader!
+
+--------------------------------------
+=> SqlDataAdapter :
+
+- bridge between the command and the dataSet
+- performs two main functions
+1. Populate the dataset, fills the dataset
+2. Changes are not gonna back to the database so data adapter updates the database with the changes that we made in dataset,
+   changes are not made immidietly,
+
+#DataTable is the O/.P of select statement.
+
+=> DataTable has DataColumns and DataRows!
+
+=> DataTable can be itself or a partof DataSet(DS will have multiple DataTables)!
+
+=> DataView - related to single DataTable!
+
+=> DataRelation - relation between two DataTable!
+
+=> DataTable does not have filtering and sorting in it, doesn't supports!
+, If we want to have it then we will createt the DataView, which is based on single DataTable and has same structure as a DataTable!
+
+
+#BigBang!
+=> One DataTable can have many views but one view is based on one DataTable only!
+
+---------------------------------------
+//primary key constraint
+DataColumn[] arrCols = new DataColumn[1];
+arrCols[0] = ds.Tables["Emps"].Columns["EmpNo"];
+ds.Tables["Emps"].PrimaryKey = arrCols;
+
+//add a foreign key constraint
+ds.Relations.Add(
+ds.Tables["Deps"].Columns["DeptNo"],
+ds.Tables["Emps"].Columns["DeptNo"]
+);
+
+//columnn leve constraint
+ds.Tables["Deps"].Columns["DeptName"].AllowDBNull = false;
+ds.Tables["Deps"].Columns["DeptName"].Unique = true;
+
+//dataGridView1.DataSource = ds.Tables[0];
+dataGridView1.DataSource = ds.Tables["Emps"];
+//dataGridView1.DataSource = ds.Tables["Deps"];
+
+
+---------------------------------------
+=> RowState :
+
+- Unchanged - U
+- Modified - M
+- Deleted - D
+- Added - A
+
+
+=> WHEN ANY CHANGES MADE IN THE GRID VIEW THE CHANGES ARE OT =REFLECTING IN TO THE DATABASE
+- Instead, the changes are reflecting only in the dataset,
+- above rowstates are maintained in the XML
+
+- cmdUpdate.SetParamater.AddWithValue() - is used when the command worksonly once
+
+- Since for update, the command wont works only once hence we must use add() only 
+
+---------------------------------------
