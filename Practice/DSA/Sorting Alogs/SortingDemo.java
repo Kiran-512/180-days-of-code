@@ -124,21 +124,21 @@ public static void insertionSort(int[] a){
   //            System.out.println("Enter an element ");
 //      arr[i] = sc.nextInt();
         random = (int) (100 * Math.random()) + 1;
- arr[i] = random;
+		arr[i] = random;
       }
 
       for (int i : arr) {
         System.out.print(i + " ");
       }
+	  
       System.out.println();
 
- //     selectionSort(arr);
-
+//     selectionSort(arr);
 //      bubbleSort(arr);
-      System.out.println();
 //      BubbleSortDemo(arr);
- 
       insertionSort(arr);
+ 
+
 
       System.out.println("After sorting ");
       for (int i : arr) {
