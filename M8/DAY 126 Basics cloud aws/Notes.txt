@@ -136,15 +136,3 @@ To be selected :
 - We can use this from any PC and can login anywhere at any place where we can login tothe AWS!
 
 ----------------------------------------
-
-
-
-
-
-----------------------------------------
-
-
-
-
-
-----------------------------------------

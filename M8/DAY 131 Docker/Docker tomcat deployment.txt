@@ -1,0 +1,55 @@
+Create ec2 in aws linux => connect => MobaX => public IP + UserName(ec2-user) + Private Key => OK
+
+
+Create maven project in eclipse => create jsp file => export project to war file by right click on projhrat name
+
+Upload war file in bucket in aws s3
+
+Make the war file public and accesbile to everyone
+
+Copy S3 URL and paste the in ec2 linux in folder demo_docker 
+
+COPY Coomand used is  => aws s3 cp s3://path .
+
+
+IMRole updation in EC2-Insatnce from Acion => security => Update Imrole => Update
+
+>>> 
+
+sudo su
+
+yum install docker
+
+docker --version
+
+service docker start
+
+mkdir demo_docker
+
+cd demo_docker
+
+aws s3 cp s3_URL .
+
+vi Dockerfile 
+
+content :
+
+FROM tomcat
+
+COPY file_name.war /usr/local/tomcat/webapps/
+
+docker build -t image_name .
+
+docker images
+
+docker run -d -p 8080:8080 image_name
+
+
+===============================
+
+
+
+check on locak system with => PublicIP:8080/filename
+
+
+

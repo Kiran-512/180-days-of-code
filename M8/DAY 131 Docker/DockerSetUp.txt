@@ -1,0 +1,85 @@
+Docker installation and it's use on AWS : 
+
+sudo su
+
+yum install docker
+
+docker --version
+
+service docker start
+
+mkdir demo_docker
+
+cd demo_docker
+
+cat Dockerfile > FROM tomcat
+
+ls
+
+docker build -t tomcat_1.0 . // build tomcat image with the name tomcat_1.0 . dot shows present directory
+
+docker image ls
+
+docker run -d -p 8080:8080 tomcat_1.0
+
+docker ps
+
+docker stop 0a01689e7cc8 // CONTAINER ID
+
+docker ps
+
+=======================
+
+=> To run someone else's docker image :
+
+docker run -d -p 8080:8080 pradeep3393/sample_1.0
+
+
+-d  => background mode => to run in background 
+
+-p => public
+
+8080:8080 => port on which it is available
+
+
+Security group => Edit inbound rules => Add rule => port NO : 8080 => (Type)CustomTCP
+
+=======================
+Deploy project with the docker :
+
+FROM tomcat
+
+COPY file_name.war /usr/local/tomcat/webapps/
+
+
+Commadn used to copy objects from s3 bucket :
+
+
+aws s3 cp s3://..path .
+
+
+=======================
+Docker other commands :
+
+=> docker login :
+username : 
+password :
+
+
+tag images  to push on docker hub :
+
+=> docker tag 8069ad1ece94 kiranyadav512/sample_1.0
+
+here,
+kiranyadav512/sample_1.0 => docker_username/image_name
+
+docker name is important so that when we push file will to that account
+
+=> docker push kiranyadav512/sample_1.0
+
+
+To pull :
+=> docker pull kiranyadav512/sample_1.0
+
+
+=======================

@@ -11,6 +11,11 @@ COPY :- copy lockal file to docker container
 EXPOSE :- Exposes specified port tothe hostmachine, used to avoid to mention port No as 8080:8080
 eg. EXPOSE  8080 =>Expose port no 8080 outside of the contianer i.e. make it public accessile by anyone from outiside of the container!
 
+Above EXPOSE is Used instead of => docker run -d -p 8080:8080 image_name
+
+-P DOCKER_CONTAINER_port : Host_machine_port
+
+docker run --help
 
 =================================
 
@@ -121,14 +126,15 @@ Advantages of Jenkin :
 
 Steps to install Jenkins server on EC2 : 
 
-Sudo su 
+=>  sudo su 
 
-Yum install docker -y 
+=>  yum install docker -y 
 
-Service start docker 
+=>  service start docker 
 
-docker network create jenkins 
+=>  docker network create jenkins 
 
+=>  
 docker run \ 
   --name jenkins-docker \ 
   --rm \ 
@@ -144,10 +150,11 @@ docker run \
   docker:dind \ 
   --storage-driver overlay2 
 
-Vi Dockerfile 
 
+=>  Vi Dockerfile 
 
 Docker file content : 
+
 FROM jenkins/jenkins:2.346.3-jdk11 
 USER root 
 RUN apt-get update && apt-get install -y lsb-release 
@@ -161,7 +168,10 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 USER jenkins 
 RUN jenkins-plugin-cli --plugins "blueocean:1.25.6 docker-workflow:1.29" 
 
-docker build -t myjenkins-blueocean:2.346.3-1 . 
+=>  docker build -t myjenkins-blueocean:2.346.3-1 .
+
+
+=>  
 
 docker run \ 
   --name jenkins-blueocean \ 
@@ -179,7 +189,10 @@ docker run \
   --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \ 
   myjenkins-blueocean:2.346.3-1 
 
-Docker ps 
+
+
+=>  Docker ps 
+
 
 <ec2-public_ip>:8080 
 
@@ -187,9 +200,18 @@ Command to find jenkins password
 
 docker logs jenkins-blueocean 
 
+here jenkins-blueocean- name fo the jenkins container/image!
 
-here jenkins-blueocean- name fo the jenkins container!
 
+install suggested plugins = > Create first Admin user => save and continue => save and finishe => start usiong jenkins :
+
+Start building a software propject : 
+
+Create a job => (enter item name ) pipeline -> NEXT => pipeline  => (pipeline )  => Definition pipeline from SCM => SCM  (Git) => Repository URL (Copy url of repository from git and pate here) => SAVE 
+
+BUILD NOW => Build Hisotry  => We can alos check logs with teh diagram being genrated 
+
+Open blue Ocean => We can check here history of build!
 
 =========================================
 

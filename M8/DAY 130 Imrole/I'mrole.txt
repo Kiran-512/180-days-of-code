@@ -1,0 +1,167 @@
+Notes for the day!
+
+------------------------------
+
+So far we have seen
+EC2
+Lambda
+RDS
+S3
+Cloud Watch and Cloud trial
+
+---------------------------------------
+
+- These services can communicate with each other
+
+
+Two ways to access teh cloud services :
+
+Im Role : 
+Secret Key and Access Key : 
+
+Linux is must for Docker and Kubernet!
+
+====================================
+
+AWS CLI : 
+
+- Used to access aws outside aws access on our local pc
+
+- IAM ROLE (Updated to global im role)
+- Secret key and Access Key : Used to configure aws cli on our local machine CLI
+
+Secret key and Access Key LOCATION -> AWS details in lab
+
+
+
+Cloud Access
+
+   AWS CLI:   
+   Copy and paste the following into ~/.aws/credentials
+[default]
+aws_access_key_id=ASIAUNHIZ2BRSMTZ666P
+aws_secret_access_key=1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
+aws_session_token=FwoGZXIvYXdzEPP//////////wEaDFBEkcsD+TfhX1Ym3yLJAcZgn/jH+DzCJVjNuJdywg9YTgueEBmRBwg7v493m9WLlY9JQaZ2HxAC38pzPv7VWxvMSluNa+k7cAtzvZFPkCzs4ysCZolnNHQ5at02f0AtW213cmsVsf5LQ4PIRerr94Z6Av18/Ix+JvxJdmbWfchX4TkW9ZtQaJHDTwtSMOTtKnhrrEmAoVujYgqhUbgrnCRbL6dnq3pHlyddfQW5Cz07kdWTAzc0B9kfv6dJZYKQWSH05AKz5p6O9pghgcZgnV6/SSfN9mLqFCij9YeYBjItEXKPQ87Hw9SkrZMDWiSPLAtXdX3aEFBeTLEvu+yBkUy++k0um1M3TTxOkstp
+
+
+=> These key are created for each new sessions!!
+	
+----------------------------------------------------------------
+
+aws <service-name> command -commandType
+
+EG.
+
+aws s3 ls s3://path of bucket
+
+----------------------------------------------------------------
+
+
+[root@ip-172-31-95-246 demo_docker]# sudo su
+
+[root@ip-172-31-95-246 demo_docker]# vi ~/.aws/credentials
+[root@ip-172-31-95-246 demo_docker]# aws configure
+AWS Access Key ID [None]: ASIAUNHIZ2BRSMTZ666P
+AWS Secret Access Key [None]: 1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
+Default region name [None]: us-east-1
+Default output format [None]: json
+[root@ip-172-31-95-246 demo_docker]# ls ~/.aws/
+config  credentials
+[root@ip-172-31-95-246 demo_docker]# cd  ~/.aws/
+[root@ip-172-31-95-246 .aws]# ls
+config  credentials
+[root@ip-172-31-95-246 .aws]# cat config
+[default]
+output = json
+region = us-east-1
+[root@ip-172-31-95-246 .aws]# cat credentials
+[default]
+aws_access_key_id = ASIAUNHIZ2BRSMTZ666P
+aws_secret_access_key = 1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
+[root@ip-172-31-95-246 .aws]# aws s3 ls s3://demobucket-kiran/
+
+====================================
+
+
+Download aws cli for windows :
+
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+
+aws --version
+
+
+====================================
+I AM ROLE :
+
+Demo 
+Policy 1
+Policy 2
+Policy 3
+
+Policy - is a set of rules to access resources and services!
+
+We don't have access to it!
+
+Procedure to create the polycies for role : 
+
+Create Policy : 
+Select Service  Name : EC2 ETC.
+Manual Access : TO GIVE ALL EXCESS
+Access level : list,read,tagging etc
+
+Select Instrance (EC2)  =>  Actions  =>  Security  => MODIFY Im Role => Select EMR IM'ROLE and Update
+
+
+====================================
+
+Event Driven Application : 
+
+Eg. of Events :
+When any file is uploaded in bucker lambda should gets triggered!
+
+
+STEPS : 
+
+First create a Lambda Function 
+
+code in lambda function is :
+
+[
+exports.handler = async (event) => {
+    // TODO implement
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    console.log(event);
+    return event;
+};
+]
+
+
+Test => Create an Event in lambda => then go to S3
+
+in S3:
+
+Select Bucket name => Properties => Event notifications (1)
+=>Create event notification => Event name
+=>Check(Select) Event types => Destination (Lambda function)=>Specify Lambda function
+(Choose from your Lambda functions
+)=> Lambda function <Select from drop down> => Save changes
+
+====================================
+
+Lniux :
+
+Install an application apt-get. yum
+set and unset environmetn variables
+User and group permissions
+cp, mv, rm, ls cat and grep
+Mount commands => optional
+Any your fav text editor, vi, nano 
+
+
+====================================
+
+

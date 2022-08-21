@@ -138,7 +138,6 @@ Storage -> Charged
 Inboud calls
 Outbound calls
 
-
 => Deploy the application on EC2 with the help of tomcat
 
 => Elastci IP 
