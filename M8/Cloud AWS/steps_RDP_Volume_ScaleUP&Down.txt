@@ -1,0 +1,41 @@
+**Creating EC2 Instance
+------------------------
+1.Click on EC2-->Launch Instance-->Create instance with name as 086_Saurabh_JH
+ -->select windows for windows instance
+2.Key pair-->create new-->give your name-->keep .pem as it is-->
+3..pem file will get downloaded(remember the path/paste it in your folder)
+4.select existing security group(Launch any wizard )
+5.Launch instance
+6.view all instances.
+
+**Connect RDP==>
+-----------------------------------
+-->select instance-->connect-->RDP client-->download remote desktop file-->
+  get password-->wait for some time-->Browse-->open .pem file-->Decrypt password
+  -->Copy Password-->Open .rdp file which you downloaded-->Connect-->Paste Password-->Yess
+======================================================
+Security Groups:
+-----------------------------------
+Select Instance-->Security-->Open Security groups URL-->Inbound rule-->Edit Inbound Rules
+-->Type>RDP--> Source>Anywhere IP4/My IP for private/Custom-->Save
+======================================================
+Create Volume:
+-----------------------------------
+Select Instance-->Volumes(On left elastic block store)-->Create Volume-->type Keep as it is
+-->Select for eg.20gb-->please see zone while selecting instance and remember-->Availabiltiy zone>(Paste zone of instance)
+-->Create Volume
+
+**Attach Volume to instance==>
+-----------------------------------
+Close RDP-->Select Volume-->Actions-->Attach Volume-->select instance of your own from dropdown-->Attach volume
+-->Run our Instance and connect RDP(Follow the Connect RDP steps)
+
+Search-->Create & Format HardDisk Partition-->Right CLick on Disk which is offline and make Online-->
+Right click Initialise-->OK-->Right Click-->New simple Volume-->Next-->name drive-->Next
+
+If you want to detach volume-->select volume after checking availability zone and instance id-->action-->Detach Volume and then we can delete
+======================================================
+Scale UP & Scale Down:
+------------------------------------
+Down==>Select Instance--> Actions-->Change Instance type-->t2 large to t2 micro(down)-->OK
+UP==>Select Instance--> Actions-->Change Instance type-->t2 micro to t2 large(UP)-->OK

@@ -1,0 +1,168 @@
+DAY 3 :
+=======================
+
+Benifits of Cloud : 
+
+- Cost effective - due to pay-as-you-go
+- Remote access at any time from any where!
+- User Friendly
+- On demand supply of services
+- Fast Deployment (Cloud Services can start in a minutes)
+- Scalability
+- Elasticity - Flexibility ( in choosing and using various services ) [ Easy to aquire alot of infra for a short period ]
+eg. Earlier companies had to purchase servers on a lease by paying huge amount from Oracle, IBM etc. With AWS can get servers easily and use whatever way we want them
+- Outsourced Management, prpvides or handels administration role
+- Reliability and security! 99.999999% gaurantee!
+
+=======================
+
+=> Scale Up and Scale Down 
+
+- Resources increasing and decraeasing based on demand and supply!
+
+AWS Console : 
+
+Select EC2 : Stop instance to Scale
+
+Actions - Insatcne Setting - Change Instance Type - Select Type from dropdown!
+
+We can not Change Instance Type unless our Insatnce has stopped!
+
+=======================
+
+=> EBS : Volume : Elastic Block Store
+- We can create volume without EC2
+- We can seperateely attach the instance to the volume created!
+
+-----------------------------------------
+
+Create Volume :
+- Create volumeInfo - gp2  - size 20 GB - Availability Zone (same as an EC2 insatnce availibility zone) - Create Volume 
+-----------------------------------------
+
+Select Volume - Action - attach volume 
+-----------------------------------------
+
+Select Volume - Action - deattach volume(make sure EC2 is stopped)
+-----------------------------------------
+
+Note : 
+
+Volume must be in the same availability zone in which EC2 is present!
+
+So if the volume and EC2 AZ is diff then we wont be able to add it
+
+So while creating the volume select the Availability Zone!
+
+- AWS has diff regions.
+- Each region has got the Availability Zone.
+Availability Zone - Incase any data center gets down so other will be active!
+
+-----------------------------------------
+=> Disk Management in EC2 
+- Search in EC2 - Create and Format HardDisk Partitions
+
+- Here the external Volume would be offline so make it online by right click on it!
+- Close that window once and again open it!
+- It will ask to initialise so cancel it first and then right click on that ext volume and initialise it!
+
+-----------------------------------------
+
+Detach Volume:
+
+- again to detach the volume EC2 must have stopped
+- Yet we can forced detach the volume!
+
+We can not detach the C drive volume from EC2 as it will cause EC2 to stop working as OS is installed in C drive
+
+=======================
+=> S3 Service :
+- S3 is way to better than Google Drive
+- Cheapest Service - Storage
+1. Used for storage
+2. S3 Quries on JSON and csv data can be run
+- We can query our data and at runtime data is presented in tabular form!
+- Mainly used for big data
+- data in the forms of json is queried with S3 select
+3. Run static websites
+
+
+Bucket - root directory (Unique name globally)
+- folders (objects)
+- files (objects)
+
+- These objects are immutable.
+
+#Name of the bucket must be unique globaly!
+
+but then sub files anf folders inside the bucket can be same which name is been used for buckets globally!
+
+- Bucket name must not contain uppercase characters
+
+- bucket name cdac is not available:
+
+=> To upload the files in parent of bucket.
+
+We can host the static website an dynamic websites (only of react) on S3 service!
+
+----------------------------------------
+=> S3 select :
+
+S3 Queries : Notre here N is the Column Number starts from 1 to n!
+
+SELECT * FROM s3object s LIMIT 5
+
+SELECT * FROM s3object s where s._2 like '%a%'
+
+SELECT s._1, s._2 FROM s3object s
+
+SELECT * FROM s3object s WHERE s._N = 'xyz'
+
+SELECT * FROM s3object s WHERE s._N like '%xyz%'
+
+SELECT * FROM s3object s WHERE CAST(s._N as INTEGER) = 1234
+
+SELECT * FROM s3object s WHERE CAST(s._N as FLOAT) > 12.34
+
+SELECT count(*) FROM s3object s
+
+SELECT s.key1 FROM S3Object s
+
+SELECT s.array1[0].key1 FROM S3Object s
+
+----------------------------------------
+
+Output setting :
+
+Output settings
+- Format
+CSV  - check this for tabular format
+JSON
+
+- CSV delimiter
+Comma
+Tab
+Custom
+
+----------------------------------------
+
+TO UPLOAD FILE AND ACCESS WITH THE LINKS :
+
+First create the bucket with the global unique name :
+
+
+=> With the link to give public access : 
+GoTo Permission : 
+1. Block public access (bucket settings)
+Must be Turned Off!
+
+Block all public access - unselect checkbox
+
+2.Object OwnershipInfo
+ACLs enabled and Save Changes
+
+Now copy URL link which can be shared publically with anyone!
+
+=======================
+
+

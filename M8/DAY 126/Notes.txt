@@ -1,0 +1,150 @@
+=======================
+=> DevOps!
+
+: Basic Requirements :
+- Must know at least one PL
+- Linux Commands (Not OS!)
+- Handson
+
+
+=> Cloud 
+=> DevOps on Cloud
+
+----------------------------------------
+=> What is Cloud Computing?
+- Cloud computing is a virtualization-based technology that allows us to create, configure, and customize applications via an internet connection. The cloud technology includes a development platform, hard disk, software application, and database.
+
+
+- The term cloud refers to a network or the internet
+
+-  It is a technology that uses remote servers on the internet to store, manage, and access data online rather than local drives. The data can be anything such as files, images, documents, audio, video, and more.
+
+
+There are the following operations that we can do using cloud computing:
+
+
+- Developing new applications and services
+- Storage, back up, and recovery of data
+- Hosting blogs and websites
+- Delivery of software on demand
+- Analysis of data
+- Streaming videos and audios
+
+----------------------------------------
+
+- CC is On demand delivery of compute power, database, storage, application and other resources via internet with pay as you go!
+
+
+- On Demand delivery : 
+
+Our Laptop has memory of 8GB, In case we need to use extra memory, we will have to extend the memory and in most of the cases we dont even use 8 GB completely so demand keeps on changin
+
+Hence to meet on demand delivery cloud computing helps and we will be charged as per the resources utilisation! 
+
+
+Compute Power incluses RAM and CPU!
+
+
+- Databases : similar to RDBMS
+
+- Storages : HD
+
+- Applications : 
+
+- pay as you go with :
+
+----------------------------------------
+
+=> Characteristics of Cloud Computing
+
+Lets say one day 1 we had below configuration :
+
+1 core CPU
+2 GB RAM
+50 GB RAM
+
+
+On day 2 we extended it to the
+
+4 core CPU
+8 GB RAM
+500 GB RAM
+
+On day 3 we extended it to the
+
+8 core CPU
+16 GB RAM
+1 TB RAM
+
+So if charges on day 1 are X athen on next day charges wil be X + 1 and then on next day it would become X+2
+
+On Day 2, charges for DAY 1 will be added which would be based on utilisation of the resources!
+
+=======================
+=> AWS :
+
+Market Share 50% > Use
+
+AWS => Amazon 
+Azure => Microsoft
+GCP => Google
+
+----------------------------------------
+
+=> HOW TO CREATE EC2?
+
+Name
+
+Instacne Type : ram cpu -> t2.Micro
+
+Key_pair : can be downloaded only once
+
+Network settings : no changes
+
+Storage : 30 GB
+
+Launch Instance
+
+----------------------------------------
+=> How to access an EC2 [Windows]
+- Search EC2 
+
+----------------------------------------
+Disable blocking pop in IE :
+Server Manager :
+Dashboard : 
+- Local Server 
+- IE Enanced Security Configuration : On ->Clcik on it -> Off -> Ok
+
+----------------------------------------
+To stop using EC2 :
+
+check EC2 -> Instance state -> stop 
+
+----------------------------------------
+Where EC2 has been created ?
+- Asia Pacific Mumbai!
+
+To be selected : 
+- North Virginia
+
+- We can use the credit given by AWS in north Virginia only
+- Anything new comes o AWS we can access it first from N Virginia
+
+----------------------------------------
+
+- We can use this from any PC and can login anywhere at any place where we can login tothe AWS!
+
+----------------------------------------
+
+
+
+
+
+----------------------------------------
+
+
+
+
+
+----------------------------------------

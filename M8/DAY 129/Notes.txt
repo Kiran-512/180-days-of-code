@@ -1,0 +1,85 @@
+S3 File Versioning :
+
+- We can save the file version and for the acharges will be diff and storage also increases!
+
+----------------------------------
+Type of Servcie Clouds :
+
+IaaS - Infrastructure as a service 
+- Raw Computing Resources 
+- Infrastructure as a Service. Infrastructure as a service (IaaS) is a cloud computing service model in which computing resources are hosted in a public cloud, private cloud, or hybrid cloud.
+- eg. EC2
+
+PaaS - Platform-as-a-Service
+- Developer facing services
+- PaaS, or Platform-as-a-Service, is a cloud computing model that provides customers a complete cloud platform—hardware, software, and infrastructure—for developing, running, and managing applications without the cost, complexity, and inflexibility that often comes with building and maintaining that platform on-premises.
+- eg. RDS 
+
+SaaS - Software as a Service!
+- Computer facing application
+- Software as a service (or SaaS) is a way of delivering applications over the Internet—as a service. Instead of installing and maintaining software, you simply access it via the Internet, freeing yourself from complex software and hardware management.
+eg.We can use IDE in cloud and other applications 
+
+----------------------------------
+=> Level of Abstraction : 
+- As we move from IaaS to SaaS,level of abstraction increases!
+
+----------------------------------
+=> SERVERLESS : 
+- ON DEMAND DELIEVRY OF COMPUTE With coimplete management of the server by cloud providers
+- What is serverless cloud computing?
+Serverless is a cloud-native development model that allows developers to build and run applications without having to manage servers. There are still servers in serverless, but they are abstracted away from app development.
+
+Basically,
+
+Serverless computing is cloud computing models in which the cloud providers(aws/azure/Google Cloud Platform) allocates resources on demand taking care of the servers on behalf of the user(Cloud consumers)!
+
+- Below things come under abstract server management which is done by the cloud providers:
+- Provisioning
+- Maitaining
+- Scaling 
+
+- There are still servers in serverless but they are abstract way from it!
+
+=> Lambda functions used for the execution : 
+- λ1......λn
+
+-> Below two functions runs in background :
+- LightsailMonitoringFunction
+- MainMonitoringFunction
+
+demo function code :
+
+exports.handler = async (event) => {
+    // TODO implement
+    
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Hello from Lambda!, Welcome to the serverless World'),
+    };
+    return response;
+};
+
+
+What ever input that we used to pass thru the console that we can pass it to the event and those events will be sent to the node js 
+
+----------------------------------
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.1</version>
+    <scope>test</scope>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------

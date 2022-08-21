@@ -1,0 +1,117 @@
+Linux Instance
+-----------------------
+Same as windows only difference is to change the OS(Amazon Linux)
+Configure Storage for linux 8 and windows 30 by default-->Launch
+=================================
+Create Bucket:
+--------------------------------
+Search for S3 bucket or select from below given options
+Create Bucket-->Bucket name should be unique-->Object ownership-->Click on ACLs enabled-->
+-->Unckeck block public Access-->tick for acknowledgement-->create bucket
+-->click bucket name
+***
+-->upload if we want to add any file(preferably html)--> Add file-->Drag and Drop or can browse-->upload
+-->Select file-->Copy URL-->Paste in our Browser
+for CSV file-->Select file-->Actions-->run sql query-->(File type will automatically get selected)-->Select from template and append
+
+Bucket versioning:
+---------------------------------
+Click on bucket-->Properties-->Bucket versioning-->Enable-->ON show versions
+For deleting bucket we need to first empty it
+===================================
+Lambda:
+---------------------------------
+Click on lambda from options or search for it
+Create Function-->Author from Scratch(if you know coding better)/Use a blueprint
+Type Hello in bluprints-->Select code and Configure
+Keep architecture as it while creating function
+execution Role-->use an existing role-->select lab role from dropdown
+Deploy is any changes made
+Test-->Create new event-->Give any name-->Save-->test(will get response)
+
+Delete Function-->Select-->action-->Delete (Never Delete those two functions which are alrady there)
+====================================
+
+To see logs
+search for cloudwatch-->Logs-->Log Group-->Click on our file
+====================================
+
+Docker:()
+-------------------------------------
+Click on EC2-->create t2 large instance of linux-->Go on Mbaxterm-->
+Mobaxterm=>SSH-->Copy paste public IP-->Specify Username Tick and give name-->
+advance ssh setting--> add key .pem file
+
+Now we are in terminal
+sudo su: cmd to go in root user
+yum install docker: to install docker
+type y = docker will get installed = have patience
+service docker start: cmd to start docker
+mkdir demo_docker(Sample file name)
+cd filename: to go into file 
+vi Dockerfile press enter
+type i to insert
+FROM tomcat : type it 
+press Esc  and type :wq and enter
+ls: cmd to see if docker file created
+docker build -t tomcat_1.0 . :to build docker file in current directory
+docker run -d -p 8080:8080 tomcat_1.0 ==> on clicking we will get one unique id below it
+docker ps : to see container id etc after we run docker
+
+*add inbound rule to see port number 8080 or to change it , go in instance security grp inbound rule,
+ custom TCP port range 8080 anywhere ip4 and save 
+
+*To see if our tomcat is running or not: copy instance ip and paste it in browser followed by :8080
+
+*Now to get your war file on linux terminal go in our bucket-->objects-->Copy s3 URI
+ 
+*For I Am Role-->select your Instance --> Actions-->security-->Modify I am role-->select EMR EC2 default--> Update
+
+*now in mobaxterm
+aws se cp s3://rightclick to paste s3 URI which you copied
+
+ls:to check your docker file
+
+vi Dockerfile: type
+type i
+COPY war file name (space)/user/local/tomcat/webapps/: type in terminal--> ESc :wq
+
+docker build -t sample_1.0 . :to create sample file
+
+docker image ls: to check docker images
+
+docker run -d -p 8080:8080 sample_1.0: to run docker
+first stop docker : docker stop right click to paste container id (get container id by docker ps)
+now run docker 
+
+Now in our browser to run our files
+===================================================
+
+DevOps:
+----------------------------------------------------
+Create t2 large instance for linux
+then follow ssh mobaxterm steps
+
+now in terminal(If we already have our docker created)
+service docker start
+docker network create jenkins: to create jenkins network
+copy paste the code given on day 07 command 07 of docker file content
+copy paste command 07 then again select only and right click
+
+vi docker file
+i
+copy paste the code given on day 07
+
+docker build -t myjenkins-blueocean:2.346.3-1// command 8 of day07
+
+copy paste command 09 then again select only and right click 
+if error change the port number
+
+docker ps
+
+docker logs jenkins-blueocean (or container Id)
+
+on your browser:
+
+
+

@@ -1,0 +1,165 @@
+=============================
+
+- When ever EC 2 stops public IP will be changed and hence we will have to download RDP file each time we restart the EC2!
+
+
+- SO far we have learnt how to create and access windows EC2
+
+- EC2 Public IP 
+- username
+- password
+
+
+Download SSH clients any of th e below :
+Linux SSH
+Putty
+Moboxterm
+Windows SSH
+
+
+
+Remote Login :
+RDP - Remote Desktop protocol 
+Its in the NV and we are here in mumbai so remote login
+
+To login we need IP of ECE and user name and password!
+
+
+=> PASSWORD CAN BE EASILY HACKED WITH Brute Force algorithm with various possible combinations of letters digits and symbols!
+
+
+.PEM FILE => PRIVATE kEY
+
+=> To remote login for any linux
+
+=> ssh -i <Private key path> username@public i/p
+
+username for amazon linux is : ec2-user
+
+
+username guide :
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
+
+make privat ekey read only as even if any signle character added tothe key will destroy that key!
+
+chmod 400 key_name.pm
+
+ec2-user
+
+
+User session-> right click -> edit session > change the IP
+
+We can also do remote login with the MobaXterm_Personal_22.1 appliaction!
+
+=============================
+
+Cloud Security :
+
+Firewall :
+=> Inbound and Outbound rules : 
+
+AWS
+Security group  
+
+-> EC2 has firewall {windows}
+
+Incoming traffic ill go to security groups first and then after checking whether its following  the rules or not its entry will be allowed!
+
+Port 22 : When we use SSH PORT 22 IS UTILISED AND Opened
+
+Edit Inbound Rules :
+- To limit the acess to the EC2
+
+Network Setting :
+Select existing security groups :
+
+LAB : 
+- Make an EC-2, Windows!
+- Install tomcat
+- Deploy web app in tomcat
+- If needed open tomcat port in ASW security group
+
+
+Access from any laptop with below URL :
+<public-ip> : <portno> / application 
+
+
+Cloud trail and cloud watch : service used to track and maintains the logs
+
+
+=============================
+=> RDS : Relational Database service 
+
+Connectivity
+YES - TO ACCESS IT OUTSIDE OF THE AWS
+
+PASSWORD : 1xITmjVx0H7uwJeZzi1f
+
+
+In MySQL Client : // created while creating RDS
+
+IP Address : database-1.cgdcsygolpzt.us-east-1.rds.amazonaws.com
+Username : admin 
+Password : 1xITmjVx0H7uwJeZzi1f
+
+
+
+=> DBeaver 
+Used for all RDBMS 
+
+
+
+=============================
+
+=> EC2 Charges :
+- Eevn fi we stop EC2 isntance then also we gets charged for using HD as RAM and CPOU will be freed for other users but then the ROM in which we are storing the data is not freed and kept for us when to start EC2 again!
+
+- So we are charges for the storage which is very minimal almost .0001 $ per GB for 24 hrs
+
+- and also we are charges for the license of OS in case of windows which is kept in the ROM!
+
+- for the linux we are not charged!
+
+=> RDS costing
+Mysql -> Free
+ram/cpu -> Free
+Storage -> Charged
+
+
+=============================
+=> Tomcat deploy : 
+- https://www.baeldung.com/tomcat-deploy-war
+
+
+=============================
+
+=> Security Groups
+Inboud calls
+Outbound calls
+
+
+=> Deploy the application on EC2 with the help of tomcat
+
+=> Elastci IP 
+
+=============================
+
+
+IQ : Is Cloud secure ?
+- Secuirty depends on developer
+- Cloud just gaurantee service is running
+- security groups and VPC configurations is completely given to the developers!
+
+
+
+
+
+
+
+
+
+
+
+
+

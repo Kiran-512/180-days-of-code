@@ -1,0 +1,217 @@
+
+Docker :
+
+- In Dockerfile below commands are used :=>  
+FROM Ubuntu
+RUN :- Run any linux commands (build hota hai to chlta hai ye command)
+EVN :-Set environment variable i.e. JAVA_HOME
+CMD :- Linux command to run
+COPY :- copy lockal file to docker container
+
+EXPOSE :- Exposes specified port tothe hostmachine, used to avoid to mention port No as 8080:8080
+eg. EXPOSE  8080 =>Expose port no 8080 outside of the contianer i.e. make it public accessile by anyone from outiside of the container!
+
+
+=================================
+
+JENKINS : 
+
+CI/CD :  
+
+- Continous Integration and Continous Delivery/Deployment!
+- It's a methodology of SLDC
+
+
+Pipeline : FCFS Deveelopment in stages
+
+Before Continous Integration :
+- Developer developed some code and deployed it on GitHub.
+- Code is integrated from diff developers
+- And after this at the time of testing if some isue or error comes then developer gets the response from them and then at that time developer is not free to check thousadns of lines, as he is busy at some diff task
+
+To resolve this issue CI comes into the picture!
+
+
+CI consiste of belwo three things :
+Build - Test - Deploy
+
+Here once developer push his smaller code of 100 lines let's say, into repo then that code will be build an dtested and deployed.
+And developer will get the immidiet response, rather than writing entire code as in earlier case!
+
+Continous Build + Continous Test  => CI
+
+
+VCS  => Build => Unit Test => Deploy => Auto Test => Production environment Deploy => Measure and validations!
+
+And feedback is send from each of these steps to the previous stages!
+
+{
+Plan
+Code
+} -- GitHub/SubVersion
+{
+Build
+Test
+}-- Selenium Junit
+
+JENKINS - Automatic propogation of task ahead in the next stages in the pipeline // Heart of the DevOps
+
+{
+Deploy
+Operate
+}-- Cheff Puppet
+{
+Monitor
+}-- Nagios
+
+
+INTEGRATION TOOL :
+Bamboo
+Travis CI
+Buildbot
+
+All these are the paid but JENKINS is Open Sopurce!
+----------------------------------------------------
+JENKINS :
+- Open Source, wrutten in Java
+- strong community support and alot of pluggins are available
+- first choice tool for CI
+
+- Automates the entire SDLC process
+
+- Jenkins was originally developed by SUn Microsystem under the name Hudson in 2004
+
+- Oracle after taking over SM, they seperated  Jenkins and Hudson
+
+- Runs on any OS
+
+- Whenever developer Writes a code, we integrate all that code of all developers at that time and we build, test and deliver/deplopy to the Client
+This process is called CI/CD
+
+
+=> WorkFlow of Jenkins :
+-  Once the developer push his code in GitHub Jenkins pulls that code and send it to Maven to biuld
+- Once build is done Jenkins pull that code and send to selenium for testing
+- Once testing is done then jenkins will pull that code and send to Artifactory as per the requirements and so on...
+
+Artifactory - Achriving purpose
+
+- We can also deploy with the jenkins
+
+
+Plugins :
+- Mouse is connected to PC via some port called plugin, In a similar way we can connect JENKINS with the other tools tooperate smoothly
+- Plugin to connect with the GitHub
+- Plugin to connect with the Maven
+- Plugin to connect with the Selenium
+- Plugin to connect with the Junit
+
+
+Advantages of Jenkin :
+- It has lot of pluggin
+- We can write our own pluggins
+- We can use Communitu pluggins
+- Its not just a tool, It is framework and can do whatever we want.All we need is just a plugin
+- We can atatch slaves ( Nodes ) to Jenkins master
+- It instruct other slaves to do the jobs, its slaves are not available then jenkins itslef does that job
+- Core server replacement
+- can create label
+
+----------------------------------------------------
+
+Steps to install Jenkins server on EC2 : 
+
+Sudo su 
+
+Yum install docker -y 
+
+Service start docker 
+
+docker network create jenkins 
+
+docker run \ 
+  --name jenkins-docker \ 
+  --rm \ 
+  --detach \ 
+  --privileged \ 
+  --network jenkins \ 
+  --network-alias docker \ 
+  --env DOCKER_TLS_CERTDIR=/certs \ 
+  --volume jenkins-docker-certs:/certs/client \ 
+  --volume jenkins-data:/var/jenkins_home \ 
+  --publish 2376:2376 \ 
+  --publish 3000:3000 \ 
+  docker:dind \ 
+  --storage-driver overlay2 
+
+Vi Dockerfile 
+
+
+Docker file content : 
+FROM jenkins/jenkins:2.346.3-jdk11 
+USER root 
+RUN apt-get update && apt-get install -y lsb-release 
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \ 
+  https://download.docker.com/linux/debian/gpg 
+RUN echo "deb [arch=$(dpkg --print-architecture) \ 
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \ 
+  https://download.docker.com/linux/debian \ 
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list 
+RUN apt-get update && apt-get install -y docker-ce-cli 
+USER jenkins 
+RUN jenkins-plugin-cli --plugins "blueocean:1.25.6 docker-workflow:1.29" 
+
+docker build -t myjenkins-blueocean:2.346.3-1 . 
+
+docker run \ 
+  --name jenkins-blueocean \ 
+  --detach \ 
+  --network jenkins \ 
+  --env DOCKER_HOST=tcp://docker:2376 \ 
+  --env DOCKER_CERT_PATH=/certs/client \ 
+  --env DOCKER_TLS_VERIFY=1 \ 
+  --publish 8080:8080 \ 
+  --publish 50000:50000 \ 
+  --volume jenkins-data:/var/jenkins_home \ 
+  --volume jenkins-docker-certs:/certs/client:ro \ 
+  --volume "$HOME":/home \ 
+  --restart=on-failure \ 
+  --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \ 
+  myjenkins-blueocean:2.346.3-1 
+
+Docker ps 
+
+<ec2-public_ip>:8080 
+
+Command to find jenkins password  
+
+docker logs jenkins-blueocean 
+
+
+here jenkins-blueocean- name fo the jenkins container!
+
+
+=========================================
+
+MAVEN : 
+
+- Its NOT JUST a build tool, It's a project management tool
+
+build => Compile, Code Review, 
+
+Java Project Structure :
+Source code
+Test code
+Project structure(assetss, directories, Resources etc.) 
+Dependecncies/Library
+Configuartion
+Task Runner - Build, Test, Run
+Reporting  
+
+------------------------------------------------------------------
+
+
+
+
+
+

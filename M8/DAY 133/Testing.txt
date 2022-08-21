@@ -1,0 +1,100 @@
+==============================
+Jira Tool :
+
+Test Mangaement Tools : 
+
+Bug Reporting and Tracking Tools : 
+
+Automation tools : Selenium
+
+Agile tools : designed to automating the agile process and tracking the agile task!
+
+Agile tool :
+- JIRA
+- VersionOne
+- TeamCity
+
+=> Development =>  Testing => QA
+
+- JIRA Is a  Agilemanaegemtn tool :
+- If we install plugin we cna also do test management and bug tracking!
+
+- JIRA Workflow :
+Project :
+
+Sprints => Stories and Epic => Task => spints will go for 3- 4 weeks => Close story => Close Epic => Close sprint
+
+
+Cloud :
+=> Pro ( Licensed )
+=> Free Version 10 users/30 days
+
+Create project in Jira
+Add users in Jira
+
+Setting ( right corner top )=> User Management => Add user's Email ID's = > Invite Team Mmbers 
+
+===== High Level
+
+Create Project First => 
+
+Create Backlog => Epic => Stories
+
+Create Sprint => Add Stories => start Sprint => Add task for every story
+
+===== Low Level
+
+Click on Backlog => Version -> Version Name -> Descritpion and start and end date
+
+
+Issue type - task, stories, spic, bug => each object is issue in jira
+
+.
+.
+.
+.
+Will be Continued...
+
+
+
+
+
+
+
+
+
+==============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+==============================
+
+
+
+
+
+
+
+
+==============================
+
+
+
+
+
+
+
+
+
+
+==============================
