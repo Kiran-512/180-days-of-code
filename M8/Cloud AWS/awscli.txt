@@ -16,9 +16,9 @@ Cloud Access
    AWS CLI:   
    Copy and paste the following into ~/.aws/credentials
 [default]
-aws_access_key_id=ASIAUNHIZ2BRSMTZ666P
-aws_secret_access_key=1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
-aws_session_token=FwoGZXIvYXdzEPP//////////wEaDFBEkcsD+TfhX1Ym3yLJAcZgn/jH+DzCJVjNuJdywg9YTgueEBmRBwg7v493m9WLlY9JQaZ2HxAC38pzPv7VWxvMSluNa+k7cAtzvZFPkCzs4ysCZolnNHQ5at02f0AtW213cmsVsf5LQ4PIRerr94Z6Av18/Ix+JvxJdmbWfchX4TkW9ZtQaJHDTwtSMOTtKnhrrEmAoVujYgqhUbgrnCRbL6dnq3pHlyddfQW5Cz07kdWTAzc0B9kfv6dJZYKQWSH05AKz5p6O9pghgcZgnV6/SSfN9mLqFCij9YeYBjItEXKPQ87Hw9SkrZMDWiSPLAtXdX3aEFBeTLEvu+yBkUy++k0um1M3TTxOkstp
+aws_access_key_id=ASSDASDASD2BRSMTZ666P
+aws_secret_access_key=1/T5TwEjcmmsadDMDKASFHKJssdasdDNKdn4/IOy/bZNwp0M
+aws_session_token=FwoGZXIvYXdzEPP/////////jH+DzCBmRBwg7v493m9WLlYJVjNuJdywg9YTgueE9JQaZ2HxAC38pzPv7VWxvMSluNa+kzs4ysCZolnNHQ5at02f0AtW213cmsVsf5LQ4PIRerr94Z67cAtzvZFPkCAv18/Ix+JX4TkW9ZtQaJHvxJdmbWfchDtKnhrrEmAoTwtSMOTVujYgqhUbgrnCRbL6dnq3pHlyddfQW5Cz07kdWTAzc0B9kfv6dJZYKQWSH05AKz5p6O9pghgcZgnV6/SSfN9mLqFCij9YeYBjItEXKPQ87Hw9SkrZMDWiSPLAtXdX3aEFBeTLEvu+yUy++k0uBkTm1M3TxOkstp
 
 
 => These key are created for each new sessions!!
@@ -31,6 +31,8 @@ EG.
 
 aws s3 ls s3://path of bucket
 
+This will display all the objects inside the bucket!
+
 ----------------------------------------------------------------
 
 
@@ -38,8 +40,8 @@ aws s3 ls s3://path of bucket
 
 [root@ip-172-31-95-246 demo_docker]# vi ~/.aws/credentials
 [root@ip-172-31-95-246 demo_docker]# aws configure
-AWS Access Key ID [None]: ASIAUNHIZ2BRSMTZ666P
-AWS Secret Access Key [None]: 1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
+AWS Access Key ID [None]: ASSDASDASD2BRSMTZ666P
+AWS Secret Access Key [None]: 1/wEaDFBEkcsDDSASDgHJGhgjHGGjgj3yLJAcZgn
 Default region name [None]: us-east-1
 Default output format [None]: json
 [root@ip-172-31-95-246 demo_docker]# ls ~/.aws/
@@ -53,8 +55,8 @@ output = json
 region = us-east-1
 [root@ip-172-31-95-246 .aws]# cat credentials
 [default]
-aws_access_key_id = ASIAUNHIZ2BRSMTZ666P
-aws_secret_access_key = 1/T5TwEjcPYPpDqHIMAmwNDNKdn4/IOy/bZNwp0M
+aws_access_key_id = ASSDASDASD2BRSMTZ666P
+aws_secret_access_key = 1/wEaDFBEkcsDDSASDgHJGhgjHGGjgj3yLJAcZgn
 [root@ip-172-31-95-246 .aws]# aws s3 ls s3://demobucket-kiran/
 
 ====================================
