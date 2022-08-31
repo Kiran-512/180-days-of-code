@@ -35,7 +35,7 @@ EXCEPTION HANDLING :
 
 - Exception class is the base class either directly or indirectly
 1.SystemException
-2.ApplicationException
+2.ApplicationException (CUSTOM EXCEPTIONS INHERIT THIS CLASS)
 
 1.SystemException
 - base class for all .net related Exception
@@ -88,7 +88,7 @@ Obj.P1 = 100/10
 
 ----------------------------------------
 #try-catch
-- We must have wither catch or finally with the try
+- We must have either catch or finally with the try
 
 - if there is no exception 
 
@@ -170,7 +170,6 @@ Console.WriteLine("finally");
 }
 
 #Note : run it seperately and not in VS
-
 
 eg. When we open connection for db connectivity
 so when connection is done adn ops gets over there the connection needs to be closed which is closed in the finally 
@@ -408,22 +407,27 @@ objects of those degeldate class are the events eg. click etc.
 
 -------------------------------------------------
 => Convention for creating the delegate :
-- if the event is x, then delegate would be called as x.eventHandler;
+- if the event is x, then delegate would be called as xeventHandler;
 
-- Events may have extra information to be passed as an params 
+- All event delegates have a void return type!
+- Events may have extra information to be passed as an params which depends on Developer!
 
 eg.
 - When the value of P1 is invaid then rasie the event and noparams are passed at this moment
 STEP 1: 
-    public delegate void InvalidP1EventHandler();
+	
+	public delegate void InvalidP1EventHandler();
 
 STEP 2: 
-public event InvalidP1EventHandler InvalidP1;
+
+	public event InvalidP1EventHandler InvalidP1;
+
 Note : Here, event is optional but as per convetion msut be added
 
 STEP 3: 
 - RAISE AND EVENT WHEREVER WE NEED;
-    InvalidP1();
+
+	InvalidP1();
 
 ASSUMING ABOVE CODE IN WIRTTIE BY DVEELOPER INSIDE CLASS -> Class1  
 
@@ -447,7 +451,7 @@ class Program{
 	}
 
 
-	static void o_InvalidP1()
+	static void o_InvalidP1() // method naming convetion here is object_Event()
 	{
 	Console.WriteLine("Event Handler code");
 	}
@@ -510,31 +514,7 @@ Kids are not allowed here!
 Dont worry you can re apply post completion of your age, 18!
 0
 
-==================================================
 
-
-Asynch with delegates :
-
-When we are using delegates are using system created threads and
-in multithreading we are creating our own threads by extending the Thread class
-
-
-=> Two imp method 
-1. Without the return type of the function :
-Action o = Display;
-o.BeginInvoke(null,null);
-
-2. With the return type of the function :
-Func<string,string> f = Display;
-o.BeginInvoke("return type is string",null,null);
-
-
-=> What if async function returns a value!
-- In case of function return s some value, and when we use it in Asynch Mode,
-That time callbackfunction is used which 
-will be called on completion of the function 
-called by the delegate in asynch mode and then 
-callbackfunction will be called which will return the value to be returned by the function.
 =======================
 
 => Non-Critical Way of informing to the User : Events
@@ -692,4 +672,29 @@ static void CallBackFunc(IAsynchResult ar){
 Console.WriteLine("Callback func called");
 
 }
-=======================
+==================================================
+
+Asynch with delegates :
+
+When we are using delegates are using system created threads and
+in multithreading we are creating our own threads by extending the Thread class
+
+
+=> Three  imp method 
+1. Without the return type of the function :
+Action o = Display;
+o.BeginInvoke(null,null);
+
+2. With the param to the function :
+Action<string> o = Display;
+o.BeginInvoke("param is string",null,null);
+
+3.=> What if async function returns a value!
+- In case of function return s some value, and when we use it in Asynch Mode,
+That time callbackfunction is used which 
+will be called on completion of the function 
+called by the delegate in asynch mode and then 
+callbackfunction will be called which will return the value to be returned by the function.
+
+==================================================
+

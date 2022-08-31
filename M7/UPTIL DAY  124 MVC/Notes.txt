@@ -103,7 +103,6 @@ App_Start
 
 - All the setting realted to the web application will be  made in the web.config
 
-
 global.asax.cs
 Application_Start(){}// when the first req comes to the pplication after deployment, this method is called!
 
@@ -190,8 +189,6 @@ inputs from form collection providd the namses for the input fields
 must match with the properties of the  Model Class.
 
 
-
-
 =================================
 
 @Html.AntiForgeryToekn()
@@ -199,11 +196,8 @@ must match with the properties of the  Model Class.
 - To validate the 
 - generates the hidden inputs and validates the inputs in the form
 
-
-
-
 =================================
-=> Layes in Model :
+=> Layers in Model :
 
 BOL -> Data -> DB
 
@@ -215,12 +209,10 @@ BOL -> Data -> DB
 - Class that has stuff in it that is required by the view 
 and not becasue entity requires it!
 
-
 eg.
 
 public  class Employee{
  
-
 Inumerable<SelectListItem> Departments{set;get;};
 }
 
@@ -307,8 +299,7 @@ that mirror the real world!
 eg.
 - Employee class with the listOfDepartments!
 
-Ienumerable<SelectListItem> var{se;lget;};
-
+Ienumerable<SelectListItem> var{set;get;};
 
 
 Model Binding : Input in the view have the same name as that oif the properties of the Model!
@@ -361,9 +352,8 @@ state management :
 
 1.} ViewBag : 
 - values in viewbag can be access from veiw to layout and from action to view
-
 - values of viewBag are lost if views are returned or sendRedirect!
-
+- On sendRedirect if we print the viewbag value no error if we try to assign viewbag value then error!!!
 
 ViewBag.message ="aaa";
 @ViewBag["message"]
@@ -402,7 +392,7 @@ Employee emp = (Employee)ViewData.["key"]
 - is a dictionary object where key are string and values will be objects!
 
 - ViewData is available only for current req.
--value is NOT lost on a req redirect!
+- value is NOT lost on a req redirect!
 
 and its true for as many redirect as possible!
 
@@ -495,14 +485,4 @@ Code First  - Sys Architech
 Model First - 
 
 
-
-
-
-
-
-----------------------------------------
-
-
-
-----------------------------------------
-----------------------------------------
+=======================

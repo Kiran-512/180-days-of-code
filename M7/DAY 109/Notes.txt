@@ -1,9 +1,8 @@
 =======================
-=> Default Method Implementation :
+=> Default Method Implementation in Interface: In dotNet Core only!
 
 interface I1
 {
-
 M1();
 M2();
 ------
@@ -18,7 +17,7 @@ M2(){}
 
 
 If M3() added in Interface, later on then it will 
-create errorsin the classes which implemented the interface!
+create errors in the classes which implemented the interface!
 
 Hence interafce method could have an optional code body and 
 it's called as default implementation of the interface method
@@ -29,14 +28,22 @@ This is introduced in the .net core!
 
 c# version is 7.3 which doent not supports the defaut implementtation of interface methods
 
-version 8 onwards its supported!
+version 8 onwards its supported! which is part of .net core 3.0
 
 But now theere would be ambuiguity in case of multiple inheritence with the inheritence!
 
 Becasue if two interfaces having the same methods with some default implementation, the implementing class gets ambiguity which one to implement!
 
 This concept is brought in just to support for API's writer if brought later on during the project!
+----------------------------------------
 
+default method implementation is optional for a class!
+
+and if default method is not implemeted by a class then that method won't be available to the ref type of that class!
+
+but with typecasting ref variablke of a class to Interface ref we can access that method!
+
+eg. (o as Person).M3()
 
 =======================
 //Code 1
@@ -117,28 +124,92 @@ namespace InterfacesInCore
         Object O;// Object
 
     }
+=======================
 
+Ref type :
+- class and its variation are of ref types (classes/ interfaces/ delegates/ arrays / object / string class)
+- memory allocation is on heap
+- and ref to the object is on stack
 
+delegate - similar to the function pointer in c++:
+
+Value type :
+- stored on stack
+- all struct/enum are of value types
+- int is also struct!
+- all enums are interanllys tored as intergers and all inters are structs!
+
+----------------------------------------
+
+Exception : Even though string is a ref type it behaves like a value type!!!
+
+string o1 ="100";
+string o2 ="200";
+o1=o2;
+o2="300";
+Console.WriteLine(o1);//200
+Console.WriteLine(o2);//300
+
+=======================
+=> ref : 
+- used with arguments in funcitons
+- must be used in both the places parametrs and arguments to the function!
+swap(ref int a,ref int b)
+{
+temp = a;
+a=b;
+b=temp;
+}
+
+-------------------------------
+
+=> out :
+- must be used in both the places parametrs and arguments to the function!
+
+Similarity :
+- changes made in the fucntion wil be reflecting back in the calling function!
+
+Difference :
+- we dont needs to initailise the values for out varibale in calling function!
+- even if assigned then out variable looses initail values in called function!
+
+- ref variable must be initialised and they don't loose the initial value!
+
+-------------------------------
+=> in : 
+- read only variable
+- must be used in both the places parametrs and arguments to the function!
+- don't loose it's initial value!
 
 =======================
 => Struct :
-- No inheritence allowed in struct
-- Parametersless constructors are not allowed in structs!
+
+- No inheritence allowed in struct, all concepts of inheritenceare not allowed in context of struct like virtual, override!
+- Excplicite Parametersless constructors are not allowed in structs!
 - Struct are of VALUE TYPES and Stored on the stack
+- COSNTUCTOR WITH THE PARAMATERS MUST INITIALISES ALL THE VARIABLES!
 
 When to use :
 - When inheritence is not required
-- 
+- struct is always faster than class!
 
 
+below is allowed as int is also a struct!
 
+int i = new int();  is similar to "int i"!
+
+here value of i is 0.
+
+- Implicite no parameter constructor initialsing the struct with the default values!
 
 =======================
+
 => enums : 
+
 Enumarated values or constant used in the code
-- useful in writing and making code simpler to understand   
+- useful in writing and making code simpler to understand
 - easier to write and maintain
-- byf=default all enums are struct
+- by default all enums are struct
 e.g. switch case with passing key as an interger makes difficult if we replace that with enum its looks easier and simpler
 
 -> Values stars from 0 and next value will be 1 plus ealier
@@ -171,12 +242,13 @@ static void Greeting(TimeOfDay t)
 	   console.WriteLine("Good Evning
 	else if(t == TimeOfDay.Night)
 	   console.WriteLine("Good Night");
-
 }
 
 =======================
-=> NullableTypes :
-values types can not store the null directly but we can store it by amking below changes 
+
+=> NullableTypes : 
+- It's a value type
+- Value types can not store the null directly but we can store it by making below changes 
 
 int? i;
 i =10;
@@ -187,22 +259,30 @@ but!!
 int j;
 j=i; // Error as int i is of nullableType
 
-so to make it work :
+so to make it work : 
+=> 5 WAYS OF ASSIGING NULLABLE TO INT!
+1 ]
+---------------------------------------
 j =(int) i;
 
+
+2 ]
+---------------------------------------
 but what if 
 
 i = null
 
-j= (int)i;// Error : Not allowed with typecast too  
+j= (int)i;// Error : Not allowed with typecast too
 
 Soltuion :
 
 if (i!=null)
      j=(int)i;
 else
-     j=0; 
+     j=0;
 
+3 ]
+---------------------------------------
 => nulltableTypes has two PROPERTIES : 
 HasValue - return true if i is not null
 HasValue - returns false if i is null
@@ -214,6 +294,9 @@ if (i.HasValue)
 else
      j=0; 
 
+
+4 ]
+---------------------------------------
 Much Better Soltuion : 
 
 - If i has a value then assign to j or else assign default value as 0
@@ -222,24 +305,29 @@ j =i.getValueOrDefault();
 - If i has a value then assign to j or else assign default value as 10
 j =i.getValueOrDefault(10);
 
+
+5]
+---------------------------------------
 Another Solution :
-=> null coalescing Operator 
+=> null coalescing Operator
 - If i has a value then assign to j or else assign default value as 10
-j=i??10; 
+j=i??10;
+
 
 =======================
+
 Disposed Method in destrctor : 
+
 .net follows non deterministic finalisation we 
 wont write destructor but we will write dispose 
 and its in the interface called Idisposable
 
 - Its recommended not to use destructor method instead use disponse method
 
-- close the file or connections 
+- To close the file or connections 
 
 
 => Why are we doing it?
-
 
 
 => How we doing it?
@@ -255,7 +343,8 @@ static void Main(String[] args){
 Class1 c = new Class1();
 
 c.Display();
-c.Dispose();
+c.Dispose();// called method after we are done with the use of c
+
 Console.ReadLine();
 
 }
@@ -265,6 +354,7 @@ Console.ReadLine();
 public class Class1(){
 
 Console.WriteLine("class1 Cons");
+
 }
 
 
@@ -279,12 +369,15 @@ Console.WriteLine("Called Dispose method");
 Q.Why we have disponse inside Idisposable interface 
 and why can't we have this method directly inside the class
 -> 
-using(Class1 o = new Class1())
-{
-d.Display();
-}
 
-here Class1 implements the IDisposable and hence on the end of using block
+using(resource){}
+
+using(Class1 o = new Class1())
+   {
+	o.Display();
+   }
+
+here, Class1 implements the IDisposable and hence on the end of using block
 i.r after } 
 dispose method will be automatically called!
  
@@ -292,14 +385,17 @@ And thats why Disponse method is there in the IDisposable Interface and which
 every class implements that interface Dispose 
 method will be called on ending of Using block
 
-
 => isDisposed boolean flag
 
-Even if the object is disposed then also if we use the object it will call another method
-so to avoid this we can maintaint eh boolean glag and make it it tru once its disposed!
 
+Flaw in .net dispose method :
+
+Even if the object is disposed then also if we use the object it will call another method!!!!!
+
+so to avoid this we can maintaint eh boolean glag and make it it tru once its disposed!
 
 =======================
 
 Reminder to Sir!
 => NullableTypes and generic connection after generic topic is over!
+

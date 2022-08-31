@@ -1,0 +1,58 @@
+Filters in ASP.Net :
+---------------------------------
+
+Authentication
+- deals with the security Mechanism
+- 
+
+Auhtorisation
+- also deals with the security Mechanism
+
+
+Action
+Result
+Exception
+
+
+---------------------------------
+=> Annotations Advanced  
+
+[Authorize]
+[AllowAnonymous]
+[NonAction]
+
+
+
+
+
+
+---------------------------------
+
+Authentication Mode 
+- None : Genral p[uporse infomration page but user is not required tologin
+
+- Windows : intranet with the limited user nos and those users are managed by the admins! eg. Admin in Windows
+
+- Forms : websites were Login forms are provided
+
+- Passport : details (ID/Pass) are stored in the passport by the service and allows you to login or registere, Paid Option
+
+- Feterated Authentication : group of sites eg. gmail, without having to login in gdrive, gdocs, gsheet, photos so the related applications are accessed with the help of federated authentication, here basically a tickit is given to the user in the forms of cookies and when ever that users goes on any website that cookie will be cheked and login access will be provided!
+
+eg.Cofiguartion changes in  Web.config file
+
+<system.web>
+<authentication mode="Forms">
+
+<forms loginUrl="~LoginExample/Login" timeout ="20"/>
+
+</authentication >
+</system.web>
+
+---------------------------------
+Persistent Cookie - Cookie which wont get deleted when we close the browser!
+
+FormAuthentication.SetAuthCookie(u.UserName, true); // Persistent Cookie
+
+---------------------------------
+

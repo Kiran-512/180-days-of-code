@@ -55,34 +55,9 @@ writer.close();
 
 
 
-
-
 ===============================
 
 => Serialisation :  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -123,9 +98,8 @@ CRUD Operations!
 To Work with Insert, Update, Delete -> SqlCommand class
 
 => SqlDataReader :
-- The datareader is a connected, forwardonly, readonly set of records.
+- The datareader is a connected, forward-only, readonly set of records.
 - It is also called firehose cursor!
-
 
 - Connected : When using datareader, the connection to the database must be kept open :
 - ForwardOnly : Once it has read it it wont go backbackward, Record can be read only in one direction!
@@ -189,10 +163,12 @@ RETURN 0
 
 Changes :
 CommandType : storedProcedure
-CommandText: Stored_Procedure_Name
+CommandText: "Stored_Procedure_Name"
 
 ---------------------------------------
-=> Returning a sinle value  : ExecuteScalar()
+=> Returning a single value  : ExecuteScalar()
+
+- return the first value at 0th position
 
 cmdSelect.CommandText = "Select count(*) from Employees";
 object retval = cmdSelect.ExecuteScalar();
@@ -201,7 +177,7 @@ object retval = cmdSelect.ExecuteScalar();
 => To read Multiple Columns we must use SqlDataReader
 
 cmdSelect.CommandText = "Select * from Employees";
-SqlDataReader dr = cmdSelect.ExecuteReader();
+SqlDataReader dr = cmdSelect.ExecuteReader(); //overload is ExecuteReader(ConnectionBehaviour.ConnectionClose);
 
 while (dr.Read())
 {
@@ -240,7 +216,7 @@ Two ways to read from dr here;
 		dr.Close();
 
 ---------------------------------------
-=> MultipleActiveResultSet = true
+=> MultipleActiveResultSet = true : used to use tow readers at the same time
 
 cn.ConnectionString = @"Data Source=(localdb)\MsSqlLocalDb;Initial Catalog=JKJuly2022;Integrated Security=true;MultipleActiveResultSets=true";
 
@@ -414,7 +390,7 @@ dataGridView1.DataSource = ds.Tables["Emps"];
 
 
 ---------------------------------------
-=> RowState :
+=> RowState : UMDA
 
 - Unchanged - U
 - Modified - M
@@ -422,7 +398,8 @@ dataGridView1.DataSource = ds.Tables["Emps"];
 - Added - A
 
 
-=> WHEN ANY CHANGES MADE IN THE GRID VIEW THE CHANGES ARE OT =REFLECTING IN TO THE DATABASE
+=> WHEN ANY CHANGES MADE IN THE GRID VIEW THE CHANGES ARE NOT REFLECTING IN TO THE DATABASE
+
 - Instead, the changes are reflecting only in the dataset,
 - above rowstates are maintained in the XML
 

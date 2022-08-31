@@ -4,7 +4,8 @@
 - Anonymous class
 - Partial class
 - Partial methods
-
+- Extention methods
+- LINQ 
 
 =============================
 =>implicit variable
@@ -13,19 +14,24 @@ int a=100;
 var a =100; // implicit variable
 
 strng s ="hello";
-var s = "hello";
 
+var s = "hello";
 s = 100;//not allowed
 
 Problem :
 - Its not readable , it we want to use int then why to go for var?
  var a = (long) 100;
 
-We need var, where we dont know the type of value in complex code!!
+We need var, where we don't know the type of value in complex code!!
 there var is the best option!
 
+- can't be used for class level variable and function params and also for return types!
+- used only for lcoal variables!
+
 =============================
+
 => GetType()
+
 - method of the object type
 
 var a =100;
@@ -37,52 +43,6 @@ foreach(var item in collection)
 }
 
 :Recommended to use explicite variable  here:
-
-foreach…
-=============================
-=> Language Features 
-- Implicite variable
-- Anonymous class
-- Partial class
-- Partial methods
-
-
-=============================
-=>implicit variable
-
-int a=100;
-var a =100; // implicit variable
-
-strng s ="hello";
-var s = "hello";
-
-s = 100;//not allowed
-
-Problem :
-- Its not readable , it we want to use int then why to go for var?
- var a = (long) 100;
-
-We need var, where we dont know the type of value in complex code!!
-there var is the best option!
-
-=============================
-=> GetType()
-- method of the object type
-
-var a =100;
-Console.WriteLine(a.GetType()); // System.Int32
-
-foreach(var item in collection)
-{
-
-}
-
-:Recommended to use explicite variable  here:
-
-foreach(int item in collection)
-{
-
-}
 
 =============================
 => Anonymous Types :
@@ -95,33 +55,36 @@ var o1 = new {}; //object initialiser
 
 var o2 = new {a=10,b="string"}; 
 
+- o1,o2 are the reference types of anonymous class!
+
 => Why needed ?
-- send the link 
+- for LINQ!
 
 eg.
 
-var obj1 = {a=1,b="aaa",c=true};
+var obj1 = new {a=1,b="aaa",c=true};
 
-var obj2 = {a=2.b="bbb",c=false};
+var obj2 = new {a=2.b="bbb",c=false};
 
-Console.WriteLine(obj._) // al properties and methods at the palce of _
+Console.WriteLine(obj._) // all properties and methods at the palce of _
 
 Console.WriteLine(obj1.GetType());// AnonymousType0`3
 
 Console.WriteLine(obj2.GetType());// AnonymousType0`3
 
-# here the name is same because both the classes have paramters with teh same name :
-and 3 denotes the number of variables inside the anonym class
+# here the name is same because both the classes have parameters with the same name :
+0 denotes the first anonymous Type of the class and 3 denotes the number of variables inside the anonym class
 
 =============================
+
 => Partial class
 - We can break single class into multiple classes and then use it, 
-- Compiler will combine al the partial classes to one!
+- Compiler will combine all the partial classes to one!
 - They need to be in the same assembly or project and namespace 
-- partail classes must have the same name
+- partial classes must have the same name
+- vARIABLE AND METHODS ARE AVAILABLE FOR PARTICAL CLASSES WHEN WRITTEN Partially in the same namespace!
 
 namespace demo{
-
 
 public partial class Class1{ public int i;}
 
@@ -154,10 +117,16 @@ Uses :
 - Form class in case of Winform applications
 
 =============================
+
 => Partial Methods !!!
+- partial methods are written inside the partial class ONLY!
 - placeholder is kept for some code which will be written later 
 - for the partial method are written at that palceholder
-- partial methods are written inside the partial class only
+- Must return void
+- can not have out params
+- can be static or instace
+- implicitely private 
+
 
 partial class c1{
 
@@ -313,14 +282,15 @@ class Program{
 
 	int a =100;
 	a.Show();//100
-	ints sum = i.Add(5);//15
+	
+	int sum = i.Add(5);//15
 	
 	}
 }
 
 
 - Internally, 
-	s.Display() is changed to MyExMethodClass.Dsiaply(s);
+	s.Display() is changed to MyExMethodClass.Display(s);
 	i.Add(5) is changed to MyExMethodClass.Add(i,5);
 
 =============================
@@ -349,10 +319,9 @@ public static class MyExMethodClass{
 
 -------------------------------------------
 -------------------------------------------
-NOTE : Below Two concepts are used extensively in LINK :
+NOTE : Below Two concepts are used extensively in LINQ : 
 -------------------------------------------
 -------------------------------------------
-
 BaseClass -- ext methd
 
 DerivedClass :BaseClass  -- ext mtd also avlbl here
@@ -361,9 +330,10 @@ DerivedClass :BaseClass  -- ext mtd also avlbl here
 
 Interface -- ext methd
 
-Class1 : Interface-- ext mtd also avlbl here
+Class1 : Interface -- ext mtd also avlbl here
 
 =============================
+
 namespace ExtensionMethods
 {
     class Program
@@ -416,13 +386,16 @@ namespace ExtensionMethods
         }
         //if you define an extension method for an interface, 
         // it is also available to all classes that implement that interface
+
         public static void ExtMethodForBaseClass(this object s)
         {
             Array.Sort();
             Console.WriteLine(s);
         }
+
         //if you define an extension method for an interface, 
         // it is also available to all classes that implement that interface
+
         public static int Subtract(this IMathOperations i, int a, int b)
         {
             return a - b;
@@ -446,8 +419,9 @@ namespace ExtensionMethods
         }
     }
 }
+
 =============================
-=============================
+
 => LINQ  ->  Language Integrated Query
 
 -> Array and Colelction Similarity
@@ -467,6 +441,9 @@ Linq-Objects
 Linq-DataSet
 Linq-Xml
 Linq-Sql
+
+Common LINQ query is used!
+
 -------------------------------------------
 
 var emps = from emp in lstemp select emp;

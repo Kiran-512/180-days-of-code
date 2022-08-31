@@ -9,8 +9,10 @@ So avoid using keywords for namespaces and classes!
 ===================================
 
 Arrays : 
-- all arrays inherits from Array class
+- all arrays inherits from Array class which inherits from IEnumerable interface due to which we can interate thru array using foreach loop
 - Array class is an abstract class hence no object of it
+
+here no limitation of Array size to MAX_VALUE of int as we can use long also here....
 
 - eg. int[] arr;
  here there no inbuild class of int[], but it is creating a derived class(int[]) 
@@ -29,26 +31,32 @@ for(int i=0;i<i.Length;i++)
 }
 
 Note :
-- here, the {0} will be replaced by i, for each iteration
+- here, the {0} will be replaced by i, for each iteration // Placeholder in a string 
 - int.parse(string s) -> converst into the type int 
 
 ALTERNATIVE : Recommended but slower as this internally calls above int.Parse(string s)
+
 	Convert.ToInt32(string s);
 
 - Length is of type int, if the size of an array is larger than the int size then 
   LongLength can be used which return Long
 
+Range of signed int is :
+- 2,147,483,648 TO 2,147,483,647
+
 ===================================
 => PRINTING AN ARRAY : 
+
 1.placeholders method 
 
 for(int i=0;i<i.Length;i++)
 {
    Cosole.WriteLine("Enter arrr[{0}] : {1} ", i, arr[i]);
 }
-- here 0 and 1 is the order of placeholder and it starts from 0 we cant take 1 and 2 if there are two!
+- here 0 and 1 is the order of placeholder and it starts from 0 we can't take 1 and 2 if there are only two! But since here only two variables are used ahich are i and arr[i] => we used 0 and 1 palceholder
 
 ===================================
+
 2.without placeholder : String interpolation
 
 for(int i=0;i<i.Length;i++)
@@ -64,11 +72,13 @@ foreach(int item in arr)
 {
    Console.WriteLine(item);
 }
+
 NOTE : 
-- CAN NOT BE USED FOR ACCEPTING THE ARRAY VALUES, 
+- CAN NOT BE USED FOR ACCEPTING THE ARRAY VALUES
 - IS USED JUST TO Print the values of an array 
 
 ===================================
+
 => Array Methods : 
 
 - Methods which have <> are used with the generics concepts
@@ -79,14 +89,15 @@ NOTE :
 
 int pos = Array.IndexOf(arr,10);
 
-2.LastIndexOf();
+2.LastIndexOf(arr, index);
 
 3.BinarSearch(arr,10);
 - Array Must be sorted
+- return -1 if not found
 
-4.Clear(arr,startingPos, noOfEleemnt_to_clear_from_array);
+4.Clear(arr,  startingPos, noOfEleemnt_to_clear_from_array);
 - array elkements will be removed i.e. the elements values will be set to default values
-Array.Clear(arr,2,2)
+Array.Clear(arr,2,2) // here first two elemtns will be set to default values
 
 5.copy(arr,arr2,noOfelementToCopy)
 
@@ -94,16 +105,15 @@ Array.copy(arr,arr2,4);
 
 - While copying the elements if we gets the error on 11th, it'll stop coping the elements, and half of the elements till 10 will get copied
 
-
-=> to avoid this and to rollback after the error we can use below method :
+=> to avoid this and to rollback after the error we can use below method : Trasnactional copy method
 
 6.ConstraintedCopy(arr,0,arr2,0,arr.length)
 
-7.Array.sort();
+7.Array.sort(arr_variable);
 
-8.Array.reverse();
+8.Array.reverse(arr_variable);
 
-9.createInstace();
+9.createInstace(arr_variable);
 
 ===================================
 
@@ -123,20 +133,23 @@ arr[2,0] arr[2,2]
 
 - arr.Length
 
-- arr.Rank // number of dimentions
+- arr.Rank // number of dimentions - 2D as one comma!
 
-- arr.GetLength(0)// 0 indicates first dimention  // 3
+- arr.GetLength(0)// 0 indicates first dimention // so length of first dimention // 3
 - arr.GetLength(1) //1 indicates second dimention // 2
 .
 .
 .
-- arr.GetLength(n)
+- arr.GetLength(n) // nth dimention's length
 
 
-- arr.GetUpperBound(0); //getLength(0) - 1 
 
-- arr.GetLowerBound(); //starting index of an array
+=>  Bound methods used for index!
+- arr.GetUpperBound(0); // here 0 shows first dimention of array//GetLength(0) - 1 // last index of an array
 
+- arr.GetLowerBound(n); // starting index of an array 
+
+ [ n => is the nth dimetion ]
 
 => Iterating thru an 2D array :
 
@@ -211,9 +224,10 @@ for(int i =0;i<emp.Length;i++)
 }
 
 ===================================
+
 => Collections
 - Array can not be resized
-- Arrays are static so memory point of view arrays are not efficient
+- Arrays are static and of fixed size so memory point of view arrays are not efficient
 
 COLLECTIONS ARE MUCH ORE FLEXIBLE THAN ARRAY
 
@@ -222,6 +236,7 @@ COLLECTIONS ARE MUCH ORE FLEXIBLE THAN ARRAY
 
 
 => Generic collections
+
 - similar to Templates in C++
 
 class MyClass<T>
@@ -240,19 +255,37 @@ Main(){
 MyClass<int> oi = new MyClass<int>();
 MyClass<decimal> od = new MyClass<decimal>();
 
-oi.Swap(ref a, ref b);
+int a = 10;
+int b = 30;
+
+oi.Swap(ref a, ref b);// will work for int type as type of a and b is int 
+
 
 }
 
+Here by using generic class we saved our time to write the same code for int and decimal as we used generic class of type T!
+
+
+
 => IMPLEMENT STACK USING GENERIC 
-class MyStack<>
+
+Constraint are added by using {class myStack <T> where t : ____ }clause!
+
+class MyStack<T>
 where T : new()  // T must have no param constructor which string class dont have we cant write => string o = new string();
+
 where T : InterfaceName // T can only be a class that implements the Interface
+
 where T : ClassName // T can only be a class specified or its derived class 
+
 where T : struct // T can only be a value type
+
 where T : class// T can only be a refernce type
+
 where T : className, InterfaceName, new()// T can only combined of all the three
+
 where T : class, struct// error - there no such things which is value type and refernce type at the same time
+
 {
 T arr[];
 
@@ -265,13 +298,15 @@ arr = new T[size];
 
 Nullable and Generics :
 int? a = 100;
+
+INTERNALLY ABOVE GETS CONVERTED INTO THE BELOW LINE OF CODE!
+
 Nullable<int> b = 100;
 
 
 //Applicable only for value types
 public struct Nullable<T> where  T : struct
 {
-
 
 }
 
@@ -284,11 +319,15 @@ public struct Nullable<T> where  T : struct
 
 => Non- Generic Collections
 - All collection implements ICollection directly or indirectly
-- using System.Collections
+- ALL NON-GENERIC COLLECTIONS are available in => using System.Collections
 
 => IEnumerable
 - ICollection inherits from IEnumerable
-- All collections supportss Enumerationand hence we can use foreach lop for each collections
+- IEnumerable allows to enumerate thru an collections!
+
+- All collections supportss Enumeration and hence we can use foreach lop for each collections
+
+Even Array class also implements Enumerable! foreach(T __ in __){}
 
 => class Stack and class Queue Implements the ICollection interface
 
@@ -307,10 +346,10 @@ public struct Nullable<T> where  T : struct
 ===================================
 => ArrayList 
 
-Collection give three standar options
+Collection give three standard options
 
 Add()
-Remove() -- removeAt()
+Remove() -- RemoveAt()
 PROPERTY -> Count 
 Counts the total no of elements in the collection
 
@@ -329,12 +368,12 @@ Console.WriteLine(item);
 alist.Remove(10);
 alist.RemoveAt(0);
 
+alist.AddRange(list2); // WILL ADD ELEMENTS OF LIST2 AT THE END OF LIST1
 
-alist.AddRange(list2);
 alist.Insert(2."Kiran"); // ads kiran at 2nd index and shifts other elements
+
 alist.InsertRange(index, ICollection);
 alist.InsertRange(1,list2);
-
 
 alist.RemoveRange(START_INDEX, CountOfELEMENTTOBEREMOVED);
 
@@ -343,7 +382,6 @@ alist.Clear();
 => Clear();
 - in collection it will removed all elements 
 - in array it reinitialises the elements to the default values
-
 
 alist.Conains(10);
 - returns true and false if found and not found
@@ -359,18 +397,18 @@ alist.copyTo(arr);
 NOTE : size of the array will be alist.Count
 
 => To take out part of an ArrayList
+
 ArrayList list3 = alist.GetRange(start_index, countOfElementoincludenewinlist);
 
-=> IsFixedSize() // alwasy returns false
+=> IsFixedSize() // always returns false for Array
 
-=> alist.Reverse 
+=> alist.Reverse();
 
 => alist.sort();
 
 => 
 alist.SetRange(star_index, Collection C);
-VALUES FROM COLLECTION C WILL BE PUT INTO THE ALIST
-
+VALUES FROM COLLECTION C WILL BE PUT INTO THE alist and willbe overidden the exisitng values!
 
 => print the elements of an ArraysList 
 
@@ -386,4 +424,8 @@ object[] arr = alist.ToArray();
 
 
 ===================================
+
 => Shallow Cloning and Deep cloning
+
+
+

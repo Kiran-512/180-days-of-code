@@ -1,8 +1,8 @@
 =======================
 => System.Threading.Task;
 
-- Wrapper class for ThreadPool Class 
-- Internally its suing thread from thread pool
+- Wrapper class for ThreadPool Class / Improvements in the features of thread class!
+- Internally its using thread from the thread pool
 - More efiicient, overhead of creating new thread is notthere!
 - light weight
 - would run faster
@@ -37,14 +37,14 @@ Task t1 = Task.Factory.StartNew(Func1);
 
 Diff ?
 -> Task.Run work with the function with the no params
--> Factory.StartNew() works with the functions with the params
+-> Factory.StartNew() works with the both - the functions with the params adn no params
 
 Note :  if params for func then Task.Run can use lambda or anon method 
 
 Params Thread functions : here, Func1(object o){}
 
 Action<object> objAction = Func1;
-Thread t1 = new Thrad(objAction, "aaa");
+Thread t1 = new Thread(objAction, "aaa");
 
 Task t1 = new Task(objAction, "aaa");
 Task t1 = new Task(Func1,"aaa");
@@ -67,8 +67,21 @@ Action<string> objAction = Func2;
 Task t1 = Task.Factory.StartNew(objAction, "aaa");
 Task t1 = Task.Factory.StartNew(Func2,"aaa");
 
-
 =======================
+
+Task with the RETURN TYPE :
+
+Task<T> t = new Task<T>(func);
+
+Here T could be anyhting.. valye type ref type or Task<T> also
+
+#BigBang
+Task<Task<T>> T = new Task<Task<T>>(func);
+
+here the function func returns a Task<T>!!!!
+
+---------------------------------------------
+
 We have used callbackfunction in Asynch with delegate for getting the return value!
 
 With the thread we will use below 
@@ -80,106 +93,20 @@ Console.WriteLine(t1.Result);
 
 here wait() is similar to the join(), as func can return a value only fater t1 finished its execution and here for task we have wait() instead of join() to wait for execution of task!
 
-=======================
+Task.Wait is similar to Thread.Join!!!
 
+When function returns a value then use 
+
+Func<object, int> deleagetObj = Func;
+Task<int> t =new Task<int>(deleagetObj,"param");
+
+OR 
+
+Task<int> t =new Task<int>(Func,"param");
+
+=======================
 - in .net core BeginInvoke and EndInvoke is not available
 
-
-=======================
-=> AsynchandAwait :
-
--------------------------------------------
-System.Threading.Task
-- Overhead of creating the own thread is removed
-- wrapper class for threads
-- improvements in working with threads
-- introduced in v4, and its recommedned to use task instead of thread!
-
- static void Main1()
-        {
-            Task t1 = new Task(Func1);
-
-            //Action objAction1 = Func1;
-            //Task t1 = new Task(objAction1);
-
-
-            //Task t3 = new Task(new Action(Func1));
-            //Task t1 = new Task(Func1); // can pass func directly!
-
-            Action objAction2 = Func2;
-            Task t2 = new Task(objAction2);
-
-            t1.Start();
-            t2.Start();
-
-            Console.ReadLine();
-        }
-
-static void Func1()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine("first Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
-            }
-        }
-
-static void Func2()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine("second Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
-            }
-        }
--------------------------------------------
--------------------------------------------
-- ID managed by CLR for threads:
-Thread.CurrentThread.ManagedThreadID
--------------------------------------------
--------------------------------------------
-//calling a method with void return type using Task.Run and Task.Factory.StartNew
-
-static void Main2()
-        {
-            //Action objAction1 = Func1;
-            //Task t1 = Task.Run(objAction1); 
-            Task t1 = Task.Run(Func1);
-
-
-            //Action objAction2 = Func2;
-            //Task t2 = Task.Factory.StartNew(objAction2);
-            Task t2 = Task.Factory.StartNew(Func2);
-
-            Console.ReadLine();
-}
- static void Func1()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine("first Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
-            }
-        }
-        static void Func2()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine("second Func called from {0},{1}", Thread.CurrentThread.ManagedThreadId, i);
-            }
-}
-
--------------------------------------------
-Task t1 =  Task.Run(func1) -- Runs code on the same line, doesnt need t1.start() 
-Task t2 = Task.Factory.StartNew(func1)
-
-Diff?
-- Task.Run can not be used with the func with the params!
-- Factory.StartNew can be used with the funct with the params
-
--------------------------------------------
-- BeginInvoke and End Invoke is not available in .net Core : 
-Task :
-- lighter in case of system resource utilisation
-- Improvised performance
-- 
 
 -------------------------------------------
 //TO DO
@@ -274,22 +201,24 @@ Thread Vs Task :
 => Maj diff between Task and Delegate :
 
 ##.net Core have delegates but don't have beginnvoke and endInvoke so the only option available is Task and Thread for calling asynch code in .net core
+=======================
 
-============================================
-AsyncAwait : 
+=> Asynch and Await :
+
 
 -> To read a value from function which return a value we need to wait for the thread to complete and then get the returned value/Result!
+
 if (!t4.IsCompleted)
 t4.Wait();
-Console.WriteLine("Result is fACTORY 2" + t4.Result);
+Console.WriteLine("Result is factory 2" + t4.Result);
 
 - Instead of these three line Await keyword is used : Function called with await must return a Task<T> :
-- await can only be used inside the asynch function 
-- async method can not be void or int
-- why Task Main? Main si a thread and Task also indicates that its a thread!
-- In .net core develoeprs removed thhis compulsion : We can use async with the void Main in .net core!
+- await can only be used inside the asynch function
+- async method can not be void or int i.e. return type is Task<T>
+- why Task Main? Main is a thread and Task also indicates that its a thread!
+- In .net core developers removed this compulsion : We can use async with the void Main in .net core!
 
- static async Task Main1()
+static async Task Main1()
         {
             Console.WriteLine("Before");
             string message = await DoWorkAsync();  //waiting call
@@ -358,16 +287,33 @@ class OverlaodingDemo {
 class Employee {
 
         public decimal Basic = 0;
+
         public static Employee operator+(Employee e, int i)
             {
-            e.Basic += i; 
+            e.Basic += i;//We can do anything that we want 	here... completly our lookout!
             return e;
             }
 }
+
+c++
+o1+5
+o1.operator+(5)
+
+.net
+o1+5
+Employee.operator+(o1,5)
+
+public static Class1 operator-(Class1 o1, Class1 o2 )
+{
+            Class1 retval = new Class1();
+            retval.i = o1.i - o2.i;
+            return retval;
+}
+
 ============================================
 => Indexers :
 
-- refernce varaible can be changed to array :
+- refernce varaible can be changed to array 
 - Indexers allows to treat an object of a class as an array!
 
 Class1 o = new Class1();
@@ -376,9 +322,32 @@ o[i]
 o[0] = 10; -- set
 o[1] = 20;-- set
 
-CW(a[0]) -- get
+ConsWrite(a[0]) -- get
 
 Above code is simliar to the property!
+
+class Class1a
+{
+        private int[] arr= new int[3];
+        public int this[int i]
+        {
+            get 
+            {
+                return arr[i];
+            }
+            set 
+            {
+                arr[i] = value;
+            }
+        }
+        public int Length
+        {
+            get 
+            {
+                return arr.Length;
+            }
+        }
+}
 
 ============================================
 => Reflection : 
@@ -458,7 +427,7 @@ Press any key to continue . . .
 --------------------------------------------
 => PRIVATE ASSEMBLY VS SHARED ASSEMBLY!
 
-- VERSION PROBLEM OF COM IS SOLVED BY CREATING ALL ASEMBLIES AS A PRIVATE 
+- VERSION PROBLEM OF COM IS SOLVED BY CREATING ALL ASEMBLIES AS A PRIVATE
 
 Project1 (Console App)
 Bin/debug
@@ -510,7 +479,7 @@ Assebmbly has been successfull added tot he cache!
 
 =======================
 ----------------------------------------
-=> Types of Functions used by Threads : 
+=> Types of Functions used by Threads in above examples: 
 ----------------------------------------
 static void Func1(){
 

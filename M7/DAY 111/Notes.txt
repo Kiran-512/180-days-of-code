@@ -1,3 +1,6 @@
+
+sassy cheeky and irreverent!
+
 ====================================
 => SortedList : 
 
@@ -6,20 +9,28 @@ SortedList slist = new SortedList();
 slist..Add(1,"Kiran");
 slist.Add(2,"Rahul");
 
-slist.[2] = "Pankaj";
+slist[2] = "Pankaj";// will overriden prev value
 
 
-slist.ContainsValue();
-slist.ContainsKey();
+slist.ContainsValue(n);
+slist.ContainsKey(n);
 
 IList ilist1 = slist.GetKeyList();
 IList ilist2 = slist.GetValueList();
 
-slist.IndexOfKey
-slist.IndexOfValue
+slist.IndexOfKey()
+slist.IndexOfValue()
 
+//returns ICollection
 slist.Keys()
 slist.Values()
+
+
+foreach (DictionaryEntry item in o)
+{
+                Console.WriteLine(item.Key);
+                Console.WriteLine(item.Value);
+}
 
 ====================================
 => Stack :
@@ -40,10 +51,9 @@ q.Dequeue();
 ====================================
 => Boxing and Unboxing :
 
-
 e.g.
 object o1;
-int i = 100;
+int i = 100; 
 o1= 100;
 
 - earlier at int i = 100, 100 was in stack but when we assigned 100 to o1,
@@ -57,7 +67,7 @@ j=(int)o1;
 => Converting the reference type into the value type is UNBOXING.
 
 RECOMMENDED : TO AVOID THE Boxing and Unboxing in code, impacts the performance.
-How?: 
+How? Due tovoerhead of conversion!
 
 ====================================
 => Generic Collection :
@@ -81,6 +91,8 @@ List<T>
 IDictionary<TKey, TValue>
 SortedList<TKey, TValue>
 Dictionary<TKey, TValue>
+
+Note : Hashtable changes to Dictionary!
 
 ====================================
 => List<T>
@@ -156,7 +168,7 @@ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-
 ====================================
 => Delegates
 - similar to function pointers in c++
-- call a function in a indrect manner 
+- call a function in a indrect manner
 
 "to delegate" - Assign a task to somebody for you
 
@@ -166,12 +178,10 @@ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-
 - to make indirect call to the function
 - to make asynchronous call
 - the function to call can be received as a parameter
-- 
 
 - Deligate is a class that inherits from the System.Delegates
 - Delegate also need to have the signature(return type and params) of the function to call
 - to call a function we need to create the object of the delegate class
-
 
 namespace DelegatesDemo{
 
@@ -214,7 +224,6 @@ namespace DelegatesDemo{
 	}
 
 	}
-
 }
 
 
@@ -260,14 +269,13 @@ class Program{
 
 static void Main(){
 
-DelegateDemo del1; 
+Del1 del1; 
 
-DelegateDemo delAdd= Add;
-
+Del2 delAdd= Add;
 
 delAdd += Add;
 
-delAdd();
+res = delAdd(10,20);
 
 Class1 cls = new Class1();
 del1 = Class1.Display;
@@ -326,7 +334,7 @@ Action<paramsType> obj;
 eg. Action<int,int> obj = DisplayAdd
 obj(10,10);
 
-- here, Static void DisplayAdd(int a,int b){};
+- here, Static void DisplayAdd(int a,int b){ }; with no return type
 
 eg. Action<int,string> obj = Store;
 obj(100,"Kiran");
@@ -360,6 +368,8 @@ public static boolean IsEven(int a)
 => Predicate
 - is a delegates that used for caling methods with return type booleans accepts only one params of any type
 
+Such functions comes freqeuntly in .net and hence predicate is introduced!
+
 for IsEven we can use predicate as :
 
 Predicate<int> o = IsEven;
@@ -367,6 +377,9 @@ Console.WriteLine(o(10));
 
 ============================================
 => Anonymous Methods and Lambda Expression in C#
+
+- majorly used in LINQ
+
 ---------------------------------
 Action act = delegate(){
 
@@ -418,3 +431,4 @@ OR
 Predicate<int> pd = a => a%2 == 0;
 
 ====================================
+

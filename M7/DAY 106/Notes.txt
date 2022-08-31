@@ -72,7 +72,19 @@ Native Code : Its already in machine code format and that can be run directly wi
 
 => JIT : converts IL to native code
 
+If any function is compiled earlier then it wont be compiled again by JIT compiler!
+
+and JIT compiler compiles the code when its needed!
+
+If any function comes twice in a code then second funcitons runs faster than its first use!
+
 .net has multiple jit compilers
+
+Which is fater native or IL code?
+given the fact that native code is already in compiled form yet the overhead it very small and it can be overcomes with the JIT compilers wnd it makes IL fatser than native code!
+
+And actual performce has also shown that the .net code is faster than the native code!
+
 
 => Memory Management :
 - All the operations like loading and unloading the assemblies
@@ -90,11 +102,20 @@ Destructor :
 - used to release the resources hold by the garbage objects
 - it is called just before the memory is released (trigger point)
 
+
+Main(){
+
+Class1 o = new Class1();
+
+o=null; // here ref is made null but are not sure if GC will run here to collect the garbage!
+
+}
+
 #BigBang :)
 - GC run on reaching threashold
 - We can't predict when the memory would get low and threshold reached in our code 
-- hence cantpredict when GC runs!!
-- hence we can't even redict when memory will get released and - hence we can not predict when destrctor will run! 
+- hence cant predict when GC runs!!
+- hence we can't even predict when memory will get released and - hence we can not predict when destrctor will run! 
 
 Hence, We should not write code in destructor : 
 
@@ -103,13 +124,13 @@ Code written inside destructor won't run at a give time it will run only when GC
 Hence its not recommened to write code to release resources in destructor!  
 
 This is Non deterministic finalisation : 
-We can not determine when destructor runs!
+We can not determine when destructor runs as we dont when then GC will runs as we dont know when memory gets low and reach threashold!
 
-=> Replacement to this is Disponse method IDisposable interface 
+=> Replacement to this is Dispose method of IDisposable interface 
 
 READ : Generation in Garbade Colelction from e-book (GC)
 
-=> App Domain context :
+=> App Domain context : 
 - APPLICATIO RUNS WITHIN A PROCESS 
 - In multithreading multiple application runs inside the one process
 - buts its highly unstable as if one app crashed it would crash entire process casuingother apps to stop
@@ -156,8 +177,7 @@ Xamarin used for all platforms (Android and Ios and windows )
 
 ============================== 
 =>.netCore 
-- neuget central hub to import all libraries 
-
+- neuget central hub to import all libraries
 
 .netframework version 4.8 is the last version after that these is only .netcore development and ccurrently it is .netcore version 6.0 
 
@@ -167,11 +187,11 @@ after .netcore 3 there directly .netcore 5, 4 is skipped as .netframwork is stop
 => Managed VS Unmanaged Code
 => Mngd Cde 
 - all code written in .net is Manged code 
-- is run by CLR (all .net code)  
+- is run by CLR (all .net code)
 
-=> Unmanaged code 
+=> Unmanaged code
 - code that was created before .net
-- is not run by CLR 
+- is not run by CLR
 
 eg. Windows DLL's Pinvokes, Com app  etc.
 
@@ -395,5 +415,119 @@ What we will be working with :
 => WCF
 => WEB API
 => .Net Core Intro
+
+======================= 
+
+When we create new project using conosle app:
+
+
+Path to be selected for the project :
+JkJuly2022\DAY 1\BasicConcepts
+
+Path\Solution\Project
+
+The path can have multiple solutions and
+a single solution can have multiple projects!
+
+View => Solution Explorer
+
+Properties => dbl click and it opens up assembly details and meta data
+
+References => used to add the reference of aeemblies used in our project => onContextMenu(right click ) on references => add assemblies
+
+From shared projects we can add reference to our project to the new project that we are creating!
+
+App.config => Any setting for the application can be done from here!
+
+program.cs=> code is written here.......!
+
+======================= 
+Main method signature =>
+
+static void Main(string[] args)
+{
+
+}
+
+----------------------------------------
+
+below also works!
+static void Main()
+{
+
+}
+
+======================= 
+namespace :
+
+- namespace can contains classes or other namspaces !
+- 
+
+n1{
+
+
+c{
+
+}
+
+n2{
+
+c{
+
+}
+
+}
+
+Main(){
+
+To access classes from namspeaces!
+//c
+//n1.c
+-- above two are similar!
+
+//n1.n2.c
+
+}
+
+}
+
+eg.
+
+System.Console.WriteLine();
+
+namspace.className.Method()
+
+
+======================= 
+Correct way of using external assembly :
+
+Add reference 
+using System;
+Console.WriteLine("some content");
+
+If we are not writing using statement then we must use System.Console.WriteLine("some content");
+
+
+======================= 
+
+Type of parameters :
+- named parametere
+- postional paramters
+
+
+Types of arguments :
+- argumetns with the default value
+
+======================= 
+
+Local Function :
+
+Function within function
+//local func can be defined within another func
+//local func can only be called from the outer func
+//local func can access variables defined in outer func
+//local func is implicitly private, if we dcalreit prviate we will get an error 
+
+local function voerloading is not allowed!
 
 ======================= 

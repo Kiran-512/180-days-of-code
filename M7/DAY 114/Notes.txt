@@ -56,13 +56,15 @@ AND CAN KILL ITSELF EVEN IF THE BACKGROUND THREAD HAS NOT YET COMPLETED ITS EXEC
 - BelowNormal
 - Lowest
 
-t1.Priority = ThreadPriority.Higest;
+t1.Priority = ThreadPriority.Highest;
 
 =============================
 => ThreadStates
 
-- Background
+- Unstarted
 - Running
+- Aborted
+- Background
 - Stopped
 - StopRequested
 - SuspendRequested
@@ -100,16 +102,31 @@ to Resume();
 complete its execution adn then only next code to that line is executed!
 
 eg. t1.Join();
+
+Excetuion after the line which called above method will be continued only after t1 finishes it exectuion!!!
+
+Above that line if there are other threads then they can be called interchangebly!
+
+
 - here, there becomesthe contract between t1 and main that main 
 will wait for t1 to complete it's execution!
 
 =============================
 => new ParameteriseThreadStart(Func)
 - used for function with the paramter and void return type
+- but the function can only accepts object o as a function parameter
+So if function accepts two params then we msut
+1] Create a class or struct which has two properties and pass it's object
+2] Create array of objects and pass it as a params
+
 
 Thread t1 = new Thread(new ParameteriseThreadStart(Func1));
 t1.Start("o1");
 
+
+//Even below is also valid!
+Thread t1 = new Thread(Func1);
+t1.Start("o1");
 
 static void Func(object o1)
 {
@@ -119,30 +136,51 @@ static void Func(object o1)
 }
 
 =============================
-Find Out what changes to be made if we want to pass more than one params 
-and other than object in above Func!
-
-=============================
-=> Thraedpool
-- Something that is not available to one but to all!
-- In Thread pool one don't get the control, as he gets by creating 
-thread from thread class 
-eg. car pick and drop service to the employee!
-
-
 
 => ParamaterizedThreads :
 - parameter can be passed in the form of object only!
 
 
+Find Out what changes to be made if we want to pass more than one params 
+and other than object in above Func!
+1]Create a class that has 2 properties and pass an object of the class
+2]Create a array of objects and pass ref varibale of array!
+
+	object[] arr = new object[2];
+
 -> How to pass two params ?
-- can create a class or struct which has two properties : 
-- We can use arrayList then typecast it not the function 
+- can create a class or struct which has two properties :
+- We can use arrayList then typecast it not the function
 - Array of Objects 
 - Anonymous methods and lambda's, Local Func
 
+object[] a = new object[2];
+a[0] = "string";
+a[1] = 100;
+
+Thread t = new Thread(F3);
+t.start(a);
+
+void F3(object o)
+{
+
+   //some code...
+
+}
+
 =======================
 => Thread Pool :
+
+- WE DONT HAVE MUCH CONTROL OVER THE THREADS
+- BUT THREAPOOL IS FASTER 
+
+- Something that is not available to one but to all!
+- In Thread pool one don't get the control, as he gets by creating
+thread from thread class
+eg. car pick and drop service to the employee! Pool of car's is made available below office!
+
+
+Assuming Thread as our taxi and functioni as our task to go home ... function sits in a thread sand gets executed!
 
 In thread Pool we don't create our own threads :
 
@@ -152,7 +190,7 @@ ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2));
 
 ThreadPool.QueueUserWorkItem(new WaitCallBack(PoolFunc2),"aaaa");
 
-#WaitCallBack - is delegate 
+#WaitCallBack - is delegate
 
 here, PoolFunc2is static void function with object o as params! 
 
@@ -224,11 +262,15 @@ lock(obj)--- Monitor.Exit(obj)
 
 }
 
-
-Note: lock(){} is only available in c# and not in any other lanuguage of .net
-instead Monitor.Enter  and Monitor.Exit
+Note: lock(obj){....} is only available in c# and not in any other lanuguage of .net
+	
+      instead 	
+	Monitor.Enter(){....}  
+        and 
+	Monitor.Exit(obj){....}
 
 =======================
+
 => Interlocked :
 
 - instead of putting the synch code in diff lock blocks can be put into this class, which has a lot of methods supporting synch!
@@ -243,4 +285,8 @@ Interlocked.Decrement(ref i); -- --i
 Interlocked.Exchange(ref i, 100); -- i =100
 
 
+=======================
+Practice code from : 
+
+www.linqsamples.com
 =======================
