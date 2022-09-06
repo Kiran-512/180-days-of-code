@@ -1,0 +1,1 @@
+export var message = "Greetings of the day!"

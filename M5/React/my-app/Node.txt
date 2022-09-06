@@ -1,0 +1,602 @@
+Download nodejs, vs code!
+
+npm init -- will create package.json file => manifest fiel contains all the dependencies!
+
+Cntrl+~ => To Open Terminal 
+
+npm install bootstrap --save // save locally
+
+npm install bootstrap --g // save globally
+
+After this the dependcy will be added in the package.json file 
+/*
+"dependencies": {
+    "bootstrap": "^5.2.0"
+}
+*/
+
+npm install gatsby-cli -g
+
+
+Create-React-App Command :
+Its not a compulsion to create our react applicationwith thsi command only but it save alot of our time for configuration!
+
+If have previously install create-react-app globally via npm install -g create-react-app, It's recommende to uninstall that using npm uninstall -g create-react-app OR yarm global remove create-react-app
+
+Use below command instead to install it :
+npx always install latest app :
+
+npx create-react-app my-app
+
+================= Folder Structure  ===================
+=> Folder Structure inside the react folder :
+=> If node_modules folder deletd then application will stop running
+=> To have that folder just run => npm install 
+=> package.json
+=>public Folder 
+- Index.html
+    This file has div with root id where entire react app is build
+=> build
+     npm run build
+     This create build folder
+     This folder contains the minified files
+
+=> src
+    Here most of our work will be carried on
+
+    App.css
+    App.js // Convention to call as App.js
+    App.test.js // testing file
+    index.css // more css here
+    index.js // with thsi file we are targeting that root div in index.html file
+
+=> .gitignore // file ignored by git even build also ignore this file
+
+=> package.json // entire manifest of our project // commands that we use are hre start and build as well as dependencies
+
+=> README.md // file contains information about our project
+
+=> Quick Update 
+- import React from 'react'; -- This is not compulsory from react 17 onwards
+
+React App hot reloading isn't working!
+.env > FAST_REFRESH=false
+
+================= First Component in React ===================
+
+Index.js 
+- is our entry point 
+- normally its just react and a function
+
+--------------------------------------------------------------
+
+import React from 'react' // Thgis is just modulke importing as we do in ES6
+import ReactDom from 'react-dom'// imported so that we can inject our function into root div of index.html 
+
+function Greeting(){ // Function name must be capital always here 
+  return <h1>This is first component</h1>
+  //jsx is returned from this function and not just a html
+}
+
+ReactDom.render(<Greeting/>,document.getElementById("root"))
+
+//unlike html in react app, we must strictly use html with oepning and closing tags wherever needed
+//<Greeting/> OR <Greeting></Greeting> both are Ok
+//  return <h1>This is first component</h4> => Error!!
+
+//Render method has two params, 1> What we are gonna render and 2> Where we gonna render it!
+}
+--------------------------------------------------------------
+Settings in settings.json in vscoe
+
+{
+  "git.autofetch": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[java]": {
+    "editor.defaultFormatter": "mwpb.java-prettier-formatter"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.wordWrap": "on",
+  "editor.fontSize": 26,
+  "files.autoSave": "off",
+  "editor.tabSize": 1,
+  "terminal.integrated.fontSize": 26,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "editor.minimap.enabled": false,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.cursorBlinking": "expand",
+  "window.zoomLevel": -2
+}
+--------------------------------------------------------------
+//shortcut rafce -- used toc reate the react component with the arrow function
+
+Stateless functional component // also called as a dump component
+always returns jsx 
+
+
+--------------------------------------------------------------
+=> Components returning JSX VS createElement method of React :
+
+import React from "react";
+import ReactDom from "react-dom"; // imported so that we can inject our function into root div of index.html
+function Greeting() {
+  return <h1>Hellow world</h1>;
+  //jsx is returned from this function and not just a html
+}
+
+
+//Another way to create react component
+
+const Greetings = () => {
+  return React.createElement('h1', {}, 'Hello Worlds');
+}
+//Nested html elemtne returning in the components
+//This is preferred as to return complex html we can not use createElement method of React as in the below case
+function Greeting1() {
+  return <div>
+    <h1>Hellow world</h1>
+    <h2>Some more heading and content here....</h2>
+    <h3>some more content....</h3>
+    <h4>bit complex html in the formof JSX is returned here</h4>
+  </div>;
+  //jsx is returned from this function and not just a html
+}
+
+const Greetings1 = () => {
+  return React.createElement('div', {}, React.createElement('h1', {}, 'Hello Worlds'));
+}
+
+ReactDom.render(<Greetings1 />, document.getElementById("root"));
+
+//unlike html in react app, we must strictly use html with oepning and closing tags wherever needed
+//<Greeting/> OR <Greeting></Greeting> both are Ok
+//  return <h1>This is first component</h4> => Error!!
+
+//Render method has two params, 1> What we are gonna render and 2> Where we gonna render it!
+
+React.createElement('h1', {}, 'Hello Worlds')
+here, 
+h1 - html element
+{} - props forh1 element if needed
+'hello worlds' - content for h1 element 
+
+--------------------------------------------------------------
+JSX Rules:
+- return single element
+- div/section/article/ or Fragment  // semantic tags are recommneded to use
+- use camelCase for html attribute // onClick, src, alt, href, type, text, id etc.
+- className instead of a class //className="header"
+- close every element // <>...</>
+- formatting // return(
+                    <h1> Some heading goes here...</h1>) 
+                    Vs return <h1> Some
+                            heading foes here </h1>
+
+--------------------------------------------------------------
+Nested Componenets, React tools!
+
+function Greeting(){
+    return(
+        <div>
+        <Person/>
+        <Message/>
+        <p> Some message goes here...</p>
+        </div>
+    );
+}
+
+const Person =()=> <h1>'Heading goes here..'</h1>;
+const Message =()=> <p>some important message</p>;
+
+--------------------------------------------------------------
+#miniProject1
+Adding css to javaScript Componenets :
+- create index.css file and then import in our index.js as import './index.css'
+
+#use of style attribute  -- style={{color:"red",fontSize:'0.75rem',marginTop:'0.25rem'}} 
+-- make sure to put prop values inside eg. marginTop :'0.23rem'
+
+function Booklist() {
+
+  return (
+    <section className="booklist">
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+    </section>
+  );
+}
+
+const Book = () => {
+
+  return (
+    <article className="book">
+      <Image></Image>
+      <Title></Title>
+      <Author />
+      <Price></Price>
+    </article>
+  );
+}
+
+const Image = () =>
+  <img src="https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/91bYsX41DVL._AC_UL600_SR600,400_.jpg" alt="book" />
+
+
+const Title = () => <h1 style={{color:"red",fontSize:'0.75rem',marginTop:0.25rem}} >Atomic Habits: The life-changing million copy bestseller
+  Atomic Habits: The life-changing million copy</h1>
+
+const Author = () => <h2>James Clear</h2>
+
+const Price = () => <h3>Rs.445/-</h3>
+
+ReactDom.render(<Booklist/>, document.getElementById("root"));
+--------------------------------------------------------------
+JSX -Javascript :
+
+const author = "Jame Clear";
+const Book = () => {
+  const title = "Atomic Habits: The life-changing million copy";
+  return (
+    <article className="book">
+      <Image></Image>
+      <h1>{title}</h1>
+      <h1>{author.toUpperCase()}</h1> //We can use java script functions with teh props
+      <h2>{200 + 150}</h2>
+      //<h2>{let x = 200;}</h2> // Error -  not allowed
+    </article>
+  );
+}
+
+--------------------------------------------------------------
+#props use
+
+console.log(props) // object{_prototype:object}
+We can set the properties for that object with the component!
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      <Book job="Important Task" />
+      <Book title="Developer" number={22} />
+
+    </section>
+  );
+}
+const Book = (props) => {
+  return (
+    <article className="book">
+      <Image></Image>
+      <h1>{title}</h1>
+      <h1>{author.toUpperCase()}</h1>
+      <h1>{props.title}</h1>
+      <h1>{props.job}</h1>
+      <h1>{props.number}</h1>
+    </article>
+  );
+}
+
+--------------------------------------------------------------
+With the js object:
+
+//setup css
+import './index.css';
+
+//setup vars
+let firstBook = {
+  author: 'James Clear',
+  title: "Atomic Habits: The life-changing million copy",
+  url: 'https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/91bYsX41DVL._AC_UL600_SR600,400_.jpg'
+}
+let secondBook = {
+  author: 'Morgan Housel',
+  title: "The Psychology of Money",
+  url: 'https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/71g2ednj0JL._AC_UL600_SR600,400_.jpg'
+}
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      <Book title={firstBook.title} url={firstBook.url} author={firstBook.author} /> // setting up the props values
+      <Book title={secondBook.title} url={secondBook.url} author={secondBook.author} />
+    </section>
+  );
+}
+const Book = (props) => { // props passed here
+  return (
+    <article className="book">
+      <Image url={props.url}></Image>
+      <h1>{props.title}</h1>// accessing the props values
+      <h1>{props.author.toUpperCase()}</h1>
+    </article>
+  );
+}
+
+const Image = (props) =>
+  <img src={props.url} alt="book" />
+
+ReactDom.render(<Booklist />, document.getElementById("root"));
+
+--------------------------------------------------------------
+=> props destructuring : 
+const {img, title, author} =props;
+<img src={img} alt="book"/>
+<h1>{title}</h1>
+<h1>{author}</h1>
+
+OR
+
+instead of props we can directly use : 
+
+const Book=({img,title,author})=>{
+    <img src={img} alt="book"/>
+    <h1>{title}</h1>
+    <h1>{author}</h1>
+ }
+
+--------------------------------------------------------------
+children props : each props object has children property for the content inside the opening and closing tags of components!
+
+
+//With the props destructuring
+function Booklist() {
+  return (
+    <section className="booklist">
+      <Book title={firstBook.title} url={firstBook.url} author={firstBook.author} >
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit dolor quibusdam officiis voluptates veniam quia labore eveniet incidunt facilis ut.</p>
+      </Book >
+      <Book title={secondBook.title} url={secondBook.url} author={secondBook.author} />
+    </section>
+  );
+}
+const Book = ({ url, title, author, children }) => {
+  return (
+    <article className="book">
+      <Image url={url}></Image>
+      <h1>{title}</h1>
+      <h1>{author.toUpperCase()}</h1>
+      {children}
+    </article>
+  );
+}
+
+//Without object destructuring 
+{props.children}
+
+--------------------------------------------------------------
+Simple list of props!
+
+const names = ['Kiran', 'Rahul', 'Rohan'];
+
+var newNames = names.map((name) => { console.log(name); return <h1>{name}</h1> });
+
+console.log(newNames);
+/*
+Array(3)
+0:
+$$typeof: Symbol(react.element)
+key: null
+props: {children: 'Kiran'}
+ref: null
+type: "h1"
+_owner: null
+_store: {validated: true}
+_self: undefined
+_source: {fileName: 'C:\\CDAC\\Github\\180-days-of-code\\M5\\React\\my-app\\src\\index.js', lineNumber: 21, columnNumber: 64}
+[[Prototype]]: Object
+1: {$$typeof: Symbol(react.element), type: 'h1', key: null, ref: null, props: {…}, …}
+2: {$$typeof: Symbol(react.element), type: 'h1', key: null, ref: null, props: {…}, …}
+length: 3
+*/
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      {names} // will print all names together
+      {newNames} // will print each names insdie <h1> tag
+    </section>
+  );
+}
+--------------------------------------------------------------
+Iterating over array of Objects!
+
+//============= Method 1 
+=> By using map method without spreadoperator and passing entire book object as a props
+
+let books = [{
+  id: 1,
+  author: 'James Clear',
+  title: "Atomic Habits: The life-changing million copy",
+  url: 'https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/91bYsX41DVL._AC_UL600_SR600,400_.jpg'
+}, {
+  id: 2,
+  author: 'Morgan Housel',
+  title: "The Psychology of Money",
+  url: 'https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/71g2ednj0JL._AC_UL600_SR600,400_.jpg'
+},
+{
+  id: 3,
+  author: 'Norman Lewis',
+  title: "Word Power Made Easy",
+  url: 'https://images-eu.ssl-images-amazon.com/images/I/818e+fq7+BL._AC_UL600_SR600,400_.jpg'
+},
+{
+  id: 4,
+  author: 'Mark Manson',
+  title: "The Subtle Art of Not Giving a F*ck",
+  url: 'https://images-eu.ssl-images-amazon.com/images/I/814jC+rODgL._AC_UL600_SR600,400_.jpg'
+},
+{
+  id: 5,
+  author: 'Gaur Gopal Das',
+  title: "Life's Amazing Secrets: How to Find Balance",
+  url: 'https://images-eu.ssl-images-amazon.com/images/I/81N7FmJhbhL._AC_UL600_SR600,400_.jpg'
+},
+]
+
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      {books.map((book, index) => {
+        return <Book key={book.id} book={book}></Book>;//instead we could have used index too!
+      })}
+    </section>
+  );
+}
+const Book = (props) => {
+  const { id, author, title, url } = props.book;
+
+  return (
+    <article className="book">
+      <Image url={url}></Image>
+      <h1>{title}</h1>
+      <h1>{author.toUpperCase()}</h1>
+    </article>
+  );
+}
+
+const Image = (props) =>
+  <img src={props.url} alt="book" />
+
+ReactDom.render(<Booklist />, document.getElementById("root"));
+
+//============= Method 2> 
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      {books.map((book, index) => {
+        return <Book key={book.id} {...book}></Book>;
+      })}
+    </section>
+  );
+}
+const Book = (props) => {
+  const { id, author, title, url } = props;
+
+  return (
+    <article className="book">
+      <Image url={url}></Image>
+      <h1>{title}</h1>
+      <h1>{author.toUpperCase()}</h1>
+    </article>
+  );
+}
+
+const Image = (props) =>
+  <img src={props.url} alt="book" />
+
+ReactDom.render(<Booklist />, document.getElementById("root"));
+
+===============================================================
+Event Basics in React :
+React normalizes events so that they have consistent properties across different browsers.
+
+The event handlers below are triggered by an event in the bubbling phase. To register an event handler for the capture phase, append Capture to the event name; for example, instead of using onClick, you would use onClickCapture to handle the click event in the capture phase.
+
+Clipboard Events
+Composition Events
+Keyboard Events
+Focus Events
+Form Events
+Generic Events
+Mouse Events
+Pointer Events
+Selection Events
+Touch Events
+UI Events
+Wheel Events
+Media Events
+Image Events
+Animation Events
+Transition Events
+Other Events
+
+
+#onClick
+
+const clickHnadler = () => { alert("Hello World!"); }
+
+
+function Booklist() {
+  return (
+    <section className="booklist">
+      {books.map((book, index) => {
+        return <Book key={book.id} {...book}></Book>;
+      })}
+    </section>
+  );
+}
+const Book = (props) => {
+  const { id, author, title, url } = props;
+
+  const btn = document.getElementById("author");
+  //btn.addEventListener('click', (author) => { console.log(author); }); // page is not rendered with this line??!!!!
+
+  const complexHandler = (author) => { console.log(author); };
+
+  return (
+ <article className="book" onMouseOver={(props) => {
+      console.log(props);
+    }}>
+      <Image url={url}></Image>
+      <h1>{title}</h1>
+      <h1 onClick={() => console.log(author)}>{author.toUpperCase()}</h1>
+      <button type="button" onClick={clickHnadler}>Click Me</button>
+      <button id="author" type="button" onClick={complexHandler(author)}>Complex Button</button>
+      {/* <button id="author" type="button">Complex Button</button> */}
+
+    </article>
+  );
+}
+
+const Image = (props) =>
+  <img src={props.url} alt="book" />
+
+ReactDom.render(<Booklist />, document.getElementById("root"));
+
+Event Object e is available inside every event function and e.target can also be fetch which gives all the evetn details!
+
+--------------------------------------------------------------
+Import and Export statements : =>
+
+import React from "react"; // Importing a module 
+import './index.css'; // Importing css file
+import { books } from './books';// since books is a js file we dont need a extension
+import Book from './Book'; // import SpecificBook from './Book'; // this will work as name doent matters in case of default export, but in case, if its not a default then name must match with the exported variables or functions! 
+
+//Importing variable from the file inside the folder inside the current directory!
+import { message } from './testing/testing';
+console.log(message);//Greetings of the day!
+
+//We can have only one default export in any file
+export default Book 
+
+//We can have as many as export in a file
+
+--------------------------------------------------------------
+Hosting of the application :
+
+netlify
+
+--------------------------------------------------------------
