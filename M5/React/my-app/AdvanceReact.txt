@@ -1,0 +1,543 @@
+================================
+React Hooks and advance react!
+
+git clone https://github.com/john-smilga/react-advanced-2020.git
+
+
+npm install && npm start
+
+useState
+useEffect
+Conditional Rendering
+Forms
+useRef
+useReducer
+Prop Drilling
+Context API /useContext
+================================
+=> useState :
+Component names MUST start with the capital letter!
+
+-- When we have a function with the paramters with teh event then we can make a useoif arrow function withinline events to avoid direct invocation as onClick={()=>{someFunc(currentPerson)}}!
+
+
+Instead of passing object to useState we can have multiple smaler satte values for each of the proerties of the object to make it simpler for us!
+
+ // const [name,setName] = useState('peter')
+  // const [age,setAge] = useState(24)
+  // const [message,setMessage] = useState('random message')
+
+  INSTEAD of
+
+    const [person, setPerson] = useState({
+    name: 'peter',
+    age: 24,
+    message: 'random message',
+  });
+
+================================
+=> useEffect!
+// by default runs after every re-render
+// cleanup function
+// second parameter
+
+import React, { useState, useEffect } from 'react';
+// by default runs after every re-render
+// cleanup function
+// second parameter
+const UseEffectBasics = () => {
+
+  useEffect(() => {
+    console.log('call useEffect...')
+    if (value != 0)
+      document.title = `new messages(${value})`;
+  })
+
+  const [value, setValue] = useState(0);
+
+  console.log('render componenet')
+  return <React.Fragment>
+    <h2>{value}</h2>
+    <button className='btn' onClick={() => { setValue(value + 1) }}>Click Me</button>
+  </React.Fragment>;
+};
+
+export default UseEffectBasics;
+--------------------------------------------------
+=> useEffect Conditional!
+- We can not use useEffcet inside the conditions
+if(){
+  useEffect(()={}) // -- Errorr!
+}
+But we can use conditions inside useEffect(()=>{
+if()
+{
+....;
+}else{
+....;
+}
+})
+
+--------------------------------------------------
+=> useEffect Dependency List : the Second params!
+- when we pass second argument it makes sure that the useEffect() runs only on first event only!
+
+useEffect(()=>{},[])
+
+When we want useEffcet to runs changing the particular dependency!
+
+We can use it as below... 
+useEffect(()=>{},[Value]) -- Here, on chaing the Value useEffect runs!
+
+We can set up as many useEeffect functions as we want for different dependencies!
+
+--------------------------------------------------
+useEffect Clean Up Function :
+- clean up functions used to clean the events which gets added eah time any event triggered!
+
+import React, { useState, useEffect } from 'react';
+
+// cleanup function
+// second argument
+
+const UseEffectCleanup = () => {
+  const [size, setSize] = useState(window.innerWidth);
+
+  const checkSize = () => { setSize(window.innerWidth) }
+
+  useEffect(() => {
+    window.addEventListener('resize', checkSize)
+
+    return () => {
+      window.removeEventListener('resize', checkSize)
+    }
+  })
+
+  return <>
+    <h2>Window</h2>
+    <h3>{size} PX </h3>
+  </>;
+};
+
+export default UseEffectCleanup;
+
+We could have passed empty econd params which would have made sure that useEffect(()=>{},[]) runs only once and hence only one event gets added which ran inside the call back function we passed as a params!
+
+Even thought below useEffect() runs only once its god practie to write clean up function as shown below:
+
+  const checkSize = () => { setSize(window.innerWidth) }
+
+  useEffect(() => {
+    window.addEventListener('resize', checkSize);
+    return () => {
+      window.removeEventListener('resize', checkSize)
+    }
+  }, [])
+
+--------------------------------------------------
+useEffect()
+- function we pass as a params can not return a promise!
+-We can not use asynch await with that function as asych returns a promise!
+
+useEffect(asych ()=>{},[]) //Errorr
+
+
+--------------------------------------------------
+import React, { useState, useEffect } from 'react';
+
+const url = 'https://api.github.com/users';
+
+const UseEffectFetchData = () => {
+
+  const [users, setUsers] = useState([])
+
+  const getUsers = async () => {
+    const response = await fetch(url)
+    const users = await response.json();
+    console.log(users)
+    setUsers(users);
+  }
+
+  useEffect(() => getUsers(), [])
+
+  return (<div>
+    <h3>GitHub Users</h3>
+    <ul className='users'>
+
+      {users.map((user) => {
+        const { id, login, avatar_url, html_url } = user;
+        return (
+          <li key={id}>
+            <img src={avatar_url} alt={login} />
+            <div>
+              <h4>{login}</h4>
+              <a href={html_url}>Profile</a>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  </div>);
+};
+
+export default UseEffectFetchData;
+==================================================
+Conditional rendering : Way tomake components more dynamic based on some type of conditions!
+
+const MultipleReturns = () => {
+  const [loading, Setloading] = useState(true);
+  if (loading) {
+    return (<h2>Loading...</h2>);
+  }
+  return (<h2>Completed!</h2>);
+};
+
+--------------------------------------------------
+Multiple return Fetch Complex Demo :
+
+import React, { useState, useEffect } from 'react';
+const url = 'https://api.github.com/users/QuincyLarson';
+
+
+const MultipleReturns = () => {
+  const [isLoading, SetisLoading] = useState(true);
+  const [isError, setIsError] = useState(false)
+  const [user, setUser] = useState('default user')
+
+  useEffect(() => {
+    fetch(url)
+      .then((resp) => {
+        if (resp.status >= 200 && resp.status <= 300) {
+          return resp.json()
+        } else {
+          SetisLoading(false)
+          setIsError(true)
+        }
+      })
+      .then((user) => {
+        console.log(user)
+        const { login } = user;
+        setUser(login);
+        SetisLoading(false);
+      })
+      .catch((err) => console.log(err))
+  }, [])
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>Errorr...</h2>;
+  }
+
+  return <h2>{user}</h2>;
+
+};
+
+export default MultipleReturns;
+
+--------------------------------------------------
+Short Circuit Evaluation : || and &&
+
+const ShortCircuit = () => {
+  const [text, setText] = useState('');
+
+  const firstValue = text || 'hello world';
+  const secondValue = text && 'hello world';
+
+  return (
+    <>
+      <h1>{firstValue}</h1> //hello world
+      <h1>{secondValue}</h1>// blank
+    </>
+  );
+};
+
+--------------------------------------------------
+
+const ShortCircuit = () => {
+  const [text, setText] = useState('K');
+
+  const firstValue = text || 'hello world';
+  const secondValue = text && 'hello world';
+
+  return (
+    <>
+      <h1>{firstValue}</h1> //K
+      <h1>{secondValue}</h1>// hello world
+    </>
+  );
+};
+--------------------------------------------------
+
+ALTERNATELY WE CAN USE OPERATORS DIRECTLY TOO as below!
+
+return <h1>{text||'Kiran'}</h1>;
+
+{text || 'Kiran'} // if text has a value print itand if notthen print 'Kiran'
+
+{text && 'Kiran'} // if text is true and has a value then only print 'Kiran'
+
+==================================================
+Ternary Operator :
+
+const ShortCircuit = () => {
+  const [text, setText] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const firstValue = text || 'hello world';
+  const secondValue = text && 'hello world';
+
+  return (
+    <>
+      <h1>{firstValue}</h1>
+      <h1>{secondValue}</h1>
+      {/* {if(true){console.log('hello world')}} */}
+      <button className='btn' onClick={() => { setIsError(!isError) }}>toggle Error</button>
+      {isError && <h1>Error...</h1>}
+      {isError ? <h1>Good Morning</h1> : <h1>Good Afternoon</h1>}
+    </>
+  );
+};
+
+export default ShortCircuit;
+
+--------------------------------------------------
+Show Hide Componenet :
+
+import React, { useState, useEffect } from 'react';
+
+const ShowHide = () => {
+
+  const [show, setShow] = useState(false)
+  const [value, setValue] = useState('Show')
+  const [width, setWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener('resize', () => { setWidth(window.innerWidth) })
+  }, [])
+
+  return (
+    <>
+      <button className='btn' onClick={() => {
+        setShow(!show); if (value === "Show") setValue("Hide")
+        else
+          setValue('Show')
+      }}>{value}</button>
+      <Item show={show} />
+    </>
+  );
+};
+
+const Item = (props) => {
+
+  return (
+    <div>
+      {props.show ? <div><h1>Window</h1><h1>Size: {window.innerWidth}</h1></div> : <h1></h1>}
+    </div>
+  )
+}
+
+export default ShowHide;
+
+==================================================
+=> Form Basics :
+
+import React, { useState } from 'react';
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value
+// React
+// value, onChange
+
+const ControlledInputs = () => {
+  const submitHandler = (a) => {
+    console.log(a) // default event object inside event handling function!
+
+    a.preventDefault();// used to prevent the page refresh which is the default behavious of the browser on form submit!
+
+    console.log('helo world')
+  }
+
+  return <>
+    <article>
+      <form onSubmit={submitHandler} className='form'>
+
+        <div className='form-control'>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id='name' />
+        </div>
+        <div className='form-control'>
+          <label htmlFor="email">Email :</label>
+          <input type="email" id='email' />
+        </div>
+
+        <button type='submit'>Add User</button>
+      </form>
+    </article>
+    <article></article>
+  </>;
+};
+
+export default ControlledInputs;
+
+--------------------------------------------------
+=> Controlled Inputs :
+
+<input type="email" id='email' value='k' /> 
+-- With this in react we wont be able to typeinto the input box!
+
+
+<input type="email" id='email' value={email} /> 
+
+
+When e is the event object which will gave us the value in the input box as => e.target.value
+
+//Code
+import React, { useState } from 'react';
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value
+// React
+// value, onChange
+
+const ControlledInputs = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const submitHandler = (a) => {
+    console.log(a) // default event object inside event handling function!
+
+    a.preventDefault();// used to prevent the page refresh which is the default behavious of the browser on form submit!
+
+    console.log(name, email)
+
+    console.log('helo world')
+  }
+
+  return <>
+    <article>
+      <form onSubmit={submitHandler} className='form'>
+
+        <div className='form-control'>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id='name' value={name} onChange={(e) => { setName(e.target.value) }} />
+        </div>
+        <div className='form-control'>
+          <label htmlFor="email">Email :</label>
+          <input type="email" id='email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
+        </div>
+
+        <button type='submit'>Add User</button>
+      </form>
+    </article>
+    <article></article>
+  </>;
+};
+
+export default ControlledInputs;
+--------------------------------------------------
+=> Add Item to the list :
+
+import React, { useState } from 'react';
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value
+// React
+// value, onChange
+
+const ControlledInputs = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [people, setpeople] = useState([]);
+
+  const submitHandler = (a) => {
+    console.log(a) // default event object inside event handling function!
+
+    a.preventDefault();// used to prevent the page refresh which is the default behavious of the browser on form submit!
+
+    console.log(name, email)
+    if (name && email) {
+      people.push({ name, email })
+      console.log(people)
+      setpeople(people)
+      setName("")
+      setEmail("")
+    }
+    console.log('helo world')
+  }
+
+  return <>
+    <article>
+      <form onSubmit={submitHandler} className='form'>
+
+        <div className='form-control'>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id='name' value={name} onChange={(e) => { setName(e.target.value) }} />
+        </div>
+        <div className='form-control'>
+          <label htmlFor="email">Email :</label>
+          <input type="email" id='email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
+        </div>
+
+        <button type='submit'>Add User</button>
+      </form>
+    </article>
+    <article>
+      {people.map((person) => {
+        const { name, email } = person; // Each child in a list should have a unique "key" prop
+        console.log("inside article 2")
+        return (
+          <div className='item'>
+            <h4>{name} </h4>
+            <h5>{email} </h5>
+          </div>
+        )
+      })}
+    </article>
+  </>;
+};
+
+export default ControlledInputs;
+--------------------------------------------------
+
+--------------------------------------------------
+
+
+================================
+--------------------------------------------------
+
+--------------------------------------------------
+
+--------------------------------------------------
+--------------------------------------------------
+
+--------------------------------------------------
+
+--------------------------------------------------
+================================
+
+
+
+================================
+
+
+
+================================
+
+================================
+
+
+
+================================
+
+
+
+================================
+
+================================
+
+
+
+================================
