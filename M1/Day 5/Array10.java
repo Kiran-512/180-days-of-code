@@ -33,7 +33,7 @@ class Array10
 		for(int i=0;i<b1.length;i++){//Row
 			for(int j=0;j<b1.length;j++){//Col
 		
-				c[i][j]= a[i][j]+b[i][j];
+				c1[i][j]= a1[i][j]+b1[i][j];
 				}
 				//System.out.println();
 		}
