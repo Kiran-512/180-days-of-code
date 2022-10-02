@@ -16,11 +16,11 @@ cat Dockerfile > FROM tomcat
 
 ls
 
-docker build -t tomcat_1.0 . // build tomcat image with the name tomcat_1.0 . dot shows present directory
+docker build -t tomcat_1.0 . // build tomcat image with the name tomcat_1.0 . dot shows present directory// with -f/path -- here we can specify the path too!
 
 docker image ls
 
-docker run -d -p 8080:8080 tomcat_1.0
+docker run -d -p 8080:8080 tomcat_1.0 // -d deamon process and -p for making it public to get access from outside! and here 8080 is container is running on and another 8080 is for exposing the tomcat outside at that port // here this inside docker container tomcat is running and its exposed to 8080 and container is also exposed to 8080 but EC2 machine inbound rule also need to exposed to 8080 for acces from outside!  
 
 docker ps
 
@@ -65,10 +65,11 @@ Docker other commands :
 username : 
 password :
 
+=> docker images
 
-tag images  to push on docker hub :
+tag images to push on docker hub : here the images is tagged with the docker hub username so the we can use that new image withthe dockername/imageID to psuh it one th dokcer hub 
 
-=> docker tag 8069ad1ece94 kiranyadav512/sample_1.0
+=> docker tag 8069ad1ece94 kiranyadav512/sample_1.0 // 8069ad1ece94 is image ID
 
 here,
 kiranyadav512/sample_1.0 => docker_username/image_name
