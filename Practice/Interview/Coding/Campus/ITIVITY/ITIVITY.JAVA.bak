@@ -1,0 +1,46 @@
+import java.util.*;
+
+class ITIVITY{
+
+static String printPattern(List<Integer> lengths){
+
+	int n=lengths.size();
+
+	String pattern="";
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			if(j==n-1)
+			{
+				pattern+="#\n";
+			}
+			else if(i==0||j==0||i==n-1)
+			{
+				pattern+="# ";
+			}
+			else{
+				pattern+="  ";
+			}
+		}
+	}
+	return pattern;
+}
+
+
+public static void main(String... args){
+
+
+	List<Integer> lengths = new ArrayList<>();
+	
+	for(int i=0;i<(Math.random())*10;i++)
+	{
+		lengths.add(i);	
+	}
+	String s = printPattern(lengths);
+	System.out.println(s);
+
+
+}
+
+}
