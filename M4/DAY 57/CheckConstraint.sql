@@ -24,8 +24,9 @@
 
 #auto_increment 
 - it will increment the value in particular column with the auto-increment column clause by 1 each time user insert into the table
-- EVEN if user gives wrong input and entry wont bve inserted into the table bu tstill auto_increment will be incremented
- 
+- if user gives wrong input and entry wont bve inserted into the table then auto_increment will not be incremented
+- If the insert worked and we deleted that record then the last updated value is reserved and continued with autoincrement!
+
 =>  to make the use of default and auto_increment use below insert statement
 insert into emp(ename,deptno,comm,mob_no) 
 value();

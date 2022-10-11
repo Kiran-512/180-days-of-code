@@ -159,7 +159,7 @@ alter table emp
 -- ==============================================================
 
 
-
+#Clear Screen in MySQL Terminal -> \! cls
 
 
 

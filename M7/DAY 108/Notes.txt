@@ -168,9 +168,23 @@ Practical use of sealed class :
 - In case of multiple inheritence with the interface, the common method of any interface must be implemented explictely to have diff implementations of   the same method in implementing class!
 - All methods in the interface are public implicitely hence even if we give it explicitely it will give us an error!
 - Interfaces are like abstract class only and it also inherits from Object class!!!
-- only static variables are allowed/ static constructor also allowed!
+- only static variables are allowed/ static constructor also allowed!.net core
 - all method are default public and abstract!
-- method implementaiton is given for the some methods in .netCore ONLY!
+- method implementaiton is given for the some methods in .netCore ONLY! 
+
+static constructor, static variables and defMethod(){} in interafce is available in .netCore in c#8.0 
+
+static Idemo() { 
+        
+}
+
+static int i;
+
+void defMethod() { 
+        
+}
+        
+        
 
 Multiple Inheritence : Interfaces 
 
