@@ -1,0 +1,13 @@
+================
+Working the react :
+
+Create the UI
+Contact server
+Routing
+State Management!
+
+================
+JSON is variable exchange format!
+
+JSON is input or output!
+

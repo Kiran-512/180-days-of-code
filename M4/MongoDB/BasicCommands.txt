@@ -1,0 +1,80 @@
+Database - Database
+Tables - Collections
+Rows - Documents
+Columns - Fields
+================
+show dbs - to view all databases
+
+use database_name - will create and switch to the new database
+
+dbs - shows current database
+
+db.dropdatabase()
+
+use kiran
+
+================
+
+
+show collections
+
+-- Create a collection names "comments"
+
+db.createCollection('comments')
+
+db.comments.drop()
+
+================
+
+db.comments.insert({'name':'Kiran',
+'lang':'JS',
+'member_since':'5 years'})
+
+
+db.comments.insertMany([{'name':'Kiran',
+'lang':'JS',
+'member_since':'5 years'},
+{'name':'Rahul',
+'lang':'JS',
+'member_since':'5 years'},
+{'name':'Pankaj',
+'lang':'JS',
+'member_since':'5 years'}
+])
+
+Objectid : Primary Key
+
+
+Show all rows in a collection
+db.comments.find();
+
+db.comments.find().pretty();
+
+
+================
+Searching 
+
+
+db.comments.find({"name" :"Kiran"}).pretty();
+
+
+================
+Limit the rows in the op :
+db.comments.find().limit(2);
+
+
+count will count all the document in a collections
+
+db.comments.find().limit(2).count();
+
+================
+Sorting :
+
+db.comments.find().sort({field : value })
+
+================
+
+
+
+
+================

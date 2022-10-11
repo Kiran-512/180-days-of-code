@@ -1,0 +1,97 @@
+Spring Boot annotations:
+
+@SpringBootApplication
+
+@EnableAutoConfiguration + @ComponentScan
++ @Configuration
+
+AutoConfiguration of dependecies like web, myswl jpa etc
+
+ComponentScan to scan the beans!
+
+@Configuration
+- to configure class and make the beans for IOC containers
+
+-----------------------------
+@Configuration
+- Class that returns a bean for IOC container management!
+- source of beans!
+- Method will be returning the objects of the another classes
+
+
+@Bean
+- used on method that returns the object!
+- life cycle of the object is managed by IoC in spring!
+
+
+@Component/@Component("concise_name")
+- used on class
+- spring manages the object life cycle of the object for this class
+- object is autowired
+
+
+@ComponentScan(basePackages = {"pack1","pack2"})
+
+if the configuration class is in the dif package and our component class is in the another package then we must use ComponentScan!
+
+-----------------------------
+Type of @Component => 
+@Controller : Presentation Layer 
+@Service : Servcie Layer
+@Repository : Dao Layer
+
+
+
+When we have two beans returning the object of the same class then bean must eb given name as
+@Bean("STUDENT1")
+
+AND AFTER AUTOWIRED WE must use below
+@Qualifier("student1")
+
+@Bean("name")
+@Lazy
+
+-----------------------------
+@RequestMapping(value="/home", method =RequestMethod.GET)
+
+
+@RequestBody
+annotations tell a controller that the object returned is automatically serialised into a json and passed bvack into http response!
+
+
+@RestController
+@ResponseBody is not need when we send the data from server to client in the form of JSON! Tht object to json serilisation taken care by RestController!
+
+
+
+@RequestMapping(value="/user/{userID}")
+
+@PathVariable
+
+-----------------------------CommandLineRunner
+- used to run a code block only once  in applications lifetime - after application is initialised
+
+- used to indicate that a bean should run when it is contained within a springAppliaction. A spring Boot Application can have multiple bean implementing CommandLineRunner
+
+
+Three ways to implement the commandLinerRunner
+
+- using CommandLineRunner as @Component
+-implement CommandLineRunner in @SpringBootApplication
+- Using CommandLineRunner as @Bean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+Lambda Expression:
+Functional Interface:
+Default methods and static methods
+Predefined functional Interfaces
+Double Colon Operator (::)
+Stream API
+Date and time API
+Optional Class
+Nashron JavaScript Engine
+
+
+Lambda Expression is an anonymous function with no name, no return type and no access modifiers!
+
+()->{}
+
+
+Functional programming in java is introduced in 1.8 in 2014 before that other major PL likde C,C++, Ruy python already ahs these feautres!
+
+Functional Programming is nothing but hte using functions in expressions, statements and passing functionas at an arguments!
+
+FP in Java 8 has made to write concise code and reduced the boiler plates!
+
+n->n*n; // method that returns a square of a number using lambda!
+
+
+@functionalInterface
+
+Runnable java.lang
+Comparable java.lang
+Comparator java.util
+
+java.util.function.* :
+Function 
+Predicate
+Consumer 
+Supplier
+
+Marker Interface :
+Cloneable!
+Serializable!
+
+

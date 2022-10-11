@@ -57,6 +57,11 @@ Commadn used to copy objects from s3 bucket :
 
 aws s3 cp s3://..path .
 
+. => (dot) represents the current directory here...
+
+Note :
+
+To use AWS CLI  - Make sure to configure aws with the secret key or else enable IMRole to use aws services with aws CLI!
 
 =======================
 Docker other commands :

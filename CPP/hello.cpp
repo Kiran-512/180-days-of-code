@@ -568,7 +568,7 @@ struct employee
     int eId;
     char favChar;
     float salary;
-};
+} ;
 
 typedef struct employe
 {
@@ -576,8 +576,15 @@ typedef struct employe
     char favChar;
     float salary;
 } ep;
+// struct employeee
+// {
+//     int eId;
+//     char favChar;
+//     float salary;
+// } ep; => Error
 
-//Unions
+//Unions - union  of data typethe latest assigned value will be picked always!
+// one from union is choosen when we access union value!
 union money{
 
     int rice;
@@ -662,7 +669,7 @@ int sum(int a,int b){// former params
     return a+b;
 }
 
-void g(){cout<<"Hello, Goo afternoon"<<endl;} // 'g' was not declared in this scope
+void g(){cout<<"Hello, Good afternoon"<<endl;} // 'g' was not declared in this scope
 
 //Former params and actual params
 
@@ -772,14 +779,300 @@ int main21(){
 int addition(int a,int b){return a+b;}
 int addition(int a,int b,int c){return a+b+c;}
 
-int main(){
+int main22(){
     cout<<addition(3,4)<<endl;//7
     cout<<addition(3,4,5)<<endl;//12
     return 0;
 }
 
 // ======================  OOP in C++
+/*
+Need of OOPS in C :
+- As the size of the program increases readability, maintainability and bug free nature of program decreases!
+- This was the major problem of the c lang taht it relied on function and procedure!
+- data was almost neglect in POPL procedural oriented programming langauges!
+- data security was easily compromised without oops
+- Using classes this problem is solved!
+
+What is POPL ?
+- Consist of set of instructions
+- main focus is on functions and not on flow of data
+- Functions can either use local or global data
+- Data moves openly from function to function!
+
+What is OOPS?
+- Works on the concept of the cl;asses and objects
+- a class is a template to create the objects
+- Treats the data as a critical element
+- Decomponses teh problem in objects and builds data and functions around the objects!
+
+Benefits of OOPS :
+Four major pillars :
+- Encapsulation, Inheritence, Polymorphism and Abstraction! 
+- Better code resuability using objects and inheritence
+- Principle of data hiding helps build secure system
+- Multiple objects can co-exists without any interference!
+- Software complexity can be easily managed!
+
+*/
+// ======================  classes in CPP
+class Employee {
+
+    public :
+        int a,b,c;
+        void setData(int a, int b,int c);//Declaration of method 
+        int setData1(int a){ // declaration and implementation together
+            return a*2;
+        }
+        void getData(){
+        cout<< "The value of a is "<<a<<endl;
+        cout<< "The value of b is "<<b<<endl;
+        cout<< "The value of c is "<<c<<endl;
+        cout<< "The value of d is "<<d<<endl;
+        cout<< "The value of e is "<<e<<endl;
+        };
+    private :
+    int d,e;
+    //int c;//redeclaration of 'int Employee::c'
+};
+void Employee :: setData(int a1,int b1, int c1){
+    d=a1;
+
+}
+
+class Student{
+
+//class = struct + more
+//properties and methods 
+//structures in c++ are typedefed
+// can have private or public members!
+// bydefault every member and function is private in classes in c++
+
+}kiran, rahul, pranit;
+
+#include<string>
+class binary{
+
+    string s;// private bedefault
+
+public :
+    void read(void);
+    void chk_bin(void);
+    void one_compliment(void);
+    void display();
+
+};
+
+void binary :: read(void){
+    cout<<"Enter a binary number"<<endl;
+    cin>>s;
+
+}
+void binary :: chk_bin(void){
+for (int i = 0; i < s.length(); i++)
+{
+    if(s.at(i)!='0' && s.at(i)!='1')
+    {
+        cout<<"Incorrect binary fomrat"<<endl;
+        exit(0);
+    }
+}
+        cout<<"Number is in Correct binary fomrat"<<endl;
+}
+
+int main23(){
+
+    Employee kiran;
+    kiran.a = 100;
+    kiran.b=200;
+    kiran.setData(1,2,3);
+    kiran.getData();
+    kiran.c = kiran.setData1(10);
+    cout<<"The value of c is "<<kiran.c<<endl;//The value of c is 20
+
+//   kiran.c=500;// inaccessible as its private
+//   kiran.e=300;// inaccessible as its private 
+
+//binary class
+
+    binary b;
+    b.read();
+    b.chk_bin();
+
+}
+/*
+
+PS C:\CDAC\Github\180-days-of-code\CPP> g++ ./hello.cpp
+PS C:\CDAC\Github\180-days-of-code\CPP> .\a.exe
+The value of a is 100
+The value of b is 200
+The value of c is 4209136
+The value of d is 1
+The value of e is 4209227
+The value of c is 20
+Enter a binary number
+1111
+Number is in Correct binary fomrat
+
+*/
+
+// ======================  object memory allocation and using array in classes 
+
+class Shop{
+
+    //int itemId[];//incomplete type is not allowedC/C++(70)
+    int itemId[100];
+    int itemPrice[100];
+    int counter;
+    public:
+    void inittCounter(){counter=1;}
+    void getItem(void);
+    void setPrice();
+};
+
+void Shop::setPrice(){
+    cout<<"Enter the ID of your Item no"<<counter<<endl;
+    cin>>itemId[counter];
+    cout<<"Enter the Price of Item"<<endl;
+    cin>>itemPrice[counter];
+    counter++;
+}
+
+void Shop::getItem(){
+    for (int i = 1; i < counter; i++)
+    {
+        cout<<"For item no "<<itemId[i] <<" price is "<<itemPrice[i]<<endl;
+        /* code */
+    }
+    
+}
+//void main(){}//'::main' must return 'int'
+int main24(){
+    Shop shop;
+    shop.inittCounter();
+
+    shop.setPrice();
+    shop.setPrice();
+    shop.setPrice();
+
+    shop.getItem();
+    //return 0; Its okay even if 0 is not returned system will return 0 implicitely!!
+ }
+/*
+PS C:\CDAC\Github\180-days-of-code\CPP> g++ ./hello.cpp
+PS C:\CDAC\Github\180-days-of-code\CPP> .\a.exe        
+Enter the ID of your Item no1
+1
+Enter the Price of Item
+11
+Enter the ID of your Item no2
+2
+Enter the Price of Item
+22
+Enter the ID of your Item no3
+3
+Enter the Price of Item
+33
+For item no 1 price is 11
+For item no 2 price is 22
+For item no 3 price is 33
+PS C:\CDAC\Github\180-days-of-code\CPP> 
+*/
+// ======================  Static variable
+
+#include<string>
+class Emploiyee{
+    int id;
+    string name;
+    static int count;// initialisation of static variable is not allowed here, we can initialise it outside of the class
+    public :
+    void setData();
+    void getDetails();
+    int countTotal(){return count;} 
+    static int getCount(){return count;}
+};
+int Emploiyee::count;// static variables must be redeclared outside of the class 
+//default value fo static int is 0
 
 
+void Emploiyee::getDetails(){
+    cout<<"id of the employee is "<<id<<endl;
+    cout<<"Name of the employee is "<<name<<endl;
+}
+
+void Emploiyee::setData(){
+    cout<<"Enter the ID and name of the employee"<<endl;
+    cin>>id>>name;
+    count++;
+}
+
+int main25(){
+    Emploiyee emp1;
+    Emploiyee emp2;
+    Emploiyee emp3;
+
+    emp1.setData();
+    emp2.setData();
+    emp3.setData();
+
+    emp1.getDetails();
+
+    cout<<emp1.countTotal()<<endl;
+    cout<<"Total no fo employee is "<<Emploiyee::getCount()<<endl;
+
+    return 0;
+}
+/*
+PS C:\CDAC\Github\180-days-of-code\CPP> g++ ./hello.cpp
+PS C:\CDAC\Github\180-days-of-code\CPP> .\a.exe        
+Enter the ID and name of the employee
+1 kiran
+Enter the ID and name of the employee
+2 rahul
+Enter the ID and name of the employee
+3
+kishore
+id of the employee is 1
+Name of the employee is kiran
+3
+Total no fo employee is 3
+PS C:\CDAC\Github\180-days-of-code\CPP>
+*/
+// ======================  Array of Objects & Passing Objects as Function Arguments
+class EmployeeTest{
+    int id;
+    string name;
+    float salary;
+    public :
+    void setData(){
+        salary=122;
+        cout<<"Enter the ID "<<endl;
+        cin>>id;
+        cout<<"Enter the name "<<endl;
+        cin>>name;
+    }
+    void showData(){
+        cout<<"ID : "<<id<<endl;
+        cout<<"Name : "<<name<<endl;
+    }
+
+};
+int main(){
+    EmployeeTest emp1;
+
+    return 0;
+}
 // ======================  
 // ======================  
+// ======================  
+// ======================  
+
+/*
+
+Compilation on terminal :
+
+g++ ./hello.cpp
+.\a.exe 
+
+
+*/

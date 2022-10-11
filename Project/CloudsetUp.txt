@@ -1,0 +1,29 @@
+Create EC2 Ubuntu free tier
+
+connect
+
+inbound rules
+
+sudo su
+apt update
+java
+install java with show command
+
+apt install mysql-server
+
+mysql
+
+create user 'caretaker'@'%' identified by 'caretaker';
+
+grant all privilages on *.* on 'caretaker'@'%' with grant option;
+
+ALTER USER 'caretaker'@'% IDENTIFIED WITH mysql_native_password BY 'caretaker';
+
+uninstall package : 
+sudo apt-get purse mysql-client-core-8.0
+
+
+ 
+
+
+
