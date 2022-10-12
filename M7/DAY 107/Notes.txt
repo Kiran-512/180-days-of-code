@@ -190,8 +190,15 @@ private protected - same class, derived class which are in the same assembly!
 
 Default access specifiers : 
 Default access modifier for class ,struct, Interface, Enum, Delegate is Internal. 
-Default access modifier for class and struct members is private. 
-No access modifier can be applied to interface members and always interface members are public
+
+top level class: internal
+method: private
+members (unless an interface or enum): private (including nested classes)
+members (of interface or enum): public
+constructor: private (note that if no constructor is explicitly defined, a public default constructor will be automatically defined)
+delegate: internal
+interface: internal
+explicitly implemented interface member: public!
 
 
 =====================
