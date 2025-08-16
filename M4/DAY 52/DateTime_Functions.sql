@@ -23,9 +23,87 @@
 
 #TO_DAYS()
 
+	| Function / Syntax                       | Valid in MySQL? | Notes / Correct Usage                                                               |
+| --------------------------------------- | --------------- | ----------------------------------------------------------------------------------- |
+| `DATEADD(date1, n)`                     | ❌               | MySQL does **not** have `DATEADD()`. Use `DATE_ADD(date, INTERVAL n unit)` instead. |
+| `DATEADD(date1, -n)`                    | ❌               | Same as above; use `DATE_SUB(date, INTERVAL n unit)`.                               |
+| `dateaddd(date1 INTERVAL n month/year)` | ❌               | Misspelled. Correct: `DATE_ADD(date1, INTERVAL n MONTH)` or `INTERVAL n YEAR`.      |
+| `DATEDIFF(date1, date2)`                | ✅               | Returns number of **days** between `date1` and `date2`.                             |
+| `DATE_ADD(date, INTERVAL n month/year)` | ✅               | Correct syntax. Adds months, years, days, etc.                                      |
+| `ADDTIME(time, expr)`                   | ✅               | Adds a time interval to a time/datetime.                                            |
+| `DAYNAME(date)`                         | ✅               | Returns weekday name, e.g., 'Saturday'.                                             |
+| `LAST_DATE()`                           | ❌               | Incorrect. MySQL uses `LAST_DAY(date)` to get month-end.                            |
+| `SYSDATE()`                             | ✅               | Returns current system datetime, evaluated **at call time**.                        |
+| `NOW()` / `CURRENT_TIMESTAMP`           | ✅               | Returns current datetime, evaluated **once per statement**.                         |
+
+| Function   | Syntax                            | Description                                                                 |
+| ---------- | --------------------------------- | --------------------------------------------------------------------------- |
+| `DATE_ADD` | `DATE_ADD(date, INTERVAL n unit)` | Adds a specific interval (DAY, MONTH, YEAR, HOUR, MINUTE, SECOND) to a date |
+| `DATE_SUB` | `DATE_SUB(date, INTERVAL n unit)` | Subtracts a specific interval from a date                                   |
+| `ADDTIME`  | `ADDTIME(time, expr)`             | Adds a time value to a time or datetime                                     |
+| `SUBTIME`  | `SUBTIME(time, expr)`             | Subtracts a time value from a time or datetime                              |
+
+| Function   | Syntax                   | Description                                          |
+| ---------- | ------------------------ | ---------------------------------------------------- |
+| `DATEDIFF` | `DATEDIFF(date1, date2)` | Returns the difference in **days** between two dates |
+| `TIMEDIFF` | `TIMEDIFF(time1, time2)` | Returns difference between two times or datetimes    |
+
+| Function    | Syntax                            | Description                                  |
+| ----------- | --------------------------------- | -------------------------------------------- |
+| `YEAR`      | `YEAR(date)`                      | Extracts the year from a date                |
+| `MONTH`     | `MONTH(date)`                     | Extracts the month number (1–12)             |
+| `DAY`       | `DAY(date)` or `DAYOFMONTH(date)` | Extracts the day of the month                |
+| `HOUR`      | `HOUR(time)`                      | Extracts hour                                |
+| `MINUTE`    | `MINUTE(time)`                    | Extracts minute                              |
+| `SECOND`    | `SECOND(time)`                    | Extracts second                              |
+| `DAYNAME`   | `DAYNAME(date)`                   | Returns weekday name, e.g., 'Saturday'       |
+| `MONTHNAME` | `MONTHNAME(date)`                 | Returns month name, e.g., 'August'           |
+| `DAYOFWEEK` | `DAYOFWEEK(date)`                 | Returns weekday number (1=Sunday…7=Saturday) |
+| `WEEKDAY`   | `WEEKDAY(date)`                   | Returns weekday number (0=Monday…6=Sunday)   |
+| `QUARTER`   | `QUARTER(date)`                   | Returns quarter (1–4)                        |
+| `DAYOFYEAR` | `DAYOFYEAR(date)`                 | Returns day of year (1–366)                  |
+| `WEEK`      | `WEEK(date)`                      | Returns week number of the year              |
+
+| Function   | Syntax                           | Description                              |
+| ---------- | -------------------------------- | ---------------------------------------- |
+| `LAST_DAY` | `LAST_DAY(date)`                 | Returns the last day of the month        |
+| `MAKEDATE` | `MAKEDATE(year, day_of_year)`    | Returns a date from year and day-of-year |
+| `MAKETIME` | `MAKETIME(hour, minute, second)` | Returns a time from hour, minute, second |
+
+| Function          | Syntax            | Description           |
+| ----------------- | ----------------- | --------------------- |
+| `NOW()`           | `NOW()`           | Current date and time |
+| `CURRENT_DATE`    | `CURRENT_DATE`    | Current date only     |
+| `CURRENT_TIME`    | `CURRENT_TIME`    | Current time only     |
+| `CURDATE()`       | `CURDATE()`       | Current date only     |
+| `CURTIME()`       | `CURTIME()`       | Current time only     |
+| `UTC_DATE()`      | `UTC_DATE()`      | Current UTC date      |
+| `UTC_TIME()`      | `UTC_TIME()`      | Current UTC time      |
+| `UTC_TIMESTAMP()` | `UTC_TIMESTAMP()` | Current UTC datetime  |
+
+| Function         | Syntax                      | Description                    |
+| ---------------- | --------------------------- | ------------------------------ |
+| `STR_TO_DATE`    | `STR_TO_DATE(str, format)`  | Converts string to date        |
+| `DATE_FORMAT`    | `DATE_FORMAT(date, format)` | Formats date into a string     |
+| `TIME_FORMAT`    | `TIME_FORMAT(time, format)` | Formats time into a string     |
+| `UNIX_TIMESTAMP` | `UNIX_TIMESTAMP([date])`    | Returns Unix timestamp         |
+| `FROM_UNIXTIME`  | `FROM_UNIXTIME(timestamp)`  | Converts timestamp to datetime |
+
+
 -- =======================================================
 LIST Functions :
 - independent of datatype
+
+	| Function                                             | Description / Notes                                                                      |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `COALESCE(expr1, expr2, ...)`                        | Returns the first **non-NULL** value. Works with numbers, strings, dates, etc.           |
+| `NULLIF(expr1, expr2)`                               | Returns `NULL` if `expr1 = expr2`, else returns `expr1`. Works with most datatypes.      |
+| `CASE`                                               | Conditional expressions; works for any datatype.                                         |
+| `IFNULL(expr1, expr2)` (MySQL)                       | Returns `expr2` if `expr1` is NULL. Works for numbers, strings, dates.                   |
+| `GREATEST(expr1, expr2, ...)`                        | Returns the **largest value**; can work for numbers, strings (lexicographically), dates. |
+| `LEAST(expr1, expr2, ...)`                           | Returns the **smallest value**; similar rules as `GREATEST`.                             |
+| `CAST(expr AS datatype)` / `CONVERT(expr, datatype)` | Converts between datatypes, flexible.                                                    |
+| `COALESCE` + `CASE`                                  | Often used together for datatype-independent logic.                                      |
 
 
 -- =======================================================
@@ -447,6 +525,15 @@ Rahul Deshmukh	low Income
 Rahul Pandey	low Income
 */
 
+/*UPDATE USING CASE :*/
+UPDATE emp
+SET salary = CASE
+    WHEN deptno = 10 THEN salary * 1.10   -- 10% increase for dept 10
+    WHEN deptno = 20 THEN salary * 1.05   -- 5% increase for dept 20
+    ELSE salary                            -- others remain same
+END
+WHERE deptno IN (10, 20, 30);
+
 -- ====================================================================
 #Environment function (Only for MySQL)
 
@@ -530,6 +617,7 @@ yednaP luhaR
 
 #random floating values
 SELECT RAND() from dual;
+
 
 
 
