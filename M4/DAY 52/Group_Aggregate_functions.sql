@@ -232,7 +232,7 @@ having count(*)>=3;
 
 #Below Works ONLY in Oracle AND not in any RDBMS:
 -- Nesting of group functions is allowed only in oracle
-select deptno, (sum(sal)) from emp 
+select deptno, max(sum(sal)) from emp 
 group by deptno; 
 
 #Solution in MySQL
@@ -240,5 +240,6 @@ group by deptno;
  select max(sum_sal) from
  (select sum(sal) as sum_sal from emp  
  group by deptno) as temp;  			-- => Here alias is given to the temp table created with the select statements O/P
+
 
 -- ============================================================
