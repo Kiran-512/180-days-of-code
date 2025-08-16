@@ -327,7 +327,7 @@ drop index u_emp_empno on emp;
 /*
 Imporatant summary of duplicate and null in indexes and constraints
 
-index - duplicates allowed but null are not allowed!
+index - duplicates allowed but null are also* allowed!
 
 unique index - duplicate are not allowed but null are allowed!
 
@@ -336,5 +336,53 @@ primary key - duplicate not allowed and even null is also not allowed!
 not null - duplicate are allowed  but null are not allowed
 
 unique - duplicate are not allowed but null are allowed any no of times
+
+| Feature / Constraint             | Duplicates Allowed? | NULLs Allowed?                                 | Notes                                                                                  |
+| -------------------------------- | ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **Index**                        | Yes                 | Yes                                            | Regular (non-unique) index doesn’t prevent duplicates or nulls.                        |
+| **Unique Index**                 | No                  | Yes (once in SQL Server, multiple in some DBs) | Prevents duplicate values. Allows NULLs (number depends on DB).                        |
+| **Primary Key**                  | No                  | No                                             | Automatically creates a unique clustered index. Cannot have NULLs.                     |
+| **NOT NULL** (column constraint) | Yes                 | No                                             | Ensures column cannot be NULL but duplicates allowed.                                  |
+| **UNIQUE** (column constraint)   | No                  | Yes                                            | Enforces uniqueness but allows NULLs (SQL Server treats multiple NULLs as duplicates).MySQL allows any number of NULLs in a UNIQUE column. |
+
+
+| Feature          | Clustered Index                    | Non-Clustered Index                                  |
+| ---------------- | ---------------------------------- | ---------------------------------------------------- |
+| Physical order   | Data is stored in index order      | Data stored separately; index points to data         |
+| Number per table | Only 1                             | Multiple allowed                                     |
+| Use case         | Range queries, primary key lookups | Columns frequently searched, not primary key         |
+| Storage          | Impacts table storage              | Separate from table storage                          |
+| Performance      | Fast for retrieval by key/range    | Fast for selective queries, may require extra lookup |
+
+💡 Tip:
+Use clustered index on columns frequently used in sorting or range queries (like IDs or dates).
+Use non-clustered indexes on columns frequently used in WHERE, JOIN, or ORDER BY clauses that aren’t the clustered key.
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY CLUSTERED,  -- automatically creates clustered index
+    Name VARCHAR(50),
+    Department VARCHAR(50)
+);
+
+CREATE CLUSTERED INDEX idx_EmployeeID
+ON Employees(EmployeeID);
+
+
+CREATE NONCLUSTERED INDEX idx_Department
+ON Employees(Department);
+
+
+MS SQL 
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,  -- automatically creates a clustered index
+    Name VARCHAR(50),
+    Department VARCHAR(50)
+);
+
+
+CREATE NONCLUSTERED INDEX idx_Department
+ON Employees(Department);
+
+
 
 */
