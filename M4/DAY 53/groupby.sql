@@ -124,5 +124,199 @@ group by deptno;
 
 
 
+-- #GROUP BY vs PARTITION BY
+
+--📋 Example Table: Orders
+--| OrderID | CustomerID | OrderAmount |
+| ------- | ---------- | ----------- |
+| 101     | C1         | 100         |
+| 102     | C1         | 200         |
+| 103     | C2         | 300         |
+| 104     | C2         | 400         |
+| 105     | C3         | 500         |
+
+🔹 Using GROUP BY
+SELECT CustomerID, SUM(OrderAmount) AS TotalSales
+FROM Orders
+GROUP BY CustomerID;
 
 
+Result:
+
+| CustomerID | TotalSales |
+| ---------- | ---------- |
+| C1         | 300        |
+| C2         | 700        |
+| C3         | 500        |
+
+
+--👉 Rows are collapsed — one row per customer. You lose individual orders.
+
+🔹 Using PARTITION BY with a window function
+SELECT 
+    CustomerID,
+    OrderID,
+    OrderAmount,
+    SUM(OrderAmount) OVER(PARTITION BY CustomerID) AS TotalSales
+FROM Orders;
+
+
+Result:
+| CustomerID | OrderID | OrderAmount | TotalSales |
+| ---------- | ------- | ----------- | ---------- |
+| C1         | 101     | 100         | 300        |
+| C1         | 102     | 200         | 300        |
+| C2         | 103     | 300         | 700        |
+| C2         | 104     | 400         | 700        |
+| C3         | 105     | 500         | 500        |
+
+--👉 Rows are not collapsed — each order is still listed, but now you see the customer’s total alongside each row.
+
+--✅ Quick way to phrase it in an interview:
+
+--“GROUP BY collapses rows into one summary row per group. PARTITION BY doesn’t collapse rows; instead, it applies the aggregation per group but shows it on each row.”
+
+  --✅ Why PARTITION BY helps
+
+--With window functions, SQL Server doesn’t require you to collapse rows. So you can mix:
+
+--Detail columns (OrderID, OrderAmount)
+
+--Aggregates per group (SUM() OVER(PARTITION BY ...))
+--
+--That’s why this works fine:
+
+SELECT 
+    CustomerID,
+    OrderID,
+    OrderAmount,
+    SUM(OrderAmount) OVER(PARTITION BY CustomerID) AS TotalSales,
+    AVG(OrderAmount) OVER(PARTITION BY CustomerID) AS AvgOrderAmount,
+    COUNT(*) OVER(PARTITION BY CustomerID) AS NumOrders
+FROM Orders;
+
+
+Result:
+
+| CustomerID | OrderID | OrderAmount | TotalSales | AvgOrderAmount | NumOrders |
+| ---------- | ------- | ----------- | ---------- | -------------- | --------- |
+| C1         | 101     | 100         | 300        | 150            | 2         |
+| C1         | 102     | 200         | 300        | 150            | 2         |
+| C2         | 103     | 300         | 700        | 350            | 2         |
+| C2         | 104     | 400         | 700        | 350            | 2         |
+| C3         | 105     | 500         | 500        | 500            | 1         |
+
+  
+--👉 Each order row keeps its details, while aggregate stats are added alongside.
+
+
+--  RANK() OVER (PARTITION BY <grouping_column> ORDER BY <criteria_column> [ASC|DESC])
+
+Example: Rank by Multiple Criteria
+
+You can even rank by more than one column. For example, by performance_score descending, then by experience ascending:
+
+SELECT
+    department_id,
+    employee_name,
+    performance_score,
+    years_experience,
+    RANK() OVER (
+        PARTITION BY department_id
+        ORDER BY performance_score DESC, years_experience ASC
+    ) AS performance_rank
+FROM employees;
+
+--Example: Rank by Multiple Criteria
+
+--You can even rank by more than one column. For example, by performance_score descending, then by experience ascending:
+
+SELECT
+    department_id,
+    employee_name,
+    performance_score,
+    years_experience,
+    RANK() OVER (
+        PARTITION BY department_id
+        ORDER BY performance_score DESC, years_experience ASC
+    ) AS performance_rank
+FROM employees;
+
+  
+/*
+🔹 1. ROW_NUMBER()
+
+Assigns a unique sequential number to each row in a partition.
+
+No ties — every row gets a distinct number.
+
+SELECT 
+    CustomerID,
+    OrderAmount,
+    ROW_NUMBER() OVER(PARTITION BY CustomerID ORDER BY OrderAmount DESC) AS RowNum
+FROM Orders;
+
+
+👉 If two rows have the same value, they still get different numbers.
+
+🔹 2. RANK()
+
+Assigns a rank number to rows.
+
+If two rows tie (same value), they get the same rank.
+
+But it skips the next rank(s).
+
+Example: If two rows tie at rank 1, the next row will be rank 3 (not 2).
+
+🔹 3. DENSE_RANK()
+
+Similar to RANK().
+
+If two rows tie, they get the same rank.
+
+But it does not skip the next rank.
+
+Example: If two rows tie at rank 1, the next row will be rank 2.
+
+| OrderID | CustomerID | OrderAmount |
+| ------- | ---------- | ----------- |
+| 101     | C1         | 500         |
+| 102     | C1         | 500         |
+| 103     | C1         | 400         |
+| 104     | C1         | 300         |
+
+SELECT 
+    OrderID,
+    CustomerID,
+    OrderAmount,
+    ROW_NUMBER() OVER (PARTITION BY CustomerID ORDER BY OrderAmount DESC) AS RowNum,
+    RANK() OVER (PARTITION BY CustomerID ORDER BY OrderAmount DESC) AS RankNo,
+    DENSE_RANK() OVER (PARTITION BY CustomerID ORDER BY OrderAmount DESC) AS DenseRankNo
+FROM Orders
+WHERE CustomerID = 'C1';
+
+| OrderID | OrderAmount | ROW_NUMBER | RANK | DENSE_RANK |
+| ------- | ----------- | ---------- | ---- | ---------- |
+| 101     | 500         | 1          | 1    | 1          |
+| 102     | 500         | 2          | 1    | 1          |
+| 103     | 400         | 3          | 3    | 2          |
+| 104     | 300         | 4          | 4    | 3          |
+
+Summary (Interview Version)
+
+ROW_NUMBER() → Always unique, no ties.
+
+RANK() → Ties get same rank, but gaps appear.
+
+DENSE_RANK() → Ties get same rank, no gaps.
+
+💡 Pro Tip: In interviews, mention use cases:
+
+ROW_NUMBER() → Picking one row per group (e.g., latest order per customer).
+
+RANK() → Competitions (like Olympic medals, where gaps are expected).
+
+DENSE_RANK() → Categories or tiers (where you don’t want gaps).
+
+*/
