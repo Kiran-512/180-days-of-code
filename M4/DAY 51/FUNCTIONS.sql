@@ -13,7 +13,124 @@
 8.TRIM
 9.SUBSTR
 =======================================================
+1. CONCAT
 
+Syntax:
+
+CONCAT(string1, string2)
+
+
+Purpose: Combines two strings into one.
+Example:
+
+SELECT CONCAT('Hello', ' World') AS greeting;
+-- Output: 'Hello World'
+
+2. UPPER
+
+Syntax:
+
+UPPER(column_name)
+
+
+Purpose: Converts all characters in a string to uppercase.
+Example:
+
+SELECT UPPER('hello') AS upper_case;
+-- Output: 'HELLO'
+
+3. LOWER
+
+Syntax:
+
+LOWER(column_name)
+
+
+Purpose: Converts all characters in a string to lowercase.
+Example:
+
+SELECT LOWER('HELLO') AS lower_case;
+-- Output: 'hello'
+
+4. RPAD
+
+Syntax:
+
+RPAD(column_name, n, ' ')
+
+
+Purpose: Pads a string on the right with spaces (or another character) to make it a fixed length of n.
+Example:
+
+SELECT RPAD('SQL', 6, ' ') AS padded_string;
+-- Output: 'SQL   ' (3 extra spaces)
+
+5. LPAD
+
+Syntax:
+
+LPAD(column_name, n, ' ')
+
+
+Purpose: Pads a string on the left with spaces (or another character) to make it a fixed length of n.
+Example:
+
+SELECT LPAD('SQL', 6, ' ') AS padded_string;
+-- Output: '   SQL' (3 spaces before)
+
+6. RTRIM
+
+Syntax:
+
+RTRIM(column_name)
+
+
+Purpose: Removes trailing spaces (on the right) from a string.
+Example:
+
+SELECT RTRIM('SQL   ') AS trimmed;
+-- Output: 'SQL'
+
+7. LTRIM
+
+Syntax:
+
+LTRIM(column_name)
+
+
+Purpose: Removes leading spaces (on the left) from a string.
+Example:
+
+SELECT LTRIM('   SQL') AS trimmed;
+-- Output: 'SQL'
+
+8. TRIM
+
+Syntax:
+
+TRIM(column_name)
+-- or
+TRIM(BOTH ' ' FROM column_name)
+
+
+Purpose: Removes both leading and trailing spaces from a string.
+Example:
+
+SELECT TRIM('   SQL   ') AS trimmed;
+-- Output: 'SQL'
+
+9. SUBSTR
+
+Syntax:
+
+SUBSTR(column_name, start_position, length)
+
+
+Purpose: Extracts a substring from a string, starting at start_position for length characters.
+Example:
+
+SELECT SUBSTR('Hello World', 7, 5) AS sub_string;
+-- Output: 'World'
 */
 
 create table students
@@ -664,3 +781,4 @@ select log(10,2) from dual;
 | **Conditional**    | `CASE`, `IF()`, `IFNULL()`, `NULLIF()`, `COALESCE()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Conditional logic                    |
 
 */
+
