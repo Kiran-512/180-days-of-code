@@ -789,3 +789,21 @@ select log(10,2) from dual;
 */
 
 
+
+| Function                                                                     | Description                     | Indexing                                            |
+| ---------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------- |
+| `INSTR(string, substring)`                                                   | Position of substring in string | **1-based** (first character = 1)                   |
+| `SUBSTR(string, start_pos, length)` / `SUBSTRING(string, start_pos, length)` | Extract substring               | **1-based** in Oracle, **1-based in standard SQL**  |
+| `LPAD(string, length, pad_char)`                                             | Pad left                        | Counting positions internally is **1-based**        |
+| `RPAD(string, length, pad_char)`                                             | Pad right                       | **1-based** internally                              |
+| `TRIM` / `LTRIM` / `RTRIM`                                                   | Remove spaces                   | Works on string characters, effectively **1-based** |
+
+SELECT SUBSTR('HELLO', 2, 3) FROM dual;  
+-- Output: 'ELL' (starts at position 2)
+
+
+SQL string functions are almost always 1-based (first character = position 1).
+
+0-based indexing is mostly in programming languages, not SQL.
+
+Case to watch out for: functions like CHARINDEX in SQL Server are also 1-based.
