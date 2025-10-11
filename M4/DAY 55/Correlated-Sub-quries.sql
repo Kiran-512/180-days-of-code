@@ -8,6 +8,64 @@
 - use EXISTS operator
 - This is exception where sub-query is faster than Join
 
+Scenario
+
+We have two tables:
+
+Employees
+
+| emp_id | name    | dept_id |
+| ------ | ------- | ------- |
+| 1      | Alice   | 10      |
+| 2      | Bob     | 20      |
+| 3      | Charlie | 10      |
+
+
+Departments
+
+| dept_id | dept_name |
+| ------- | --------- |
+| 10      | Sales     |
+| 20      | IT        |
+| 30      | Marketing |
+
+
+We want to get all employees who belong to a department that exists in the Departments table.
+
+Using JOIN (traditional approach)
+SELECT e.emp_id, e.name, d.dept_name
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id;
+
+
+✅ This works fine and is usually fast.
+
+Using correlated subquery with EXISTS (sometimes faster)
+SELECT e.emp_id, e.name
+FROM Employees e
+WHERE EXISTS (
+    SELECT 1
+    FROM Departments d
+    WHERE d.dept_id = e.dept_id
+);
+
+
+Why this can be faster:
+
+The EXISTS subquery stops scanning as soon as it finds a match for each employee.
+
+If Departments is large but emp_id matches are sparse, it avoids creating a huge intermediate join result.
+
+You only care about existence, not the full join, so EXISTS is optimal.
+
+Key Takeaways
+
+Use JOIN when you need columns from both tables.
+
+Use EXISTS when you only need to check for existence, especially for large datasets.
+
+Correlated subqueries are exception cases where SQL engines can short-circuit early, making them faster than a join.
+	
 -- ==========================================================
 
 INTERNAL IMPLEMENTATION AND WORKING OF CORRELATED SUB-Query : 
@@ -162,4 +220,5 @@ where deptno is not null;
 */
 
 -- =====================================================
+
 
