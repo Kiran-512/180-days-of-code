@@ -391,10 +391,16 @@ select instr(fname,'shay') from students; -- returns index of s in Akshay
 0
 */
 
-select instr(fname,'shay') from students
-		where fname = 'AKSHAY';
-#op WILL BE 3
+--If you want a case-insensitive search, you can do:
 
+SELECT INSTR(UPPER(fname), 'SHAY') 
+FROM students
+WHERE fname = 'AKSHAY';
+-- Output: 3
+
+--Here, 'SHAY' starts at position 3 in 'AKSHAY'.
+
+	
  select instr(ename,'un') from emp;
 -- eg. Kirun -> return 4, Carun - retrnu 3 and Rahul-> return 0 as un is not found in rahul
 
@@ -781,4 +787,5 @@ select log(10,2) from dual;
 | **Conditional**    | `CASE`, `IF()`, `IFNULL()`, `NULLIF()`, `COALESCE()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Conditional logic                    |
 
 */
+
 
