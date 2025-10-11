@@ -69,3 +69,14 @@ select * from emp where deptno = 10 for update wait 60; #(time in SECONDS)
 
 #WAIT/NO WAIT options are not available in MySQL
 #LOCKS ARE AUTOMATICALLY RELEASED WHEN YOU ROLLBACK OR COMMIT
+
+
+
+--MySQL 8.0 introduced SKIP LOCKED:
+
+SELECT * FROM emp FOR UPDATE SKIP LOCKED;
+
+
+--This selects rows that are not currently locked and skips the locked ones.
+
+Very useful for queue processing or batch updates.
