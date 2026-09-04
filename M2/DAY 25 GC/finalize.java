@@ -52,4 +52,6 @@ Release the resources
 Release the resources
 Release the resources
 line no 27
+
+here even though, all three objects are connected internally they are released individually hence finalize called three time!
 */
